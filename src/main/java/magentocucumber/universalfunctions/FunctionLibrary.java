@@ -1,5 +1,6 @@
 package magentocucumber.universalfunctions;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,6 +25,10 @@ public class FunctionLibrary {
     public void waitForElementVisible(WebElement element){
         WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(timeout));
         wait.until(ExpectedConditions.visibilityOf(element));
+    }
+    public void waitAlertPresent(){
+        WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(timeout));
+        wait.until(ExpectedConditions.alertIsPresent());
     }
     public void javaScriptClick(WebElement element) {
         JavascriptExecutor jse = (JavascriptExecutor) driver;
