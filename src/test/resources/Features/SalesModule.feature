@@ -11,3 +11,5 @@ Feature: Sales module features
       Given sales manager is on customer's shopping cart page "aliyeidiris@gmail.com"
       When sales manager empty Customer's Shopping Cart "hbm001"
       Then sales manager should be able to manage customer's shopping cart successfully
+
+

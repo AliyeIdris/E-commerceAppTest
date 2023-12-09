@@ -15,4 +15,5 @@ public class TestDataHolder {
         String time=(Long.toString(timeStamp).toString().substring(10));
         return time;
     }
+    String mavenCommand=" mvn -Dtest=CucumberTestRunner test";
 }

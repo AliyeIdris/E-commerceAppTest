@@ -44,4 +44,8 @@ public class SalesModuleStepDefinitions extends BasePage {
     public void salesManagerShouldBeAbleToManageCustomerSShoppingCartSuccessfully() {
         Assert.assertTrue(manageCustomersPage.verifyManageShoppingCart());
     }
+
+    @Given("manager got to product page")
+    public void managerGotToProductPage() {
+    }
 }
