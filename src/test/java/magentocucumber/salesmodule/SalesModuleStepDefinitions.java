@@ -35,9 +35,9 @@ public class SalesModuleStepDefinitions extends BasePage {
         manageCustomersPage.navigateToCustomerShoppingCartPage(customerEmail);
     }
 
-    @When("sales manager empty Customer's Shopping Cart {string}")
-    public void salesManagerEmptyCustomerSShoppingCart(String sku) {
-        manageCustomersPage.emptyShoppingCart(sku);
+    @When("sales manager empty Customer's Shopping Cart")
+    public void salesManagerEmptyCustomerSShoppingCart() {
+        manageCustomersPage.emptyShoppingCart();
     }
 
     @Then("sales manager should be able to manage customer's shopping cart successfully")

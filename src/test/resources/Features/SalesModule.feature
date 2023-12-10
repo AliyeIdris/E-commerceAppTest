@@ -9,7 +9,7 @@ Feature: Sales module features
     Scenario: Sales Manager should be able to manage view shopping cart for customers.
       description: (You need to open a customer and manage shopping cart) -Aliye
       Given sales manager is on customer's shopping cart page "aliyeidiris@gmail.com"
-      When sales manager empty Customer's Shopping Cart "hbm001"
+      When sales manager empty Customer's Shopping Cart
       Then sales manager should be able to manage customer's shopping cart successfully
 
 
