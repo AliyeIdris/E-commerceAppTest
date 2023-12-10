@@ -30,7 +30,6 @@ public class DashboardStepDefinitions extends BasePage {
         password=readConfig("password");
 
     }
-
     @When("sales manager enter valid username and valid password")
     public void salesManagerEnterValidUsernameAndValidPassword() {
         loginPage.enterUserName(username);

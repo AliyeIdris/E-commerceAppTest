@@ -29,7 +29,7 @@ public class Hooks extends BasePage {
         scenario.log("UI test ended!");
         AdminDashboardPage dashboardPage = new AdminDashboardPage(driver);
         dashboardPage.logout();
-        //closeBrowser();
+        closeBrowser();
     }
     @After("@DatabaseTest")
     public void tearDownDatabase(Scenario scenario) {
