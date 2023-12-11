@@ -51,8 +51,12 @@ public class ManageCustomersPage {
         functionLibrary.waitForElementVisible(emailSearchField);
         emailSearchField.sendKeys(customerEmail);
         searchButton.click();
-        WebElement customerLocation = driver.findElement(By.xpath(
-                String.format("//*[@id=\"customerGrid_table\"]/tbody/tr/td[contains(text(),'%s')]", customerEmail)));
+        WebElement customerLocation= driver.findElement(By.xpath(String.format("//*[@id=\"customerGrid_table\"]/tbody/tr/td[contains(text(),'%s')]", customerEmail)));
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         functionLibrary.waitForElementVisible(customerLocation);
         customerLocation.click();
         functionLibrary.waitForElementVisible(shoppingCartLink);

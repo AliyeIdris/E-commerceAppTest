@@ -16,14 +16,16 @@ import org.junit.Assert;
  * @Email :aliyeidiris@gmail.com
  **/
 public class SalesModuleStepDefinitions extends BasePage {
-    AdminLoginPage loginPage=new AdminLoginPage(driver);
-    AdminDashboardPage dashboardPage=new AdminDashboardPage(driver);
-    ManageCustomersPage manageCustomersPage=new ManageCustomersPage(driver);
+    AdminLoginPage loginPage = new AdminLoginPage(driver);
+    AdminDashboardPage dashboardPage = new AdminDashboardPage(driver);
+    ManageCustomersPage manageCustomersPage = new ManageCustomersPage(driver);
+
     //*************************** Background ***************************
     @Given("sales manager login")
     public void salesManagerLogin() {
         loginPage.login(AdminRole.SALES_MANAGER);
     }
+
     @And("sales manager on the dashboard page")
     public void salesManagerOnTheDashboardPage() {
         Assert.assertTrue(dashboardPage.verifySalesManagerDashboardPage());
@@ -49,3 +51,4 @@ public class SalesModuleStepDefinitions extends BasePage {
     public void managerGotToProductPage() {
     }
 }
+
