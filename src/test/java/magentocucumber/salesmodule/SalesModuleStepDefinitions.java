@@ -55,7 +55,6 @@ public class SalesModuleStepDefinitions extends BasePage {
 
     @Given("Sales manager is on the dashboard page and invoices are should be existing")
     public void salesManagerIsOnTheDashboardPageAndInvoicesAreShouldBeExisting() {
-        //loginPage.login(AdminRole.SALES_MANAGER);
         Assert.assertTrue(dashboardPage.verifySalesManagerDashboardPage());
     }
 

@@ -52,7 +52,6 @@ public class InvoicesPage {
     WebElement submitButton;
     @FindBy(xpath = "//*[@id=\"comments_block\"]/ul/li/small")
     WebElement verifyCommentTextSuccessful;
-    int invoiceSize;
 
     public void viewInvoicesAndAddComments(String commentText){
         actions.moveToElement(salesTap).build().perform();
