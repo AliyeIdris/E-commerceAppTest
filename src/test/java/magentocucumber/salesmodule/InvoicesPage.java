@@ -34,7 +34,7 @@ public class InvoicesPage {
         random=new Random();
         logger= Logger.getLogger(InvoicesPage.class.getName());
     }
-    @FindBy(xpath = "//a[@class='active']")
+    @FindBy(xpath = "//*[@id=\"nav\"]/li[1]/a/span")
     WebElement salesTap;
     @FindBy(xpath = "//span[normalize-space()='Invoices']")
     WebElement invoices;
@@ -55,14 +55,10 @@ public class InvoicesPage {
     int invoiceSize;
 
     public void viewInvoicesAndAddComments(String commentText){
-        functionLibrary.waitForElementVisible(salesTap);
         actions.moveToElement(salesTap).build().perform();
-        functionLibrary.waitForElementVisible(invoices);
+       functionLibrary.waitForElementVisible(invoices);
         actions.moveToElement(invoices).click().build().perform();
-        int randomIndex= random.nextInt(allInvoices.size());
-        String randomElement= String.valueOf(allInvoices.get(randomIndex));
-        actions.click(allInvoices.get(randomIndex));
-        System.out.println("clicked random elements are"+randomElement);
+        allInvoices.get(new Random().nextInt(allInvoices.size())).click();
         actions.scrollToElement(commentTextField).build().perform();
         actions.click(commentTextField).sendKeys(commentText).build().perform();
         functionLibrary.waitForElementVisible(notifyCustomerCheckBox);
