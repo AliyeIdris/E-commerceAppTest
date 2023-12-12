@@ -74,13 +74,13 @@ public class InvoicesPage {
     }
     public boolean verifyInvoicesAndComment(){
         if (verifyViewingInvoices.isDisplayed()){
-            System.out.println("view invoices successfully!!!");
+            logger.info("view invoices successfully!!!");
             return true;
         }if (verifyCommentTextSuccessful.isDisplayed()){
-            System.out.println("add comment proses is successful!!!");
+            logger.info("add comment proses is successful!!!");
             return true;
         }else {
-            System.out.println("sorry!!! plz try again!!!");
+            logger.info("sorry!!! plz try again!!!");
             return false;
         }
     }
