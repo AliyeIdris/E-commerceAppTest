@@ -12,4 +12,11 @@ Feature: Sales module features
       When sales manager empty Customer's Shopping Cart
       Then sales manager should be able to manage customer's shopping cart successfully
 
+      @ManageInvoicesAndComment
+      Scenario: Sales manager should be able to view invoices and add comments
+        Given Sales manager is on the dashboard page and invoices are should be existing
+        When Sales manager views invoices and adds comments
+        Then Sales manager should be able to view invoices and add comments successfully
+
+
 

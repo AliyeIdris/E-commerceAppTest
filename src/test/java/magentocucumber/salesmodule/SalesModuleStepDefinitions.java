@@ -8,6 +8,7 @@ import magentocucumber.dashboardmodule.AdminDashboardPage;
 import magentocucumber.dashboardmodule.AdminLoginPage;
 import magentocucumber.dashboardmodule.AdminRole;
 import magentocucumber.universalfunctions.BasePage;
+import magentocucumber.universalfunctions.TestDataHolder;
 import org.junit.Assert;
 
 /**
@@ -19,6 +20,7 @@ public class SalesModuleStepDefinitions extends BasePage {
     AdminLoginPage loginPage = new AdminLoginPage(driver);
     AdminDashboardPage dashboardPage = new AdminDashboardPage(driver);
     ManageCustomersPage manageCustomersPage = new ManageCustomersPage(driver);
+    InvoicesPage invoicesPage=new InvoicesPage(driver);
 
     //*************************** Background ***************************
     @Given("sales manager login")
@@ -49,6 +51,24 @@ public class SalesModuleStepDefinitions extends BasePage {
 
     @Given("manager got to product page")
     public void managerGotToProductPage() {
+    }
+
+    @Given("Sales manager is on the dashboard page and invoices are should be existing")
+    public void salesManagerIsOnTheDashboardPageAndInvoicesAreShouldBeExisting() {
+        loginPage.login(AdminRole.SALES_MANAGER);
+        Assert.assertTrue(dashboardPage.verifySalesManagerDashboardPage());
+    }
+
+    @When("Sales manager views invoices and adds comments")
+    public void salesManagerViewsInvoicesAndAddsComments() {
+        invoicesPage.viewInvoicesAndAddComments(TestDataHolder.timeStamp());
+        
+    }
+
+    @Then("Sales manager should be able to view invoices and add comments successfully")
+    public void salesManagerShouldBeAbleToViewInvoicesAndAddCommentsSuccessfully() {
+        invoicesPage.verifyInvoicesAndComment();
+
     }
 }
 
