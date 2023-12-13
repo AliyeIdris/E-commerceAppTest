@@ -20,3 +20,12 @@ Feature: Sales module features
 
 
 
+  @viewCouponsReports
+  Scenario Outline:Sales Manager should be able to view coupons in the Reports
+    Given sales manager is on the reports page
+    When Sales manager Click on Reports move to reports and move to Sales and select coupons fill in "<fromDate>"and"<toDate>"field
+    Then Total coupons Report page should display with information
+
+    Examples:
+      | fromDate  | toDate    |
+      | 10/20/2023 | 12/12/2023 |
