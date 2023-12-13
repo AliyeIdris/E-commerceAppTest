@@ -40,17 +40,14 @@ public class SalesModuleStepDefinitions extends BasePage {
     public void salesManagerIsOnCustomerSShoppingCartPage(String customerEmail) {
         manageCustomersPage.navigateToCustomerShoppingCartPage(customerEmail);
     }
-
     @When("sales manager empty Customer's Shopping Cart")
     public void salesManagerEmptyCustomerSShoppingCart() {
         manageCustomersPage.emptyShoppingCart();
     }
-
     @Then("sales manager should be able to manage customer's shopping cart successfully")
     public void salesManagerShouldBeAbleToManageCustomerSShoppingCartSuccessfully() {
         Assert.assertTrue(manageCustomersPage.verifyManageShoppingCart());
     }
-
     @Given("manager got to product page")
     public void managerGotToProductPage() {
     }
@@ -69,17 +66,15 @@ public class SalesModuleStepDefinitions extends BasePage {
     @Then("Total coupons Report page should display with information")
     public void totalCouponsReportPageShouldDisplayWithInformation() {
         couponsPage.verifyCouponsReports();}
+
     @Given("Sales manager is on the dashboard page and invoices are should be existing")
     public void salesManagerIsOnTheDashboardPageAndInvoicesAreShouldBeExisting() {
         Assert.assertTrue(dashboardPage.verifySalesManagerDashboardPage());
     }
-
     @When("Sales manager views invoices and adds comments")
     public void salesManagerViewsInvoicesAndAddsComments() {
         invoicesPage.viewInvoicesAndAddComments(TestDataHolder.comments);
-        
     }
-
     @Then("Sales manager should be able to view invoices and add comments successfully")
     public void salesManagerShouldBeAbleToViewInvoicesAndAddCommentsSuccessfully() {
         invoicesPage.verifyInvoicesAndComment();
