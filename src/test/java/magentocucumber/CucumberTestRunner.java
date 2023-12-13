@@ -17,6 +17,7 @@ import org.junit.runner.RunWith;
         //tags = "@SmokeTest "
         //tags="@viewCouponsReports"
         tags="@TotalShippedOrdersReport"
+       // tags = "@ManageInvoicesAndComment"
 )
 public class CucumberTestRunner {
 }
