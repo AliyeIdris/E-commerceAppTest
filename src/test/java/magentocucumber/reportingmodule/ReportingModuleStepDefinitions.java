@@ -1,5 +1,6 @@
 package magentocucumber.reportingmodule;
 
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -34,5 +35,9 @@ public class ReportingModuleStepDefinitions extends BasePage {
     @Then("total shipped report should appear")
     public void totalShippedReportShouldAppear() {
         reportViewPage.confirmIsReportAppeared();
+    }
+    @After("@ReportingModule")
+    public void tearDown(){
+        closeBrowser();
     }
 }
