@@ -16,6 +16,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
     AdminDashboardPage adminDashboardPage;
     ReportingDashboardPage dashboardPage;
     ReportViewPage reportViewPage;
+    DownloadsPage downloadsPage;
     @Before
     public void setUp(){
         adminLoginPage=new AdminLoginPage(driver);
@@ -23,6 +24,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
         adminDashboardPage=new AdminDashboardPage(driver);
         dashboardPage=new ReportingDashboardPage(driver);
         reportViewPage=new ReportViewPage(driver);
+        downloadsPage=new DownloadsPage(driver);
 
     }
 
@@ -52,6 +54,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
 
     @When("reporting manager downloads the existing reports")
     public void reportingManagerDownloadsTheExistingReports() {
+        downloadsPage.downloadProducts();
     }
 
     @Then("Products reports should be downloadable")
