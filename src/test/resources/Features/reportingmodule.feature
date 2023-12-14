@@ -9,3 +9,10 @@ Feature: Reporting module features
     Examples:
       | dateFrom   | dateTo     |
       | 03/21/2023 | 12/12/2023 |
+
+
+ @ManageProductsDownloadsReport
+ Scenario: Reporting manager should be able to see products downloads reports
+   Given reporting manager is on the admin dashboard page
+   When reporting manager downloads the existing reports
+   Then Products reports should be downloadable
