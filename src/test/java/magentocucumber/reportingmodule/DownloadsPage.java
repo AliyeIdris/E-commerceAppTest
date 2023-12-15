@@ -8,8 +8,10 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.io.File;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Logger;
 
 /**
  * @author : SalmanUyghur
@@ -21,6 +23,7 @@ public class DownloadsPage {
     FunctionLibrary functionLibrary;
     Actions actions;
     ReportingDashboardPage dashboardPage;
+    Logger logger;
 
     public DownloadsPage(WebDriver driver) {
         this.driver = driver;
@@ -28,6 +31,7 @@ public class DownloadsPage {
         functionLibrary=new FunctionLibrary(driver);
         actions=new Actions(driver);
         dashboardPage=new ReportingDashboardPage(driver);
+
     }
     @FindBy(xpath = "//a[@href='#']//span[contains(text(),'Products')]")
     WebElement productsLink;
@@ -39,6 +43,9 @@ public class DownloadsPage {
     WebElement CSV;
     @FindAll(@FindBy(xpath = "//*[@id=\"downloadsGrid_export\"]/option"))
     List<WebElement> selectOptions;
+    @FindAll(@FindBy(xpath = "//*[@title=\"#\"]"))
+    List<WebElement> reports;
+
     public void downloadProducts(){
         functionLibrary.waitForElementVisible(dashboardPage.reportsLink);
         actions.moveToElement(dashboardPage.reportsLink).build().perform();
@@ -50,7 +57,13 @@ public class DownloadsPage {
         functionLibrary.waitForElementVisible(exportButton);
         actions.click(exportButton).build().perform();
     }
-    public void verifyProductsDownloadsReport(){
-        
+    public boolean verifyProductsDownloadsReport(){
+     if (reports.size()==0){
+         logger.info("there are not any downloads reports,please add reports");
+         return false;
+     }else if (reports.size()==1){
+         logger.info("the products downloads reports are already seen successful!!!");
+     }
+     return true;
     }
 }

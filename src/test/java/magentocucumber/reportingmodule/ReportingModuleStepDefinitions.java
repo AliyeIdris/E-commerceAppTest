@@ -59,6 +59,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
 
     @Then("Products reports should be downloadable")
     public void productsReportsShouldBeDownloadable() {
+        downloadsPage.verifyProductsDownloadsReport();
     }
 
 
