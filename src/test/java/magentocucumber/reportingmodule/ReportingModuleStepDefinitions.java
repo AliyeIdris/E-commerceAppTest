@@ -17,6 +17,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
     ReportingDashboardPage dashboardPage;
     ReportViewPage reportViewPage;
     DownloadsPage downloadsPage;
+    ProductsReviewsPage reviewsPage;
     @Before
     public void setUp(){
         adminLoginPage=new AdminLoginPage(driver);
@@ -25,6 +26,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
         dashboardPage=new ReportingDashboardPage(driver);
         reportViewPage=new ReportViewPage(driver);
         downloadsPage=new DownloadsPage(driver);
+        reportViewPage=new ReportViewPage(driver);
 
     }
 
@@ -60,5 +62,20 @@ public class ReportingModuleStepDefinitions extends BasePage {
     @Then("Products reports should be see able")
     public void productsReportsShouldBeSeeAble() {
         downloadsPage.verifyProductsDownloadsReport();
+    }
+
+    @Given("reporting manager is on the dashboard page")
+    public void reportingManagerIsOnTheDashboardPage() {
+        Assert.assertTrue(adminDashboardPage.verifyReportingManagerDashboardPage());
+    }
+
+    @When("reporting manager opens the reviews page and sees the reviews")
+    public void reportingManagerOpensTheReviewsPageAndSeesTheReviews() {
+        reviewsPage.setProductsReviews();
+    }
+
+    @Then("products reviews should be see able")
+    public void productsReviewsShouldBeSeeAble() {
+        Assert.assertTrue(reviewsPage.verifyProductsReviews());
     }
 }
