@@ -15,4 +15,4 @@ Feature: Reporting module features
  Scenario: Reporting manager should be able to see products downloads reports
    Given reporting manager is on the admin dashboard page
    When reporting manager downloads the existing reports
-   Then Products reports should be downloadable
+   Then Products reports should be see able

@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
         features = {"classpath:features/"},
         //tags = "@SmokeTest "
         //tags="@viewCouponsReports"
-        tags="@ManageProductsDownloadsReport"
+        tags="@TotalShippedOrdersReport"
        // tags = "@ManageInvoicesAndComment"
 )
 public class CucumberTestRunner {
