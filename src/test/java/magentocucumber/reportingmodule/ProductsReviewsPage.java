@@ -68,7 +68,7 @@ public class ProductsReviewsPage {
     public boolean verifyProductsReviews(){
         if (reviews.size()>1){
             System.out.println("reviews are already displayed successfully!!!");
-            logger.info("reviews are already displayed successfully!!!");
+          //  logger.info("reviews are already displayed successfully!!!");
             return true;
         } else if (reviews.size()==0) {
             logger.info("sorry ! there are not any reviews added");
