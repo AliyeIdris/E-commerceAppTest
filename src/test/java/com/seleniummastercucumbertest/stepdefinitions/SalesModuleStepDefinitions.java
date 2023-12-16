@@ -40,8 +40,8 @@ public class SalesModuleStepDefinitions extends BasePage {
 
     //*************************** Manage Shopping Cart ***************************
     @Given("sales manager is on customer's shopping cart page {string}")
-    public void salesManagerIsOnCustomerSShoppingCartPage(String customerEmail) {
-        manageCustomersPage.navigateToCustomerShoppingCartPage(customerEmail);
+    public void salesManagerIsOnCustomerSShoppingCartPage(String email) {
+        manageCustomersPage.navigateToCustomerShoppingCartPage(email);
     }
     @When("sales manager empty Customer's Shopping Cart")
     public void salesManagerEmptyCustomerSShoppingCart() {
@@ -82,5 +82,7 @@ public class SalesModuleStepDefinitions extends BasePage {
     public void salesManagerShouldBeAbleToViewInvoicesAndAddCommentsSuccessfully() {
         invoicesPage.verifyInvoicesAndComment();
     }
+
+
 }
 

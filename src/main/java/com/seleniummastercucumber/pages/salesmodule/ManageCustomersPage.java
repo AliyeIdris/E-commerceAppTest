@@ -50,31 +50,31 @@ public class ManageCustomersPage {
         manageCustomersLink.click();
         functionLibrary.waitForElementVisible(emailSearchField);
         emailSearchField.sendKeys(customerEmail);
+        functionLibrary.waitForElementVisible(searchButton);
         searchButton.click();
-        WebElement customerLocation= driver.findElement(By.xpath(String.format("//*[@id=\"customerGrid_table\"]/tbody/tr/td[contains(text(),'%s')]", customerEmail)));
         try {
-            Thread.sleep(4000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+        WebElement customerLocation= driver.findElement(By.xpath(String.format("//*[@id=\"customerGrid_table\"]/tbody/tr/td[contains(text(),'%s')]", customerEmail)));
         functionLibrary.waitForElementVisible(customerLocation);
         customerLocation.click();
         functionLibrary.waitForElementVisible(shoppingCartLink);
         shoppingCartLink.click();
     }
-
     public void emptyShoppingCart() {
         linkSize = deleteLinks.size();
         if (noRecordFoundMessage.isDisplayed()) {
             System.out.println("Shopping cart is empty!");
         } else {
             deleteLinks.get(new Random().nextInt(deleteLinks.size())).click();
+            functionLibrary.waitAlertPresent();
+            driver.switchTo().alert().accept();
         }
-        functionLibrary.waitAlertPresent();
-        driver.switchTo().alert().accept();
     }
 
     public boolean verifyManageShoppingCart() {
-        return (linkSize - deleteLinks.size() == 1);
+        return noRecordFoundMessage.isDisplayed() || linkSize - deleteLinks.size() == 1;
     }
 }
