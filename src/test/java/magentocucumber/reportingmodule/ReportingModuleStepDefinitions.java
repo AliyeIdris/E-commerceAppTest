@@ -2,6 +2,7 @@ package magentocucumber.reportingmodule;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -14,20 +15,28 @@ import org.junit.Assert;
 public class ReportingModuleStepDefinitions extends BasePage {
     AdminLoginPage adminLoginPage =new AdminLoginPage(driver);
     AdminDashboardPage adminDashboardPage=new AdminDashboardPage(driver);
-    ReportingDashboardPage dashboardPage;
-    ReportViewPage reportViewPage;
+    ReportingDashboardPage dashboardPage=new ReportingDashboardPage(driver);
+    ReportViewPage reportViewPage=new ReportViewPage(driver);
     DownloadsPage downloadsPage =new DownloadsPage(driver);
-    ProductsReviewsPage reviewsPage;
-    @Before
-    public void setUp(){
-        adminLoginPage=new AdminLoginPage(driver);
-        adminLoginPage.login(AdminRole.REPORTINGMANAGER);
-        adminDashboardPage=new AdminDashboardPage(driver);
-        dashboardPage=new ReportingDashboardPage(driver);
-        reportViewPage=new ReportViewPage(driver);
+    ProductsReviewsPage reviewsPage=new ProductsReviewsPage(driver);
+//    @Before
+//    public void setUp(){
+//        adminLoginPage=new AdminLoginPage(driver);
+//        adminLoginPage.login(AdminRole.REPORTINGMANAGER);
+//        adminDashboardPage=new AdminDashboardPage(driver);
+//        dashboardPage=new ReportingDashboardPage(driver);
+//        reportViewPage=new ReportViewPage(driver);
+//
+//    }
+     @Given("report manager login")
+     public void reportManagerLogin() {
+         adminLoginPage.login(AdminRole.REPORTINGMANAGER);
+     }
 
+    @And("report manager is on the dashboard page")
+    public void reportManagerIsOnTheDashboardPage() {
+        Assert.assertTrue(adminDashboardPage.verifyReportingManagerDashboardPage());
     }
-
     @Given("reporting manager is on the admin page and clicks shipping report")
     public void reportingManagerIsOnTheAdminPageAndClicksShippingReport() {
         dashboardPage.openShippingPage();
@@ -42,14 +51,11 @@ public class ReportingModuleStepDefinitions extends BasePage {
     public void totalShippedReportShouldAppear() {
         reportViewPage.confirmIsReportAppeared();
     }
-//    @After("@ReportingModule")
-//    public void tearDown(){
-//        closeBrowser();
-//    }
+
     //*****************************
     @Given("reporting manager is on the admin dashboard page")
     public void reportingManagerIsOnTheAdminDashboardPage() {
-        Assert.assertTrue(adminDashboardPage.verifyReportingManagerDashboardPage());
+         Assert.assertTrue(adminDashboardPage.verifyReportingManagerDashboardPage());
     }
 
     @When("reporting manager downloads the existing reports")
@@ -64,7 +70,6 @@ public class ReportingModuleStepDefinitions extends BasePage {
 
     @Given("reporting manager is on the dashboard page")
     public void reportingManagerIsOnTheDashboardPage() {
-        Assert.assertTrue(adminDashboardPage.verifyReportingManagerDashboardPage());
     }
 
     @When("reporting manager opens the reviews page and sees the reviews")
@@ -76,4 +81,10 @@ public class ReportingModuleStepDefinitions extends BasePage {
     public void productsReviewsShouldBeSeeAble() {
         Assert.assertTrue(reviewsPage.verifyProductsReviews());
     }
+
+
+//    @After("@ReportingModule")
+//    public void tearDown(){
+//        closeBrowser();
+//    }
 }

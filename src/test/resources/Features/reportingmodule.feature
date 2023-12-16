@@ -1,6 +1,10 @@
 @UITest @RegressionTest @ReportingModule
 Feature: Reporting module features
 
+  Background:
+    Given report manager login
+    And report manager is on the dashboard page
+
   @TotalShippedOrdersReport
   Scenario Outline: Reporting Manager should be able to see total shipped orders report
     Given reporting manager is on the admin page and clicks shipping report
