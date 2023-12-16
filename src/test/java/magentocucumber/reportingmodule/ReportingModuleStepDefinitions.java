@@ -12,11 +12,11 @@ import magentocucumber.universalfunctions.BasePage;
 import org.junit.Assert;
 
 public class ReportingModuleStepDefinitions extends BasePage {
-    AdminLoginPage adminLoginPage;
-    AdminDashboardPage adminDashboardPage;
+    AdminLoginPage adminLoginPage =new AdminLoginPage(driver);
+    AdminDashboardPage adminDashboardPage=new AdminDashboardPage(driver);
     ReportingDashboardPage dashboardPage;
     ReportViewPage reportViewPage;
-    DownloadsPage downloadsPage;
+    DownloadsPage downloadsPage =new DownloadsPage(driver);
     ProductsReviewsPage reviewsPage;
     @Before
     public void setUp(){
@@ -24,8 +24,6 @@ public class ReportingModuleStepDefinitions extends BasePage {
         adminLoginPage.login(AdminRole.REPORTINGMANAGER);
         adminDashboardPage=new AdminDashboardPage(driver);
         dashboardPage=new ReportingDashboardPage(driver);
-        reportViewPage=new ReportViewPage(driver);
-        downloadsPage=new DownloadsPage(driver);
         reportViewPage=new ReportViewPage(driver);
 
     }
@@ -44,10 +42,10 @@ public class ReportingModuleStepDefinitions extends BasePage {
     public void totalShippedReportShouldAppear() {
         reportViewPage.confirmIsReportAppeared();
     }
-    @After("@ReportingModule")
-    public void tearDown(){
-        closeBrowser();
-    }
+//    @After("@ReportingModule")
+//    public void tearDown(){
+//        closeBrowser();
+//    }
     //*****************************
     @Given("reporting manager is on the admin dashboard page")
     public void reportingManagerIsOnTheAdminDashboardPage() {
