@@ -1,4 +1,4 @@
-package magentocucumber.database;
+package com.seleniummastercucumbertest.stepdefinitions;
 
 /**
  * @author : user

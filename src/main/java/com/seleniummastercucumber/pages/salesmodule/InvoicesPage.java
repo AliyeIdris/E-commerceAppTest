@@ -1,8 +1,6 @@
-package magentocucumber.salesmodule;
+package com.seleniummastercucumber.pages.salesmodule;
 
-import magentocucumber.dashboardmodule.AdminDashboardPage;
-import magentocucumber.universalfunctions.FunctionLibrary;
-import magentocucumber.universalfunctions.TestDataHolder;
+import com.seleniummastercucumber.utility.FunctionLibrary;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
