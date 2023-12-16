@@ -40,9 +40,9 @@ public class ProductsReviewsPage {
     WebElement productsReviews;
     @FindBy(xpath = "//select[@name='limit']")
     WebElement selectDropBox;
-    @FindAll(@FindBy(xpath = "//@title"))
+    @FindAll(@FindBy(xpath = "//table/tbody/tr"))
     List<WebElement> products;
-    @FindAll(@FindBy(xpath = "//tr[@title]"))
+    @FindAll(@FindBy(xpath = "//table/tbody/tr"))
     List<WebElement> reviews;
     public void setProductsReviews(){
         functionLibrary.waitForElementVisible(dashboardPage.reportsLink);
@@ -57,15 +57,17 @@ public class ProductsReviewsPage {
         select.selectByValue("200");
         if (products.size()==0){
             logger.info("sorry there are not any products!!!");
-        } else if (products.size()==1) {
-            products.get(new Random(products.size()).nextInt()).click();
+        } else if (products.size()>1) {
+            int i=(int)(Math.random()*products.size());
+            products.get(i).click();
         }
         functionLibrary.waitForElementVisible(selectDropBox);
         actions.click(selectDropBox).build().perform();
         select.selectByValue("200");
     }
     public boolean verifyProductsReviews(){
-        if (reviews.size()==1){
+        if (reviews.size()>1){
+            System.out.println("reviews are already displayed successfully!!!");
             logger.info("reviews are already displayed successfully!!!");
             return true;
         } else if (reviews.size()==0) {

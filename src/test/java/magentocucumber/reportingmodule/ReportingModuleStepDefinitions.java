@@ -19,15 +19,6 @@ public class ReportingModuleStepDefinitions extends BasePage {
     ReportViewPage reportViewPage=new ReportViewPage(driver);
     DownloadsPage downloadsPage =new DownloadsPage(driver);
     ProductsReviewsPage reviewsPage=new ProductsReviewsPage(driver);
-//    @Before
-//    public void setUp(){
-//        adminLoginPage=new AdminLoginPage(driver);
-//        adminLoginPage.login(AdminRole.REPORTINGMANAGER);
-//        adminDashboardPage=new AdminDashboardPage(driver);
-//        dashboardPage=new ReportingDashboardPage(driver);
-//        reportViewPage=new ReportViewPage(driver);
-//
-//    }
      @Given("report manager login")
      public void reportManagerLogin() {
          adminLoginPage.login(AdminRole.REPORTINGMANAGER);
