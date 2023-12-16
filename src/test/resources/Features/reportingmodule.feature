@@ -1,6 +1,10 @@
 @UITest @RegressionTest @ReportingModule
 Feature: Reporting module features
 
+  Background:
+    Given report manager login
+    And report manager is on the dashboard page
+
   @TotalShippedOrdersReport
   Scenario Outline: Reporting Manager should be able to see total shipped orders report
     Given reporting manager is on the admin page and clicks shipping report
@@ -9,3 +13,17 @@ Feature: Reporting module features
     Examples:
       | dateFrom   | dateTo     |
       | 03/21/2023 | 12/12/2023 |
+
+
+ @ManageProductsDownloadsReport
+ Scenario: Reporting manager should be able to see products downloads reports
+   Given reporting manager is on the admin dashboard page
+   When reporting manager downloads the existing reports
+   Then Products reports should be see able
+
+   @Manage_Products_Reviews
+   Scenario: Reporting manager should be able to see products reviews
+     Given reporting manager is on the dashboard page
+     When  reporting manager opens the reviews page and sees the reviews
+     Then  products reviews should be see able
+

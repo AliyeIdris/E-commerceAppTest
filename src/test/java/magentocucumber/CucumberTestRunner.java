@@ -18,6 +18,7 @@ import org.junit.runner.RunWith;
         //tags="@viewCouponsReports"
         tags="@TotalShippedOrdersReport"
        // tags = "@ManageInvoicesAndComment"
+        // tags="@Manage_Products_Reviews"
 )
 public class CucumberTestRunner {
 }
