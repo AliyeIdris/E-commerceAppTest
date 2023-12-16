@@ -1,4 +1,4 @@
-package magentocucumber.universalfunctions;
+package com.seleniummastercucumber.utility;
 
 import java.io.FileInputStream;
 import java.io.IOException;

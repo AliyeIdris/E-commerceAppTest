@@ -1,4 +1,4 @@
-package magentocucumber.universalfunctions;
+package com.seleniummastercucumber.utility;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.lang3.SystemUtils;
@@ -11,8 +11,6 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 
-import static magentocucumber.universalfunctions.FileUtility.readConfig;
-
 /**
  * @author : user
  * @created : 8.12.2023,16:39
@@ -20,7 +18,7 @@ import static magentocucumber.universalfunctions.FileUtility.readConfig;
  **/
 public class BasePage {
     public static WebDriver driver;
-    static boolean headlessMode=Boolean.parseBoolean(readConfig("headlessMode"));
+    static boolean headlessMode=Boolean.parseBoolean(FileUtility.readConfig("headlessMode"));
     public static void setUp(DriverType driverType,String url){
         switch (driverType) {
             case CHROME_DRIVER -> {

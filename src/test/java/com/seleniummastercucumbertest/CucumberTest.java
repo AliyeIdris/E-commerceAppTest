@@ -1,4 +1,4 @@
-package magentocucumber;
+package com.seleniummastercucumbertest;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
@@ -14,11 +14,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         plugin = {"pretty","html:target/cucumber-testReport.html", "junit:target/cucumber-results.xml" },
         features = {"classpath:features/"},
-        //tags = "@SmokeTest "
-        //tags="@viewCouponsReports"
-        tags="@TotalShippedOrdersReport"
-       // tags = "@ManageInvoicesAndComment"
-        // tags="@Manage_Products_Reviews"
+        tags="@SmokeTest"
 )
-public class CucumberTestRunner {
+public class CucumberTest {
 }

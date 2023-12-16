@@ -1,14 +1,17 @@
-package magentocucumber.salesmodule;
+package com.seleniummastercucumbertest.stepdefinitions;
 
+import com.seleniummastercucumber.pages.salesmodule.CouponsPage;
+import com.seleniummastercucumber.pages.salesmodule.InvoicesPage;
+import com.seleniummastercucumber.pages.salesmodule.ManageCustomersPage;
+import com.seleniummastercucumber.utility.TestDataHolder;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import magentocucumber.dashboardmodule.AdminDashboardPage;
-import magentocucumber.dashboardmodule.AdminLoginPage;
-import magentocucumber.dashboardmodule.AdminRole;
-import magentocucumber.universalfunctions.BasePage;
-import magentocucumber.universalfunctions.TestDataHolder;
+import com.seleniummastercucumber.pages.dashboardmodule.AdminDashboardPage;
+import com.seleniummastercucumber.pages.dashboardmodule.AdminLoginPage;
+import com.seleniummastercucumber.pages.dashboardmodule.AdminRole;
+import com.seleniummastercucumber.utility.BasePage;
 import org.junit.Assert;
 
 /**

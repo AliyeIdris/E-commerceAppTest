@@ -1,6 +1,6 @@
-package magentocucumber.dashboardmodule;
+package com.seleniummastercucumber.pages.dashboardmodule;
 
-import magentocucumber.universalfunctions.FunctionLibrary;
+import com.seleniummastercucumber.utility.FunctionLibrary;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

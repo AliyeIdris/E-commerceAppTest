@@ -1,6 +1,6 @@
-package magentocucumber.salesmodule;
+package com.seleniummastercucumber.pages.salesmodule;
 
-import magentocucumber.universalfunctions.FunctionLibrary;
+import com.seleniummastercucumber.utility.FunctionLibrary;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindAll;
