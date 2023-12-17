@@ -13,10 +13,10 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         plugin = {"pretty","html:target/cucumber-testReport.html", "junit:target/cucumber-results.xml" },
-        features = {"classpath:features/"},
+        features = {"classpath:features/reportingmodule.feature"}
         //tags = "@SmokeTest "
         //tags="@viewCouponsReports"
-        tags="@TotalShippedOrdersReport"
+       // tags="@TotalShippedOrdersReport"
        // tags = "@ManageInvoicesAndComment"
         // tags="@Manage_Products_Reviews"
 )
