@@ -1,4 +1,4 @@
-package magentocucumber.dashboardmodule;
+package com.seleniummastercucumber.pages.dashboardmodule;
 
 /**
  * @author : user

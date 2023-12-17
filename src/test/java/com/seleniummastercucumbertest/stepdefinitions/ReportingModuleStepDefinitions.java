@@ -1,15 +1,17 @@
-package magentocucumber.reportingmodule;
+package com.seleniummastercucumbertest.stepdefinitions;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
+import com.seleniummastercucumber.pages.reportingmodule.DownloadsPage;
+import com.seleniummastercucumber.pages.reportingmodule.ProductsReviewsPage;
+import com.seleniummastercucumber.pages.reportingmodule.ReportViewPage;
+import com.seleniummastercucumber.pages.reportingmodule.ReportingDashboardPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import magentocucumber.dashboardmodule.AdminDashboardPage;
-import magentocucumber.dashboardmodule.AdminLoginPage;
-import magentocucumber.dashboardmodule.AdminRole;
-import magentocucumber.universalfunctions.BasePage;
+import com.seleniummastercucumber.pages.dashboardmodule.AdminDashboardPage;
+import com.seleniummastercucumber.pages.dashboardmodule.AdminLoginPage;
+import com.seleniummastercucumber.pages.dashboardmodule.AdminRole;
+import com.seleniummastercucumber.utility.BasePage;
 import org.junit.Assert;
 
 public class ReportingModuleStepDefinitions extends BasePage {

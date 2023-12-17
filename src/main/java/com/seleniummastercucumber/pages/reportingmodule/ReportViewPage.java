@@ -1,6 +1,6 @@
-package magentocucumber.reportingmodule;
+package com.seleniummastercucumber.pages.reportingmodule;
 
-import magentocucumber.universalfunctions.FunctionLibrary;
+import com.seleniummastercucumber.utility.FunctionLibrary;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

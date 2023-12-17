@@ -1,12 +1,12 @@
-package magentocucumber.dashboardmodule;
+package com.seleniummastercucumber.pages.dashboardmodule;
 
-import magentocucumber.universalfunctions.FunctionLibrary;
+import com.seleniummastercucumber.utility.FunctionLibrary;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static magentocucumber.universalfunctions.FileUtility.readConfig;
+import static com.seleniummastercucumber.utility.FileUtility.readConfig;
 
 /**
  * @author : user
@@ -23,7 +23,7 @@ public class AdminLoginPage {
         functionLibrary = new FunctionLibrary(driver);
     }
     @FindBy(xpath = "//h2[text()='Log in to Admin Panel']")
-    WebElement loginPageTitle;
+    public WebElement loginPageTitle;
     @FindBy(css = "#username")
     WebElement usernameField;
     @FindBy(css = "#login")

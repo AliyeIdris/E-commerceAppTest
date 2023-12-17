@@ -1,4 +1,4 @@
-package magentocucumber.universalfunctions;
+package com.seleniummastercucumber.utility;
 
 import com.github.javafaker.Faker;
 

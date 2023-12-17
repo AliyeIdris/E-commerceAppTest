@@ -1,13 +1,13 @@
-package magentocucumber;
+package com.seleniummastercucumbertest;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
-import magentocucumber.dashboardmodule.AdminDashboardPage;
-import magentocucumber.universalfunctions.BasePage;
-import magentocucumber.universalfunctions.DriverType;
+import com.seleniummastercucumber.pages.dashboardmodule.AdminDashboardPage;
+import com.seleniummastercucumber.utility.BasePage;
+import com.seleniummastercucumber.utility.DriverType;
 
-import static magentocucumber.universalfunctions.FileUtility.readConfig;
+import static com.seleniummastercucumber.utility.FileUtility.readConfig;
 
 /**
  * @author : user

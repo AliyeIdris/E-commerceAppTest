@@ -1,4 +1,4 @@
-package magentocucumber.universalfunctions;
+package com.seleniummastercucumber.utility;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 import java.io.File;
 import java.io.IOException;
 
-import static magentocucumber.universalfunctions.FileUtility.readConfig;
+import static com.seleniummastercucumber.utility.FileUtility.readConfig;
 
 /**
  * @author : user
