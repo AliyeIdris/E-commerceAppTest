@@ -1,11 +1,7 @@
 package com.seleniummastercucumber.pages.reportingmodule;
 
-<<<<<<< HEAD:src/test/java/magentocucumber/reportingmodule/ProductsReviewsPage.java
-import magentocucumber.universalfunctions.FunctionLibrary;
-import org.apache.logging.log4j.Logger;
-=======
 import com.seleniummastercucumber.utility.FunctionLibrary;
->>>>>>> master:src/main/java/com/seleniummastercucumber/pages/reportingmodule/ProductsReviewsPage.java
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -15,11 +11,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
-<<<<<<< HEAD:src/test/java/magentocucumber/reportingmodule/ProductsReviewsPage.java
+
 import java.util.Random;
-=======
+
 import java.util.logging.Logger;
->>>>>>> master:src/main/java/com/seleniummastercucumber/pages/reportingmodule/ProductsReviewsPage.java
+
 
 /**
  * @author : SalmanUyghur
