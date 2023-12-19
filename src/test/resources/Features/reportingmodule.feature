@@ -20,8 +20,7 @@ Feature: Reporting module features
    Given reporting manager is on the admin dashboard page
    When reporting manager downloads the existing reports
    Then Products reports should be see able
-
-   @Manage_Products_Reviews
+  @Manage_Products_Reviews
    Scenario: Reporting manager should be able to see products reviews
      Given reporting manager is on the dashboard page
      When  reporting manager opens the reviews page and sees the reviews
