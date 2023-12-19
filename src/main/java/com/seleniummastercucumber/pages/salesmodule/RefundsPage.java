@@ -35,11 +35,8 @@ public class RefundsPage {
     WebElement selectData01;
     @FindBy(xpath = "//div[@class='calendar']//tr//div[text()='«']")
     WebElement unSelectTable01;
-    @FindBy(xpath = "//input[@id='sales_report_from']")
-    WebElement fromDateField;
     @FindBy(xpath = "//*[@id='sales_report_to_trig']")
     WebElement selectDate02;
-
     @FindBy(css = ".today")
     WebElement unSelectTable02;
     @FindBy(xpath = "//label[@for='sales_report_to']")
