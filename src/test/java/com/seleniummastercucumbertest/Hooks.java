@@ -24,13 +24,13 @@ public class Hooks extends BasePage {
             scenario.log("Database test started...");
         }
     }
-//    @After("@UITest")
-//    public void tearDownBrowser(Scenario scenario) {
-//        scenario.log("UI test ended!");
-//        AdminDashboardPage dashboardPage = new AdminDashboardPage(driver);
-//        dashboardPage.logout();
-//        closeBrowser();
-//    }
+    @After("@UITest")
+    public void tearDownBrowser(Scenario scenario) {
+        scenario.log("UI test ended!");
+        AdminDashboardPage dashboardPage = new AdminDashboardPage(driver);
+        dashboardPage.logout();
+        closeBrowser();
+    }
     @After("@DatabaseTest")
     public void tearDownDatabase(Scenario scenario) {
         scenario.log("Database test ended!");
