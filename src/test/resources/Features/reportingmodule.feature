@@ -27,3 +27,8 @@ Feature: Reporting module features
      When  reporting manager opens the reviews page and sees the reviews
      Then  products reviews should be see able
 
+ @Products-low-stock-Report
+ Scenario: Reporting Manager should be able to see Products low stock Report
+   Given reporting manager is on the dashboard page
+   When  reporting manager navigate to low stock page
+   Then  products low stock report should be display

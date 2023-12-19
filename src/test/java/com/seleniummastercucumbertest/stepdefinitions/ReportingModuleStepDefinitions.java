@@ -76,8 +76,13 @@ public class ReportingModuleStepDefinitions extends BasePage {
     }
 
 
-//    @After("@ReportingModule")
-//    public void tearDown(){
-//        closeBrowser();
-//    }
+    @When("reporting manager navigate to low stock page")
+    public void reportingManagerNavigateToLowStockPage() {
+         dashboardPage.navigateToLowStockPage();
+    }
+
+    @Then("products low stock report should be display")
+    public void productsLowStockReportShouldBeDisplay() {
+         Assert.assertTrue(dashboardPage.viewAllLowStock());
+    }
 }
