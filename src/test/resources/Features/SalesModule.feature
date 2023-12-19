@@ -29,3 +29,9 @@ Feature: Sales module features
     Examples:
       | fromDate  | toDate    |
       | 10/20/2023 | 12/12/2023 |
+
+    @viewRefundsReports
+    Scenario: Sales Manager should be able to view refunds in the Reports
+      Given sales manager is on the refunds page
+      When sales manager select on from and to date fill and click on show report
+      Then total refunded report should be display with information
