@@ -3,6 +3,7 @@ package com.seleniummastercucumbertest.stepdefinitions;
 import com.seleniummastercucumber.pages.salesmodule.CouponsPage;
 import com.seleniummastercucumber.pages.salesmodule.InvoicesPage;
 import com.seleniummastercucumber.pages.salesmodule.ManageCustomersPage;
+import com.seleniummastercucumber.pages.salesmodule.RefundsPage;
 import com.seleniummastercucumber.utility.TestDataHolder;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -26,6 +27,7 @@ public class SalesModuleStepDefinitions extends BasePage {
     InvoicesPage invoicesPage=new InvoicesPage(driver);
 
     CouponsPage couponsPage=new CouponsPage(driver);
+    RefundsPage refundsPage = new RefundsPage(driver);
 
     //*************************** Background ***************************
     @Given("sales manager login")
@@ -84,5 +86,19 @@ public class SalesModuleStepDefinitions extends BasePage {
     }
 
 
+    @Given("sales manager is on the refunds page")
+    public void salesManagerIsOnTheRefundsPage() {
+        refundsPage.navigateToRefundsPage();
+    }
+
+    @When("sales manager select on from and to date fill and click on show report")
+    public void salesManagerSelectOnFromAndToDateFillAndClickOnShowReport() {
+        refundsPage.totalRefundedReport();
+    }
+
+    @Then("total refunded report should be display with information")
+    public void totalRefundedReportShouldBeDisplayWithInformation() {
+        Assert.assertTrue(refundsPage.viewRefundsInTheReports());
+    }
 }
 
