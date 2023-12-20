@@ -1,9 +1,6 @@
 package com.seleniummastercucumbertest.stepdefinitions;
 
-import com.seleniummastercucumber.pages.reportingmodule.DownloadsPage;
-import com.seleniummastercucumber.pages.reportingmodule.ProductsReviewsPage;
-import com.seleniummastercucumber.pages.reportingmodule.ReportViewPage;
-import com.seleniummastercucumber.pages.reportingmodule.ReportingDashboardPage;
+import com.seleniummastercucumber.pages.reportingmodule.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -21,6 +18,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
     ReportViewPage reportViewPage=new ReportViewPage(driver);
     DownloadsPage downloadsPage =new DownloadsPage(driver);
     ProductsReviewsPage reviewsPage=new ProductsReviewsPage(driver);
+    OrderReportPage orderReportPage=new OrderReportPage(driver);
      @Given("report manager login")
      public void reportManagerLogin() {
          adminLoginPage.login(AdminRole.REPORTINGMANAGER);
@@ -85,4 +83,19 @@ public class ReportingModuleStepDefinitions extends BasePage {
     public void productsLowStockReportShouldBeDisplay() {
          Assert.assertTrue(dashboardPage.viewAllLowStock());
     }
+
+    @Given("reporting manager navigate to order report page")
+    public void reportingManagerNavigateToOrderReportPage() {
+        dashboardPage.goToOrderedReportPage();
+    }
+    @When("reporting manager filter total order report with date")
+    public void reportingManagerFilterTotalOrderReportWithDate() {
+         orderReportPage.seeTotalOrderedReport();
+    }
+
+    @Then("total order report should be displayed")
+    public void totalOrderReportShouldBeDisplayed() {
+         orderReportPage.verifyDisplayedTotalOrderReport();
+    }
+
 }

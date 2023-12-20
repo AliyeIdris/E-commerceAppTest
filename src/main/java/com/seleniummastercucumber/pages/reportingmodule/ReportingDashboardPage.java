@@ -38,6 +38,8 @@ public class ReportingDashboardPage {
     @FindAll(
             @FindBy(xpath = "//div[@class='hor-scroll']//tbody"))
     List<WebElement> lowStockReport;
+    @FindBy(xpath = "//span[text()='Orders']")
+    WebElement ordersLink;
     public void openShippingPage() {
         functionLibrary.waitForElementVisible(reportsLink);
         actions.moveToElement(reportsLink).moveToElement(salesLink).moveToElement(shippingLink).click().perform();
@@ -55,5 +57,9 @@ public class ReportingDashboardPage {
             logger.info("View All low Stock Report failed!!!");
             return false;
         }
+    }
+    public void goToOrderedReportPage(){
+        functionLibrary.waitForElementVisible(reportsLink);
+        actions.moveToElement(reportsLink).moveToElement(salesLink).moveToElement(ordersLink).click().build().perform();
     }
 }

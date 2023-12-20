@@ -77,4 +77,10 @@ public class ManageCustomersPage {
     public boolean verifyManageShoppingCart() {
         return noRecordFoundMessage.isDisplayed() || linkSize - deleteLinks.size() == 1;
     }
-}
+
+
+    }
+
+
+
+
