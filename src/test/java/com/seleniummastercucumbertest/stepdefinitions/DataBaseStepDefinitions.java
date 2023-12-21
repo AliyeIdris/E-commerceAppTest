@@ -1,5 +1,6 @@
 package com.seleniummastercucumbertest.stepdefinitions;
 
+import com.seleniummastercucumber.pages.database.VerifyNewCustomer;
 import com.seleniummastercucumber.pages.database.VerifySQLScripts;
 import com.seleniummastercucumber.utility.ConnectionType;
 import com.seleniummastercucumber.utility.DBConnection;
@@ -16,6 +17,7 @@ import static com.seleniummastercucumber.utility.FileUtility.readConfig;
 public class DataBaseStepDefinitions {
     Connection connection;
     VerifySQLScripts verifySQLScripts;
+    VerifyNewCustomer verifyNewCustomer;
     DBConnection dbConnection = new DBConnection();
     String dbUrl =readConfig("dburl");
     String dbPort = readConfig("dbport");
@@ -23,6 +25,7 @@ public class DataBaseStepDefinitions {
     String password = readConfig("dbpassword");
     String dbName = readConfig("dbname");
     boolean isCategoryExist ;
+    boolean isCustomerExist;
 
     @Given("user has valid database connection")
     public void userHasValidDatabaseConnection() {
@@ -43,11 +46,22 @@ public class DataBaseStepDefinitions {
         Assert.assertTrue(isCategoryExist);
     }
 
-    @When("Execute SQL query to get newly registered users information by Entity ID")
-    public void executeSQLQueryToGetNewlyRegisteredUsersInformationByEntityID() {
-    }
+//    @Given("The user has valid database connection")
+//    public void theUserHasValidDatabaseConnection() {
+//        connection = dbConnection.connectToDataBaseServer(dbUrl, dbPort, username, password, dbName
+//                , ConnectionType.MYSQL);
+//        verifySQLScripts = new VerifySQLScripts();
+//    }
 
+    @When("Execute SQL query to get newly registered users information by email {}")
+    public void executeSQLQueryToGetNewlyRegisteredUsersInformationByEmail(String email) {
+       verifyNewCustomer.verifyNewlyRegisteredCustomer(connection,email);
+    }
     @Then("Database returns newly registered information")
     public void databaseReturnsNewlyRegisteredInformation() {
+        Assert.assertTrue(isCustomerExist);
+
     }
+
+
 }
