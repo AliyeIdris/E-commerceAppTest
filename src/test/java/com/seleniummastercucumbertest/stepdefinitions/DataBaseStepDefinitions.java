@@ -42,4 +42,12 @@ public class DataBaseStepDefinitions {
     public void theDatabaseReturnsSubCategoryInformationWithDetails() {
         Assert.assertTrue(isCategoryExist);
     }
+
+    @When("Execute SQL query to get newly registered users information by Entity ID")
+    public void executeSQLQueryToGetNewlyRegisteredUsersInformationByEntityID() {
+    }
+
+    @Then("Database returns newly registered information")
+    public void databaseReturnsNewlyRegisteredInformation() {
+    }
 }
