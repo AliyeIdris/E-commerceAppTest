@@ -32,6 +32,7 @@ public class DataBaseStepDefinitions {
         connection = dbConnection.connectToDataBaseServer(dbUrl, dbPort, username, password, dbName
                 , ConnectionType.MYSQL);
         verifySQLScripts = new VerifySQLScripts();
+        verifyNewCustomer=new VerifyNewCustomer();
     }
 
     @When("Execute SQL query to get sub category information with categoryName {}")

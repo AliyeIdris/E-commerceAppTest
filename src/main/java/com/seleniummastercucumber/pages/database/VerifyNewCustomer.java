@@ -61,6 +61,7 @@ public boolean verifyNewlyRegisteredCustomer(Connection connection,String custom
                 int website_id=cachedRowSet.getInt("website_id");
                 String email=cachedRowSet.getNString("email");
                 int group_id=cachedRowSet.getInt("group_id");
+                System.out.println(String.format("entity_id=%s website_id=%s email=%s group_id=%s",entity_id,website_id,email,group_id));
                 rowCount=cachedRowSet.getRow();
             }catch (SQLException e){
                 e.printStackTrace();
@@ -73,8 +74,5 @@ public boolean verifyNewlyRegisteredCustomer(Connection connection,String custom
 
     }
     return isCustomerExist;
-
-
-
 }
 }
