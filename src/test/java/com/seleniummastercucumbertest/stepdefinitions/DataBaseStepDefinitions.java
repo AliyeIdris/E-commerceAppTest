@@ -48,11 +48,12 @@ public class DataBaseStepDefinitions {
 
     @When("Execute SQL query to get newly registered users information by email")
     public void executeSQLQueryToGetNewlyRegisteredUsersInformationByEmail() {
-        verifySQLScripts.newlyRegisteredUser("salmanuyghur3@gmail.com",connection);
+        isCustomerExist=verifySQLScripts.newlyRegisteredUser("uyhgur999@gmail.com",connection);
+
     }
     @Then("Database returns newly registered information")
     public void databaseReturnsNewlyRegisteredInformation() {
-       // Assert.assertTrue(isCustomerExist);
+      Assert.assertTrue(isCustomerExist);
 
     }
 
