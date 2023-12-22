@@ -11,7 +11,7 @@ Scenario: User retrieves sub category info from the database
 
   @Verify_newly_Added_Customer
   Scenario: user retrieves that newly registered users information
-#    Given The user has valid database connection
-    When Execute SQL query to get newly registered users information by email salmanuyghur3@gmail.com
+    Given  user has valid database connection
+    When Execute SQL query to get newly registered users information by email
     Then Database returns newly registered information
 

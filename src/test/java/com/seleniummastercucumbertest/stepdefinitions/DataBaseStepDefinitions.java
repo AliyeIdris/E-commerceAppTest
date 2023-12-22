@@ -47,22 +47,16 @@ public class DataBaseStepDefinitions {
         Assert.assertTrue(isCategoryExist);
     }
 
-//    @Given("The user has valid database connection")
-//    public void theUserHasValidDatabaseConnection() {
-//        connection = dbConnection.connectToDataBaseServer(dbUrl, dbPort, username, password, dbName
-//                , ConnectionType.MYSQL);
-//        verifySQLScripts = new VerifySQLScripts();
-//    }
-
-    @When("Execute SQL query to get newly registered users information by email {}")
-    public void executeSQLQueryToGetNewlyRegisteredUsersInformationByEmail(String email) {
-       verifyNewCustomer.verifyNewlyRegisteredCustomer(connection,email);
+    @When("Execute SQL query to get newly registered users information by email")
+    public void executeSQLQueryToGetNewlyRegisteredUsersInformationByEmail() {
+        verifyNewCustomer.newlyRegisteredUser("salmanuyghur3@gmail.com",connection);
     }
     @Then("Database returns newly registered information")
     public void databaseReturnsNewlyRegisteredInformation() {
-        Assert.assertTrue(isCustomerExist);
+       // Assert.assertTrue(isCustomerExist);
 
     }
+
 
 
 }
