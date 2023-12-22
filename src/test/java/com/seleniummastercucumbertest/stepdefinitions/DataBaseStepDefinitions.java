@@ -1,6 +1,9 @@
 package com.seleniummastercucumbertest.stepdefinitions;
 
+import com.seleniummastercucumber.pages.dashboardmodule.AdminLoginPage;
+import com.seleniummastercucumber.pages.dashboardmodule.AdminRole;
 import com.seleniummastercucumber.pages.database.VerifySQLScripts;
+import com.seleniummastercucumber.utility.BasePage;
 import com.seleniummastercucumber.utility.ConnectionType;
 import com.seleniummastercucumber.utility.DBConnection;
 import com.seleniummastercucumber.utility.FileUtility;
@@ -23,6 +26,7 @@ public class DataBaseStepDefinitions {
     String password = readConfig("dbpassword");
     String dbName = readConfig("dbname");
     boolean isCategoryExist ;
+    boolean isTaxRuleNameExist;
 
     @Given("user has valid database connection")
     public void userHasValidDatabaseConnection() {
@@ -41,5 +45,18 @@ public class DataBaseStepDefinitions {
     @Then("The database returns sub category information with details")
     public void theDatabaseReturnsSubCategoryInformationWithDetails() {
         Assert.assertTrue(isCategoryExist);
+    }
+
+
+    @When("the user query the mg_tax_calculation_rule table with taxRuleName")
+    public void theUserQueryTheMg_tax_calculation_ruleTableWithTaxRuleName() {
+       // AdminLoginPage loginPage = new AdminLoginPage(BasePage.driver);
+       // loginPage.login(AdminRole.SALES_MANAGER);
+        isTaxRuleNameExist=VerifySQLScripts.getNewlyAddedTaxRule(connection,"Wholesale Customer - Tax Exempt ");
+    }
+
+    @Then("the user should see the newly added tax rule info")
+    public void theUserShouldSeeTheNewlyAddedTaxRuleInfo() {
+        Assert.assertTrue(isTaxRuleNameExist);
     }
 }

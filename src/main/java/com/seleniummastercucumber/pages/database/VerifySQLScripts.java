@@ -47,4 +47,59 @@ public class VerifySQLScripts {
         return isSubCategoryExist;
 
     }
+    public static boolean getNewlyAddedTaxRule(Connection connection,String taxRuleName){
+        boolean isTaxRuleNameExist=false;
+        Statement statement=null;
+        ResultSet resultSet=null;
+        CachedRowSet cachedRowSet=null;
+
+        try {
+            cachedRowSet= RowSetProvider.newFactory().createCachedRowSet();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            statement = connection.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        String taxRuleSqlScript=String.format("select * from i9362596_mg2.mg_tax_calculation_rule where code='%s';",taxRuleName);
+        try {
+            resultSet=statement.executeQuery(taxRuleSqlScript);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if(resultSet==null){
+            System.out.println("no records found");
+            return isTaxRuleNameExist;
+        }else{
+            try {
+                cachedRowSet.populate(resultSet);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            int count=0;
+            while (true){
+                try {
+                    if(!cachedRowSet.next()){
+                        break;
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    String code = cachedRowSet.getString("code");
+                    System.out.println(code);
+                    count = cachedRowSet.getRow();
+                }catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
+            if(count>=1)
+                isTaxRuleNameExist=true;
+            return isTaxRuleNameExist;
+        }
+    }
 }
