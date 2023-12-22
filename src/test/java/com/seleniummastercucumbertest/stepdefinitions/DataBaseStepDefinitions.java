@@ -1,12 +1,8 @@
 package com.seleniummastercucumbertest.stepdefinitions;
 
-import com.seleniummastercucumber.pages.dashboardmodule.AdminLoginPage;
-import com.seleniummastercucumber.pages.dashboardmodule.AdminRole;
 import com.seleniummastercucumber.pages.database.VerifySQLScripts;
-import com.seleniummastercucumber.utility.BasePage;
 import com.seleniummastercucumber.utility.ConnectionType;
 import com.seleniummastercucumber.utility.DBConnection;
-import com.seleniummastercucumber.utility.FileUtility;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -26,7 +22,10 @@ public class DataBaseStepDefinitions {
     String password = readConfig("dbpassword");
     String dbName = readConfig("dbname");
     boolean isCategoryExist ;
+    boolean isCustomerExist;
+
     boolean isTaxRuleNameExist;
+
 
     @Given("user has valid database connection")
     public void userHasValidDatabaseConnection() {
@@ -45,6 +44,16 @@ public class DataBaseStepDefinitions {
     @Then("The database returns sub category information with details")
     public void theDatabaseReturnsSubCategoryInformationWithDetails() {
         Assert.assertTrue(isCategoryExist);
+    }
+
+    @When("Execute SQL query to get newly registered users information by email")
+    public void executeSQLQueryToGetNewlyRegisteredUsersInformationByEmail() {
+        verifySQLScripts.newlyRegisteredUser("salmanuyghur3@gmail.com",connection);
+    }
+    @Then("Database returns newly registered information")
+    public void databaseReturnsNewlyRegisteredInformation() {
+       // Assert.assertTrue(isCustomerExist);
+
     }
 
 
