@@ -25,7 +25,6 @@ public class SalesModuleStepDefinitions extends BasePage {
     AdminDashboardPage dashboardPage = new AdminDashboardPage(driver);
     ManageCustomersPage manageCustomersPage = new ManageCustomersPage(driver);
     InvoicesPage invoicesPage=new InvoicesPage(driver);
-
     CouponsPage couponsPage=new CouponsPage(driver);
     RefundsPage refundsPage = new RefundsPage(driver);
 

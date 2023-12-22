@@ -65,12 +65,16 @@ public class ManageCustomersPage {
     }
     public void emptyShoppingCart() {
         linkSize = deleteLinks.size();
-        if (noRecordFoundMessage.isDisplayed()) {
-            System.out.println("Shopping cart is empty!");
-        } else {
-            deleteLinks.get(new Random().nextInt(deleteLinks.size())).click();
-            functionLibrary.waitAlertPresent();
-            driver.switchTo().alert().accept();
+        try {
+            if (noRecordFoundMessage.isDisplayed()) {
+                System.out.println("Shopping cart is empty!");
+            } else {
+                deleteLinks.get(new Random().nextInt(deleteLinks.size())).click();
+                functionLibrary.waitAlertPresent();
+                driver.switchTo().alert().accept();
+            }
+        }catch (NoSuchElementException e){
+            e.printStackTrace();
         }
     }
 

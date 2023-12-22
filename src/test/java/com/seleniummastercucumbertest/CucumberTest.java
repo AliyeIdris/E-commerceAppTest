@@ -14,8 +14,8 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         plugin = {"pretty","html:target/cucumber-testReport.html", "junit:target/cucumber-results.xml" },
 
-        features = {"classpath:features/reportingmodule.feature"},
-        tags="@Manage_Products_Reviews"
+        features = {"classpath:features/SalesModule.feature"},
+        tags="@ManageShoppingCart"
 )
 public class CucumberTest {
 }
