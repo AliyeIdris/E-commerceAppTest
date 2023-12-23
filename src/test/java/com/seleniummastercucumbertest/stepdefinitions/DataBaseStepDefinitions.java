@@ -56,8 +56,6 @@ public class DataBaseStepDefinitions {
       Assert.assertTrue(isCustomerExist);
 
     }
-
-
     @When("the user query the mg_tax_calculation_rule table with taxRuleName")
     public void theUserQueryTheMg_tax_calculation_ruleTableWithTaxRuleName() {
        // AdminLoginPage loginPage = new AdminLoginPage(BasePage.driver);
