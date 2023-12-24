@@ -13,7 +13,10 @@ import com.seleniummastercucumber.pages.dashboardmodule.AdminDashboardPage;
 import com.seleniummastercucumber.pages.dashboardmodule.AdminLoginPage;
 import com.seleniummastercucumber.pages.dashboardmodule.AdminRole;
 import com.seleniummastercucumber.utility.BasePage;
+import net.bytebuddy.utility.RandomString;
 import org.junit.Assert;
+
+import java.util.Random;
 
 /**
  * @author : user
@@ -28,6 +31,7 @@ public class SalesModuleStepDefinitions extends BasePage {
 
     CouponsPage couponsPage=new CouponsPage(driver);
     RefundsPage refundsPage = new RefundsPage(driver);
+    int quantity;
 
     //*************************** Background ***************************
     @Given("sales manager login")
@@ -99,6 +103,22 @@ public class SalesModuleStepDefinitions extends BasePage {
     @Then("total refunded report should be display with information")
     public void totalRefundedReportShouldBeDisplayWithInformation() {
         Assert.assertTrue(refundsPage.viewRefundsInTheReports());
+    }
+
+    @Given("sales manager go to the shopping cart page with email {string}")
+    public void salesManagerGoToTheShoppingCartPageWithEmail(String email) {
+        manageCustomersPage.navigateToShoppingCartPage(email);
+    }
+
+    @When("sales manager update the existing shopping cart")
+    public void salesManagerUpdateTheExistingShoppingCart() {
+        quantity=(int)((Math.random())*50);
+        manageCustomersPage.updateShoppingCart(quantity);
+    }
+
+    @Then("updated shopping cart info should be displayed")
+    public void updatedShoppingCartInfoShouldBeDisplayed() {
+        Assert.assertTrue("shopping cart does not updated ",manageCustomersPage.verifyUpdatedShoppingCart());
     }
 }
 

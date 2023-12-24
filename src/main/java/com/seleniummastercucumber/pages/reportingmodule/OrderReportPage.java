@@ -29,7 +29,7 @@ public class OrderReportPage {
     WebElement goLastYearButton;
     @FindBy(xpath = "//*[text()='To ']")
     WebElement toWordPath;
-    @FindBy(xpath = "//*[@id=\"html-body\"]/div[5]/table/thead/tr[2]/td[3]/div") //cpfy
+    @FindBy(xpath = "(//div[text()='today'])[2]") // can not locate
     WebElement todayButton;
     @FindBy(xpath = "//*[text()='Show Report']")
     WebElement showReportButton;

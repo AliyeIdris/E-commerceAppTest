@@ -23,6 +23,7 @@ public class DataBaseStepDefinitions {
     String password = readConfig("dbpassword");
     String dbName = readConfig("dbname");
     boolean isCategoryExist ;
+    boolean isStoreViewExist;
 
     @Given("user has valid database connection")
     public void userHasValidDatabaseConnection() {
@@ -41,5 +42,15 @@ public class DataBaseStepDefinitions {
     @Then("The database returns sub category information with details")
     public void theDatabaseReturnsSubCategoryInformationWithDetails() {
         Assert.assertTrue(isCategoryExist);
+    }
+
+    @When("run SQL query to get newly added store view info with store view name {string}")
+    public void runSQLQueryToGetNewlyAddedStoreViewInfoWithStoreViewName(String name) {
+        isStoreViewExist=verifySQLScripts.getNewlyAddedStoreView(connection,name);
+    }
+
+    @Then("database returns store view information details")
+    public void databaseReturnsStoreViewInformationDetails() {
+        Assert.assertTrue("Store view is not exist ",isStoreViewExist);
     }
 }
