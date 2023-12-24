@@ -3,7 +3,6 @@ package com.seleniummastercucumbertest.stepdefinitions;
 import com.seleniummastercucumber.pages.database.VerifySQLScripts;
 import com.seleniummastercucumber.utility.ConnectionType;
 import com.seleniummastercucumber.utility.DBConnection;
-import com.seleniummastercucumber.utility.FileUtility;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -23,6 +22,10 @@ public class DataBaseStepDefinitions {
     String password = readConfig("dbpassword");
     String dbName = readConfig("dbname");
     boolean isCategoryExist ;
+    boolean isCustomerExist;
+
+    boolean isTaxRuleNameExist;
+
     boolean isStoreViewExist;
 
     @Given("user has valid database connection")
@@ -42,6 +45,29 @@ public class DataBaseStepDefinitions {
     @Then("The database returns sub category information with details")
     public void theDatabaseReturnsSubCategoryInformationWithDetails() {
         Assert.assertTrue(isCategoryExist);
+    }
+
+    @When("Execute SQL query to get newly registered users information by email")
+    public void executeSQLQueryToGetNewlyRegisteredUsersInformationByEmail() {
+        verifySQLScripts.newlyRegisteredUser("salmanuyghur3@gmail.com",connection);
+    }
+    @Then("Database returns newly registered information")
+    public void databaseReturnsNewlyRegisteredInformation() {
+       // Assert.assertTrue(isCustomerExist);
+
+    }
+
+
+    @When("the user query the mg_tax_calculation_rule table with taxRuleName")
+    public void theUserQueryTheMg_tax_calculation_ruleTableWithTaxRuleName() {
+       // AdminLoginPage loginPage = new AdminLoginPage(BasePage.driver);
+       // loginPage.login(AdminRole.SALES_MANAGER);
+        isTaxRuleNameExist=VerifySQLScripts.getNewlyAddedTaxRule(connection,"Wholesale Customer - Tax Exempt ");
+    }
+
+    @Then("the user should see the newly added tax rule info")
+    public void theUserShouldSeeTheNewlyAddedTaxRuleInfo() {
+        Assert.assertTrue(isTaxRuleNameExist);
     }
 
     @When("run SQL query to get newly added store view info with store view name {string}")
