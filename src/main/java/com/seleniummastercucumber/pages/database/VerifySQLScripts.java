@@ -158,7 +158,7 @@ public class VerifySQLScripts {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        String selectUser = String.format("select entity_id,website_id,email,group_id from i9362596_mg2.mg_customer_entity where email '%s'", userEmail);
+        String selectUser = String.format("select entity_id,email from mg_customer_entity where email='%s'", userEmail);
         try {
             resultSet = statement.executeQuery(selectUser);
         } catch (SQLException e) {
@@ -185,10 +185,8 @@ public class VerifySQLScripts {
 
                 try {
                     int entity_id = cachedRowSet.getInt("entity_id");
-                    int website_id = cachedRowSet.getInt("website_id");
-                    String email = cachedRowSet.getNString("email");
-                    int group_id = cachedRowSet.getInt("group_id");
-                    System.out.println(String.format("entity_id=%s website_id=%s email=%s group_id=%s", entity_id, website_id, email, group_id));
+                    String email = cachedRowSet.getString("email");
+                    System.out.println(String.format("entity_id=%d email=%s", entity_id,email));
                     count = cachedRowSet.getRow();
                 } catch (SQLException e) {
                     e.printStackTrace();
