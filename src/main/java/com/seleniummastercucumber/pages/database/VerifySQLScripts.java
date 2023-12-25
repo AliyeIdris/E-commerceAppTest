@@ -47,6 +47,45 @@ public class VerifySQLScripts {
         return isSubCategoryExist;
 
     }
+    public boolean getNewlyAddedStoreView(Connection connection,String storeViewName){
+        boolean isStoreViewExist=false;
+        Statement statement;
+        ResultSet resultSet;
+        CachedRowSet cachedRowSet;
+        try {
+            statement = connection.createStatement();
+            String sqlScriptStoreView = String.format("select store_id,code,group_id,name from mg_core_store where name='%s'"
+                    ,storeViewName);
+            resultSet = statement.executeQuery(sqlScriptStoreView);
+            cachedRowSet = RowSetProvider.newFactory().createCachedRowSet();
+            if (resultSet == null) {
+                System.out.println("No records found");
+            } else {
+                cachedRowSet.populate(resultSet);
+                int rowCount = 0;
+                String name=" ";
+                while (true) {
+                    if (!cachedRowSet.next()) {
+                        break;
+                    }
+                    int store_id = cachedRowSet.getInt("store_id");
+                    String code = cachedRowSet.getString("code");
+                    int group_id = cachedRowSet.getInt("group_id");
+                     name = cachedRowSet.getString("name");
+                    System.out.println(String.format("store_id=%d code=%s group_id=%d name=%s", store_id,code,group_id,name));
+                    rowCount = cachedRowSet.getRow();
+                }
+                System.out.println("row Count: " + rowCount);
+                if (rowCount >= 1 && name.equalsIgnoreCase(storeViewName)) {
+                    isStoreViewExist = true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return isStoreViewExist;
+
+    }
     public static boolean getNewlyAddedTaxRule(Connection connection,String taxRuleName){
         boolean isTaxRuleNameExist=false;
         Statement statement=null;
