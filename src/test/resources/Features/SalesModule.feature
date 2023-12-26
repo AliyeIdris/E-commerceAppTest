@@ -35,3 +35,10 @@ Feature: Sales module features
       Given sales manager is on the refunds page
       When sales manager select on from and to date fill and click on show report
       Then total refunded report should be display with information
+
+      @UpdateShoppingCart
+      Scenario: Sales Manager should be able to manage update an existing shopping cart for customers.
+      (You need to open a customer and manage shopping cart)
+        Given sales manager go to the shopping cart page with email "Jerry@gmail.com"
+        When sales manager update the existing shopping cart
+        Then updated shopping cart info should be displayed

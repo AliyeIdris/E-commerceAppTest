@@ -26,6 +26,7 @@ public class DataBaseStepDefinitions {
 
     boolean isTaxRuleNameExist;
 
+    boolean isStoreViewExist;
 
     @Given("user has valid database connection")
     public void userHasValidDatabaseConnection() {
@@ -48,15 +49,14 @@ public class DataBaseStepDefinitions {
 
     @When("Execute SQL query to get newly registered users information by email")
     public void executeSQLQueryToGetNewlyRegisteredUsersInformationByEmail() {
-        verifySQLScripts.newlyRegisteredUser("salmanuyghur3@gmail.com",connection);
+        isCustomerExist=verifySQLScripts.newlyRegisteredUser("uyhgur999@gmail.com",connection);
+
     }
     @Then("Database returns newly registered information")
     public void databaseReturnsNewlyRegisteredInformation() {
-       // Assert.assertTrue(isCustomerExist);
+      Assert.assertTrue(isCustomerExist);
 
     }
-
-
     @When("the user query the mg_tax_calculation_rule table with taxRuleName")
     public void theUserQueryTheMg_tax_calculation_ruleTableWithTaxRuleName() {
        // AdminLoginPage loginPage = new AdminLoginPage(BasePage.driver);
@@ -67,5 +67,15 @@ public class DataBaseStepDefinitions {
     @Then("the user should see the newly added tax rule info")
     public void theUserShouldSeeTheNewlyAddedTaxRuleInfo() {
         Assert.assertTrue(isTaxRuleNameExist);
+    }
+
+    @When("run SQL query to get newly added store view info with store view name {string}")
+    public void runSQLQueryToGetNewlyAddedStoreViewInfoWithStoreViewName(String name) {
+        isStoreViewExist=verifySQLScripts.getNewlyAddedStoreView(connection,name);
+    }
+
+    @Then("database returns store view information details")
+    public void databaseReturnsStoreViewInformationDetails() {
+        Assert.assertTrue("Store view is not exist ",isStoreViewExist);
     }
 }
