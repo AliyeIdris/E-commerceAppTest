@@ -40,6 +40,8 @@ public class ReportingDashboardPage {
     List<WebElement> lowStockReport;
     @FindBy(xpath = "//span[text()='Orders']")
     WebElement ordersLink;
+    @FindBy(xpath = "//a/span[text()='Tax']")
+    WebElement taxLink;
     public void openShippingPage() {
         functionLibrary.waitForElementVisible(reportsLink);
         actions.moveToElement(reportsLink).moveToElement(salesLink).moveToElement(shippingLink).click().perform();
@@ -61,5 +63,13 @@ public class ReportingDashboardPage {
     public void goToOrderedReportPage(){
         functionLibrary.waitForElementVisible(reportsLink);
         actions.moveToElement(reportsLink).moveToElement(salesLink).moveToElement(ordersLink).click().build().perform();
+    }
+    public void navigateToTaxReportPage(){
+        functionLibrary.waitForElementVisible(reportsLink);
+        actions.moveToElement(reportsLink).perform();
+        functionLibrary.waitForElementVisible(salesLink);
+        actions.moveToElement(salesLink).perform();
+        functionLibrary.waitForElementVisible(taxLink);
+        taxLink.click();
     }
 }

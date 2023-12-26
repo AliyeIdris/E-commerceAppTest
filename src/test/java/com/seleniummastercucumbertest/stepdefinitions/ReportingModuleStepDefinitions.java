@@ -19,6 +19,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
     DownloadsPage downloadsPage =new DownloadsPage(driver);
     ProductsReviewsPage reviewsPage=new ProductsReviewsPage(driver);
     OrderReportPage orderReportPage=new OrderReportPage(driver);
+    TaxReportPage taxReportPage=new TaxReportPage(driver);
      @Given("report manager login")
      public void reportManagerLogin() {
          adminLoginPage.login(AdminRole.REPORTINGMANAGER);
@@ -98,4 +99,19 @@ public class ReportingModuleStepDefinitions extends BasePage {
          orderReportPage.verifyDisplayedTotalOrderReport();
     }
 
+    //*************************** View Tax Report Grouped By Tax Rate ***************************
+    @Given("reporting manager is on the Order Taxes Report Page")
+    public void reportingManagerIsOnTheOrderTaxesReportPage() {
+         dashboardPage.navigateToTaxReportPage();
+    }
+
+    @When("reporting manager fills the filter options with {string} and {string}")
+    public void reportingManagerFillsTheFilterOptionsWithAnd(String dateFrom, String dateTo) {
+         taxReportPage.filterTaxReportDate(dateFrom,dateTo);
+    }
+
+    @Then("reporting manager should be able to see the Sales-Taxes Report Grouped By Tax Rate")
+    public void reportingManagerShouldBeAbleToSeeTheSalesTaxesReportGroupedByTaxRate() {
+         Assert.assertTrue(taxReportPage.verifyTaxReportViewedSuccessfully());
+    }
 }
