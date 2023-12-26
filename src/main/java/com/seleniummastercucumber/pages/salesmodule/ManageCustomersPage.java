@@ -1,6 +1,7 @@
 package com.seleniummastercucumber.pages.salesmodule;
 
 import com.seleniummastercucumber.utility.FunctionLibrary;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindAll;
@@ -19,28 +20,42 @@ public class ManageCustomersPage {
     WebDriver driver;
     FunctionLibrary functionLibrary;
     Actions actions;
+    Logger logger;
+    public ManageCustomersPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+        functionLibrary = new FunctionLibrary(driver);
+        actions = new Actions(driver);
+        logger=Logger.getLogger(ManageCustomersPage.class.getName());
+    }
     @FindBy(xpath = "(//span[text()='Customers'])[1]")
     WebElement customersMenu;
     @FindBy(xpath = "//span[text()='Manage Customers']")
     WebElement manageCustomersLink;
     @FindBy(id = "customer_info_tabs_cart")
     WebElement shoppingCartLink;
-    @FindBy(xpath = "(//tr[@class='even']/td[text()='No records found.'])[3]")
-    WebElement noRecordFoundMessage;
+    @FindAll(
+            @FindBy(xpath = "(//tr[@class='even']/td[text()='No records found.'])[3]")
+    )
+    List<WebElement> noRecordFoundMessage;
     @FindBy(id = "customerGrid_filter_email")
     WebElement emailSearchField;
     @FindBy(xpath = "//span[text()='Search']")
     WebElement searchButton;
     @FindAll(
-            @FindBy(linkText = "Delete")
+            @FindBy(xpath = "//a[text()='Delete']")
     )
     List<WebElement> deleteLinks;
     int linkSize;
-    public ManageCustomersPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-        functionLibrary = new FunctionLibrary(driver);
-        actions = new Actions(driver);
+    @FindBy(xpath = "//td[@class='pager']")
+    WebElement totalRecordField;
+
+    public int getLinkSize() {
+        return linkSize;
+    }
+
+    public void setLinkSize(int linkSize) {
+        this.linkSize = linkSize;
     }
 
     public void navigateToCustomerShoppingCartPage(String customerEmail) {
@@ -62,23 +77,36 @@ public class ManageCustomersPage {
         customerLocation.click();
         functionLibrary.waitForElementVisible(shoppingCartLink);
         shoppingCartLink.click();
-    }
-    public void emptyShoppingCart() {
-        linkSize = deleteLinks.size();
         try {
-            if (noRecordFoundMessage.isDisplayed()) {
-                System.out.println("Shopping cart is empty!");
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void emptyShoppingCart() {
+        setLinkSize(deleteLinks.size());
+            if (noRecordFoundMessage.size()==1) {
+                logger.info("Shopping cart is empty!");
             } else {
                 deleteLinks.get(new Random().nextInt(deleteLinks.size())).click();
                 functionLibrary.waitAlertPresent();
                 driver.switchTo().alert().accept();
             }
-        }catch (NoSuchElementException e){
-            e.printStackTrace();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
     public boolean verifyManageShoppingCart() {
-        return noRecordFoundMessage.isDisplayed() || linkSize - deleteLinks.size() == 1;
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        List<WebElement> deleteLinks=driver.findElements(By.xpath("//a[text()='Delete']"));
+        return getLinkSize() > deleteLinks.size() || noRecordFoundMessage.size() > 0;
     }
 }

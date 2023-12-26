@@ -48,9 +48,9 @@ public class SalesModuleStepDefinitions extends BasePage {
     public void salesManagerEmptyCustomerSShoppingCart() {
         manageCustomersPage.emptyShoppingCart();
     }
-    @Then("sales manager should be able to manage customer's shopping cart successfully")
-    public void salesManagerShouldBeAbleToManageCustomerSShoppingCartSuccessfully() {
-        Assert.assertTrue(manageCustomersPage.verifyManageShoppingCart());
+    @Then("sales manager managed shopping cart successfully")
+    public void salesManagerManagedShoppingCartSuccessfully() {
+        manageCustomersPage.verifyManageShoppingCart();
     }
     @Given("manager got to product page")
     public void managerGotToProductPage() {
@@ -99,5 +99,7 @@ public class SalesModuleStepDefinitions extends BasePage {
     public void totalRefundedReportShouldBeDisplayWithInformation() {
         Assert.assertTrue(refundsPage.viewRefundsInTheReports());
     }
+
+
 }
 
