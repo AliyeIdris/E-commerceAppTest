@@ -12,7 +12,7 @@ Feature: Reporting module features
     Then total shipped report should appear
     Examples:
       | dateFrom   | dateTo     |
-      | 03/21/2023 | 12/12/2023 |
+      | 21/01/2010 | 26/12/2023 |
 
 
  @ManageProductsDownloadsReport
@@ -37,3 +37,12 @@ Feature: Reporting module features
      Given reporting manager navigate to order report page
      When reporting manager filter total order report with date
      Then total order report should be displayed
+
+     @ViewSalesTaxReport
+       Scenario Outline: Reporting Manager Should be Able to See Sales-Taxes Report Grouped by Tax Rate
+       Given reporting manager is on the Order Taxes Report Page
+       When reporting manager fills the filter options with "<From>" and "<To>"
+       Then reporting manager should be able to see the Sales-Taxes Report Grouped By Tax Rate
+       Examples:
+       |From     |  To      |
+       |9/1/2010 |12/26/2023|

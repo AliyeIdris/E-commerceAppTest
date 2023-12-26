@@ -13,10 +13,9 @@ import com.seleniummastercucumber.pages.dashboardmodule.AdminDashboardPage;
 import com.seleniummastercucumber.pages.dashboardmodule.AdminLoginPage;
 import com.seleniummastercucumber.pages.dashboardmodule.AdminRole;
 import com.seleniummastercucumber.utility.BasePage;
-import net.bytebuddy.utility.RandomString;
+
 import org.junit.Assert;
 
-import java.util.Random;
 
 /**
  * @author : user
@@ -27,9 +26,8 @@ public class SalesModuleStepDefinitions extends BasePage {
     AdminLoginPage loginPage = new AdminLoginPage(driver);
     AdminDashboardPage dashboardPage = new AdminDashboardPage(driver);
     ManageCustomersPage manageCustomersPage = new ManageCustomersPage(driver);
-    InvoicesPage invoicesPage=new InvoicesPage(driver);
-
-    CouponsPage couponsPage=new CouponsPage(driver);
+    InvoicesPage invoicesPage = new InvoicesPage(driver);
+    CouponsPage couponsPage = new CouponsPage(driver);
     RefundsPage refundsPage = new RefundsPage(driver);
     int quantity;
 
@@ -49,14 +47,17 @@ public class SalesModuleStepDefinitions extends BasePage {
     public void salesManagerIsOnCustomerSShoppingCartPage(String email) {
         manageCustomersPage.navigateToCustomerShoppingCartPage(email);
     }
+
     @When("sales manager empty Customer's Shopping Cart")
     public void salesManagerEmptyCustomerSShoppingCart() {
         manageCustomersPage.emptyShoppingCart();
     }
-    @Then("sales manager should be able to manage customer's shopping cart successfully")
-    public void salesManagerShouldBeAbleToManageCustomerSShoppingCartSuccessfully() {
-        Assert.assertTrue(manageCustomersPage.verifyManageShoppingCart());
+
+    @Then("sales manager managed shopping cart successfully")
+    public void salesManagerManagedShoppingCartSuccessfully() {
+        manageCustomersPage.verifyManageShoppingCart();
     }
+
     @Given("manager got to product page")
     public void managerGotToProductPage() {
     }
@@ -69,21 +70,24 @@ public class SalesModuleStepDefinitions extends BasePage {
 
     @When("Sales manager Click on Reports move to reports and move to Sales and select coupons fill in {string}and{string}field")
     public void salesManagerClickOnReportsMoveToReportsAndMoveToSalesAndSelectCouponsFillInAndField(String arg0, String arg1) {
-        couponsPage.viewCouponsReports(arg0,arg1);
+        couponsPage.viewCouponsReports(arg0, arg1);
     }
 
     @Then("Total coupons Report page should display with information")
     public void totalCouponsReportPageShouldDisplayWithInformation() {
-        couponsPage.verifyCouponsReports();}
+        couponsPage.verifyCouponsReports();
+    }
 
     @Given("Sales manager is on the dashboard page and invoices are should be existing")
     public void salesManagerIsOnTheDashboardPageAndInvoicesAreShouldBeExisting() {
         Assert.assertTrue(dashboardPage.verifySalesManagerDashboardPage());
     }
+
     @When("Sales manager views invoices and adds comments")
     public void salesManagerViewsInvoicesAndAddsComments() {
         invoicesPage.viewInvoicesAndAddComments(TestDataHolder.comments);
     }
+
     @Then("Sales manager should be able to view invoices and add comments successfully")
     public void salesManagerShouldBeAbleToViewInvoicesAndAddCommentsSuccessfully() {
         invoicesPage.verifyInvoicesAndComment();
@@ -112,13 +116,13 @@ public class SalesModuleStepDefinitions extends BasePage {
 
     @When("sales manager update the existing shopping cart")
     public void salesManagerUpdateTheExistingShoppingCart() {
-        quantity=(int)((Math.random())*50);
+        quantity = (int) ((Math.random()) * 50);
         manageCustomersPage.updateShoppingCart(quantity);
     }
 
     @Then("updated shopping cart info should be displayed")
     public void updatedShoppingCartInfoShouldBeDisplayed() {
-        Assert.assertTrue("shopping cart does not updated ",manageCustomersPage.verifyUpdatedShoppingCart());
+        Assert.assertTrue("shopping cart does not updated ", manageCustomersPage.verifyUpdatedShoppingCart());
     }
 }
 

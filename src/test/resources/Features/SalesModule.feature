@@ -10,7 +10,7 @@ Feature: Sales module features
       description: (You need to open a customer and manage shopping cart) -Aliye
       Given sales manager is on customer's shopping cart page "aliyeidiris@gmail.com"
       When sales manager empty Customer's Shopping Cart
-      Then sales manager should be able to manage customer's shopping cart successfully
+      Then sales manager managed shopping cart successfully
 
       @ManageInvoicesAndComment
       Scenario: Sales manager should be able to view invoices and add comments
