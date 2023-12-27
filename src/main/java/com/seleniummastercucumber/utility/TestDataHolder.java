@@ -18,4 +18,7 @@ public class TestDataHolder {
     }
 
     String mavenCommand="mvn -Dtest=CucumberTestRunner test";
+
+    public static String taxRuleName=faker.name().title();
+    public static int indexNumber=faker.number().numberBetween(0,3);
 }

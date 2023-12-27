@@ -1,9 +1,6 @@
 package com.seleniummastercucumbertest.stepdefinitions;
 
-import com.seleniummastercucumber.pages.salesmodule.CouponsPage;
-import com.seleniummastercucumber.pages.salesmodule.InvoicesPage;
-import com.seleniummastercucumber.pages.salesmodule.ManageCustomersPage;
-import com.seleniummastercucumber.pages.salesmodule.RefundsPage;
+import com.seleniummastercucumber.pages.salesmodule.*;
 import com.seleniummastercucumber.utility.TestDataHolder;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -29,6 +26,7 @@ public class SalesModuleStepDefinitions extends BasePage {
     InvoicesPage invoicesPage = new InvoicesPage(driver);
     CouponsPage couponsPage = new CouponsPage(driver);
     RefundsPage refundsPage = new RefundsPage(driver);
+    ManageTaxRulePage manageTaxRulePage=new ManageTaxRulePage(driver);
     int quantity;
 
     //*************************** Background ***************************
@@ -58,7 +56,7 @@ public class SalesModuleStepDefinitions extends BasePage {
         manageCustomersPage.verifyManageShoppingCart();
     }
 
-    @Given("manager got to product page")
+    @Given("manager bot to product page")
     public void managerGotToProductPage() {
     }
 
@@ -123,6 +121,24 @@ public class SalesModuleStepDefinitions extends BasePage {
     @Then("updated shopping cart info should be displayed")
     public void updatedShoppingCartInfoShouldBeDisplayed() {
         Assert.assertTrue("shopping cart does not updated ", manageCustomersPage.verifyUpdatedShoppingCart());
+    }
+
+    @Given("sales manager is on Manage Tax Rules page")
+    public void salesManagerIsOnManageTaxRulesPage() {
+        manageTaxRulePage.navigateToManageTaxRulePage();
+    }
+
+    @When("sales manager add tax rule")
+    public void salesManagerAddTaxRule() {
+        manageTaxRulePage.addTaxRule(TestDataHolder.taxRuleName,TestDataHolder.indexNumber);
+    }
+
+    @And("sales manager update added tax rule")
+    public void salesManagerUpdateAddedTaxRule() {
+    }
+
+    @Then("sales manager added and updated tax rule successfully")
+    public void salesManagerAddedAndUpdatedTaxRuleSuccessfully() {
     }
 }
 
