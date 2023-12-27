@@ -1,6 +1,7 @@
 package com.seleniummastercucumber.pages.reportingmodule;
 
 import com.seleniummastercucumber.utility.FunctionLibrary;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -112,68 +113,11 @@ public class CustomersOrdersTotalPage {
         dayField.click();
     }
     public void enterEndDate(String endDate){
-        String[] splitDate = endDate.split("/");
-        int day = Integer.parseInt(splitDate[0]);
-        int month = Integer.parseInt(splitDate[1]);
-        String monthString = new DateFormatSymbols().getMonths()[month - 1];
-        int year = Integer.parseInt(splitDate[2]);
         functionLibrary.waitForElementVisible(calendarIconTo);
         calendarIconTo.click();
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        WebElement currentMonthYearField;
-        String[] yearMonth;
-        while (true) {
-            currentMonthYearField = driver.findElement(By.xpath("//thead/tr/td[@colspan='6' and @class='title']"));
-            System.out.println(currentMonthYearField.getText());
-            yearMonth = currentMonthYearField.getText().split(",");
-            int currentYear = Integer.parseInt(yearMonth[2].trim());
-            if (currentYear == year) {
-                break;
-            } else if (currentYear > year) {
-                WebElement yearBackwardButton = driver.findElement(By.xpath("//div[text()='«']"));
-                functionLibrary.waitForElementVisible(yearBackwardButton);
-                yearBackwardButton.click();
-            } else {
-                WebElement yearForwardButton = driver.findElement(By.xpath("//div[text()='»']"));
-                functionLibrary.waitForElementVisible(yearForwardButton);
-                yearForwardButton.click();
-            }
-        }
-        while (true) {
-            currentMonthYearField = driver.findElement(By.xpath("//thead/tr/td[@colspan='6' and @class='title']"));
-            yearMonth = currentMonthYearField.getText().split(",");
-            String currentMonth = yearMonth[0].trim();
-            if (currentMonth.equalsIgnoreCase(monthString)) {
-                break;
-            } else {
-                int num;
-                try {
-                    Date date = new SimpleDateFormat("MMM").parse(currentMonth);
-                    Calendar cal = Calendar.getInstance();
-                    cal.setTime(date);
-                    num = cal.get(Calendar.MONTH) + 1;
-                } catch (ParseException e) {
-                    throw new RuntimeException(e);
-                }
-                if (num > month) {
-                    WebElement monthBackwardButton = driver.findElement(By.xpath("//div[text()='‹']"));
-                    functionLibrary.waitForElementVisible(monthBackwardButton);
-                    monthBackwardButton.click();
-                } else {
-                    WebElement monthForwardButton = driver.findElement(By.xpath("//div[text()='›']"));
-                    functionLibrary.waitForElementVisible(monthForwardButton);
-                    monthForwardButton.click();
-                }
-            }
-        }
-        WebElement dayField = driver.findElement(By.xpath(String.format("//td[contains(@class,'day') and text()='%d']", day)));
-        functionLibrary.waitForElementVisible(dayField);
-        dayField.click();
-
+        WebElement currentDay = driver.findElement(By.xpath("(//div[text()='today'])[2]"));
+        functionLibrary.waitForElementVisible(currentDay);
+        currentDay.click();
     }
     public void applyFilterToReport(String startDate, String endDate){
         enterStartDate(startDate);
@@ -188,7 +132,7 @@ public class CustomersOrdersTotalPage {
         int numberOfOrder=Integer.parseInt(totalNumberOfOrdersField.getText());
         double averageOrderAmount=Double.parseDouble(averageOrderAmountField.getText().substring(1));
         int expectedTotalOrderAmount=(int)(numberOfOrder*averageOrderAmount);
-        int actualTotalOrderAmount=(int)Double.parseDouble(totalOrderAmountField.getText().substring(1));
+        int actualTotalOrderAmount=(int)(Double.parseDouble(totalOrderAmountField.getText().substring(1).replace(",","")));
         return customerNameColumn.isDisplayed() &&expectedTotalOrderAmount==actualTotalOrderAmount;
     }
 }
