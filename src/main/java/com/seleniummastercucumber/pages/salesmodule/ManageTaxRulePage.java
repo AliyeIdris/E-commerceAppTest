@@ -9,12 +9,15 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.Random;
+
 public class ManageTaxRulePage {
     WebDriver driver;
     FunctionLibrary functionLibrary;
     Logger logger;
     Actions actions;
     Select select;
+    Random random;
 
     @FindBy(xpath = "//span[text()='Sales']")
     WebElement salesTab;
@@ -40,6 +43,8 @@ public class ManageTaxRulePage {
     WebElement sortOrderField;
     @FindBy(xpath = "//button//span[contains(text(), 'Save Rule')]")
     WebElement saveButton;
+    @FindBy(xpath = "//ul[@class='messages']")
+    WebElement addTaxRuleVerification;
 
     public ManageTaxRulePage(WebDriver driver) {
         this.driver=driver;
@@ -64,29 +69,38 @@ public class ManageTaxRulePage {
         }
     }
 
-    public void addTaxRule(String taxRuleName,int indexNumber){
+    public void addTaxRule(String taxRuleName, String customerIndexNumber, String productIndexNumber, String taxNumber, String number){
         functionLibrary.waitForElementVisible(addTaxRuleButton);
         actions.click(addTaxRuleButton).build().perform();
         functionLibrary.waitForElementVisible(nameField);
         nameField.sendKeys(taxRuleName);
         functionLibrary.waitForElementVisible(taxCustomerClassList);
         select=new Select(taxCustomerClassList);
-        select.selectByIndex(indexNumber);
+        select.selectByIndex(Integer.parseInt(String.valueOf(customerIndexNumber)));
         functionLibrary.waitForElementVisible(taxProductClassList);
         select=new Select(taxProductClassList);
-        select.selectByIndex(indexNumber);
+        select.selectByIndex(Integer.parseInt(String.valueOf(productIndexNumber)));
         functionLibrary.waitForElementVisible(taxRateList);
         select=new Select(taxRateList);
-        select.selectByIndex(indexNumber);
+        select.selectByIndex(Integer.parseInt(String.valueOf(taxNumber)));
         functionLibrary.waitForElementVisible(priorityField);
-        priorityField.sendKeys(String.valueOf(indexNumber));
+        priorityField.sendKeys(String.valueOf(number));
         functionLibrary.waitForElementVisible(calculateOffSubtotalOnly);
         calculateOffSubtotalOnly.click();
         functionLibrary.waitForElementVisible(sortOrderField);
-        sortOrderField.sendKeys(String.valueOf(indexNumber));
+        sortOrderField.sendKeys(String.valueOf(number));
         functionLibrary.waitForElementVisible(saveButton);
         actions.click(saveButton).build().perform();
+    }
 
+    public boolean verifyAddedTaxRule(){
+        if (addTaxRuleVerification.getText().contains("has been saved")){
+            logger.info("Tax rule is added successfully");
+            return true;
+        }else {logger.info(addTaxRuleVerification.getText());
+            logger.info("Tax rule is failed");
+            return false;
+        }
     }
 
 }

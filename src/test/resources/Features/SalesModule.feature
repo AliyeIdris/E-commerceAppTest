@@ -48,5 +48,6 @@ Feature: Sales module features
           description: (see Tax link under Store)
           Given sales manager is on Manage Tax Rules page
           When sales manager add tax rule
+          Then tax rule is added
           And sales manager update added tax rule
           Then sales manager added and updated tax rule successfully

@@ -130,15 +130,20 @@ public class SalesModuleStepDefinitions extends BasePage {
 
     @When("sales manager add tax rule")
     public void salesManagerAddTaxRule() {
-        manageTaxRulePage.addTaxRule(TestDataHolder.taxRuleName,TestDataHolder.indexNumber);
+        manageTaxRulePage.addTaxRule(TestDataHolder.taxRuleName,String.valueOf(TestDataHolder.customerIndexNumber),String.valueOf(TestDataHolder.productIndexNumber),String.valueOf(TestDataHolder.taxIndexNumber),String.valueOf(TestDataHolder.number));
     }
+    @Then("tax rule is added")
+    public void taxRuleIsAdded() {Assert.assertTrue(manageTaxRulePage.verifyAddedTaxRule());}
 
     @And("sales manager update added tax rule")
     public void salesManagerUpdateAddedTaxRule() {
+
     }
 
     @Then("sales manager added and updated tax rule successfully")
     public void salesManagerAddedAndUpdatedTaxRuleSuccessfully() {
     }
+
+
 }
 
