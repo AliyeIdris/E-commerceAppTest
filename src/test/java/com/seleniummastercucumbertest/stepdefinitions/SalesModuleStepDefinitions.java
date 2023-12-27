@@ -1,16 +1,15 @@
 package com.seleniummastercucumbertest.stepdefinitions;
 
+import com.seleniummastercucumber.pages.dashboardmodule.AdminDashboardPage;
+import com.seleniummastercucumber.pages.dashboardmodule.AdminLoginPage;
+import com.seleniummastercucumber.pages.dashboardmodule.AdminRole;
 import com.seleniummastercucumber.pages.salesmodule.*;
+import com.seleniummastercucumber.utility.BasePage;
 import com.seleniummastercucumber.utility.TestDataHolder;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import com.seleniummastercucumber.pages.dashboardmodule.AdminDashboardPage;
-import com.seleniummastercucumber.pages.dashboardmodule.AdminLoginPage;
-import com.seleniummastercucumber.pages.dashboardmodule.AdminRole;
-import com.seleniummastercucumber.utility.BasePage;
-
 import org.junit.Assert;
 
 
@@ -130,18 +129,26 @@ public class SalesModuleStepDefinitions extends BasePage {
 
     @When("sales manager add tax rule")
     public void salesManagerAddTaxRule() {
-        manageTaxRulePage.addTaxRule(TestDataHolder.taxRuleName,String.valueOf(TestDataHolder.customerIndexNumber),String.valueOf(TestDataHolder.productIndexNumber),String.valueOf(TestDataHolder.taxIndexNumber),String.valueOf(TestDataHolder.number));
+        manageTaxRulePage.addTaxRule(TestDataHolder.taxRuleName,String.valueOf(TestDataHolder.customerIndexNumber)
+                ,String.valueOf(TestDataHolder.productIndexNumber)
+                ,String.valueOf(TestDataHolder.taxIndexNumber),String.valueOf(TestDataHolder.number));
     }
     @Then("tax rule is added")
     public void taxRuleIsAdded() {Assert.assertTrue(manageTaxRulePage.verifyAddedTaxRule());}
 
     @And("sales manager update added tax rule")
     public void salesManagerUpdateAddedTaxRule() {
-
+        manageTaxRulePage.updateAddedTaxRule(TestDataHolder.taxRuleName, String.valueOf(TestDataHolder.customerIndexNumber+1),
+                String.valueOf(TestDataHolder.productIndexNumber+1),
+                String.valueOf(TestDataHolder.taxIndexNumber+1),String.valueOf(TestDataHolder.number),
+                TestDataHolder.taxRuleName,TestDataHolder.taxRuleName+" updated");
+        Assert.assertTrue(manageTaxRulePage.verifyUpdatedTaxRule());
     }
 
     @Then("sales manager added and updated tax rule successfully")
     public void salesManagerAddedAndUpdatedTaxRuleSuccessfully() {
+        Assert.assertTrue(manageTaxRulePage.verifyAddedTaxRule());
+        Assert.assertTrue(manageTaxRulePage.verifyUpdatedTaxRule());
     }
 
 
