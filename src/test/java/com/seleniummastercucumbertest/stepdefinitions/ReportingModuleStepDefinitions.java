@@ -20,6 +20,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
     ProductsReviewsPage reviewsPage=new ProductsReviewsPage(driver);
     OrderReportPage orderReportPage=new OrderReportPage(driver);
     TaxReportPage taxReportPage=new TaxReportPage(driver);
+    CustomersOrdersTotalPage customersOrdersTotalPage=new CustomersOrdersTotalPage(driver);
      @Given("report manager login")
      public void reportManagerLogin() {
          adminLoginPage.login(AdminRole.REPORTINGMANAGER);
@@ -113,5 +114,22 @@ public class ReportingModuleStepDefinitions extends BasePage {
     @Then("reporting manager should be able to see the Sales-Taxes Report Grouped By Tax Rate")
     public void reportingManagerShouldBeAbleToSeeTheSalesTaxesReportGroupedByTaxRate() {
          Assert.assertTrue(taxReportPage.verifyTaxReportViewedSuccessfully());
+    }
+    //*************************** View Customers By Order Total ***************************
+    @Given("reporting manager is on the Customers by Orders Total page")
+    public void reportingManagerIsOnTheCustomersByOrdersTotalPage() {
+         dashboardPage.navigateToCustomersOrderTotalPage();
+    }
+
+    @When("reporting manager apply filters for the report")
+    public void reportingManagerApplyFiltersForTheReport() {
+         String startDate="1/10/2023";
+         String endDate="31/12/2025";
+         customersOrdersTotalPage.applyFilterToReport(startDate,endDate);
+    }
+
+    @Then("reporting manager should be able to see Customers - Customers by Orders Total Report")
+    public void reportingManagerShouldBeAbleToSeeCustomersCustomersByOrdersTotalReport() {
+         customersOrdersTotalPage.verifyViewCustomersByTotalOrdersReport();
     }
 }
