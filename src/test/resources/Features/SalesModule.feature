@@ -42,3 +42,12 @@ Feature: Sales module features
         Given sales manager go to the shopping cart page with email "Jerry@gmail.com"
         When sales manager update the existing shopping cart
         Then updated shopping cart info should be displayed
+
+        @ManageTaxRules
+        Scenario: Sales Manager should be able to manage add and update tax rules
+          description: (see Tax link under Store)
+          Given sales manager is on Manage Tax Rules page
+          When sales manager add tax rule
+          Then tax rule is added
+          And sales manager update added tax rule
+          Then sales manager added and updated tax rule successfully
