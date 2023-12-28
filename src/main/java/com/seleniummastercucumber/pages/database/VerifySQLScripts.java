@@ -1,5 +1,7 @@
 package com.seleniummastercucumber.pages.database;
 
+import org.apache.log4j.Logger;
+
 import javax.sql.rowset.CachedRowSet;
 import javax.sql.rowset.RowSetProvider;
 import java.sql.Connection;
@@ -8,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class VerifySQLScripts {
+    Logger logger=Logger.getLogger(VerifySQLScripts.class.getName());
     public boolean getAddedSubCategoriesInfo(Connection connection, String subCategoryName){
         boolean isSubCategoryExist = false;
         Statement statement;
@@ -198,5 +201,40 @@ public class VerifySQLScripts {
         }
 
     }
+    public boolean getCustomerInfo(Connection connection,String customerEmail){
+        Statement statement;
+        ResultSet resultSet;
+        CachedRowSet cachedRowSet;
+        try {
+            statement=connection.createStatement();
+            String sqlScriptForCustomer=String.format("Select * from mg_customer_entity where email='%s';",customerEmail);
+            resultSet=statement.executeQuery(sqlScriptForCustomer);
+            cachedRowSet=RowSetProvider.newFactory().createCachedRowSet();
+            cachedRowSet.populate(resultSet);
+            if (!cachedRowSet.next()){
+                logger.info("No record fund!");
+                return false;
+            }else {
+                int rowCount;
+                do {
+                    rowCount = cachedRowSet.getRow();
+                    int entityId = cachedRowSet.getInt("entity_id");
+                    String email = cachedRowSet.getString("email");
+                    String createDate = cachedRowSet.getString("created_at");
+                    if (rowCount>0 && email.equalsIgnoreCase(customerEmail)) {
+                        logger.info("Customer is found!");
+                        System.out.printf("Customer_Id: %d, Customer_Email: %s, Created Date: %s",
+                                entityId, email, createDate);
+                    } else {
+                        logger.info("Customer info does not match!!!");
+                    }
+                }while (cachedRowSet.next());
+                System.out.println("\nRow count is: "+rowCount);
+                return true;
+                }
 
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 }

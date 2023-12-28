@@ -16,7 +16,7 @@ Scenario: User retrieves sub category info from the database
     Then database returns store view information details
 
 
-  @Verify_newly_Added_Customer
+  @Verify_newly_Added_Customer #this should be "verifyNewlyRegisteredUser"
   Scenario: user retrieves that newly registered users information
     Given  user has valid database connection
     When Execute SQL query to get newly registered users information by email
@@ -29,3 +29,8 @@ Scenario: User retrieves sub category info from the database
     When the user query the mg_tax_calculation_rule table with taxRuleName
     Then the user should see the newly added tax rule info
 
+    @VerifyNewlyAddedCustomer
+    Scenario: Verify that newly added customers should be in the database
+      Given the user has read access to the mg_customer_entity table
+      When user query to get the customer info with email "aliyeidiris@gmail.com"
+      Then database should return the newly added customer with detailed info
