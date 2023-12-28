@@ -53,3 +53,10 @@ Feature: Reporting module features
     Given reporting manager is on the Customers by Orders Total page
     When reporting manager apply filters for the report
     Then reporting manager should be able to see Customers - Customers by Orders Total Report
+
+
+  @ViewNewCustomerReport
+  Scenario: Reporting Manager should be able to see Customers-New Accounts Report
+    Given reporting manager is on the New Customers page
+    When reporting manager filter customer report and search for it
+    Then reporting manager should be able to see Customers Report-New Accounts Report

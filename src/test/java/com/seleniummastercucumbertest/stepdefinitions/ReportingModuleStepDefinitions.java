@@ -21,6 +21,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
     OrderReportPage orderReportPage=new OrderReportPage(driver);
     TaxReportPage taxReportPage=new TaxReportPage(driver);
     CustomersOrdersTotalPage customersOrdersTotalPage=new CustomersOrdersTotalPage(driver);
+    NewAccountsPage newAccountsPage=new NewAccountsPage(driver);
      @Given("report manager login")
      public void reportManagerLogin() {
          adminLoginPage.login(AdminRole.REPORTINGMANAGER);
@@ -131,5 +132,22 @@ public class ReportingModuleStepDefinitions extends BasePage {
     @Then("reporting manager should be able to see Customers - Customers by Orders Total Report")
     public void reportingManagerShouldBeAbleToSeeCustomersCustomersByOrdersTotalReport() {
          customersOrdersTotalPage.verifyViewCustomersByTotalOrdersReport();
+    }
+
+    @Given("reporting manager is on the New Customers page")
+    public void reportingManagerIsOnTheNewCustomersPage() {
+         dashboardPage.navigateToNewCustomersPage();
+    }
+
+    @When("reporting manager filter customer report and search for it")
+    public void reportingManagerFilterCustomerReportAndSearchForIt() {
+        String startDate="1/10/2023";
+        String endDate="31/12/2025";
+         newAccountsPage.applyFilterToReportNewCustomers(startDate,endDate);
+    }
+
+    @Then("reporting manager should be able to see Customers Report-New Accounts Report")
+    public void reportingManagerShouldBeAbleToSeeCustomersReportNewAccountsReport() {
+         newAccountsPage.verifyViewNewCustomerReport();
     }
 }

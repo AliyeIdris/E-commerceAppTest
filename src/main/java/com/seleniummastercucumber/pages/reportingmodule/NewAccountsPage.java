@@ -15,22 +15,16 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * @author : user
- * @created : 27.12.2023,16:26
- * @Email :aliyeidiris@gmail.com
- **/
-public class CustomersOrdersTotalPage {
+public class NewAccountsPage {
     WebDriver driver;
     FunctionLibrary functionLibrary;
     Logger logger;
 
-    public CustomersOrdersTotalPage(WebDriver driver) {
+    public NewAccountsPage(WebDriver driver) {
         PageFactory.initElements(driver,this);
         functionLibrary=new FunctionLibrary(driver);
         logger=Logger.getLogger(CustomersOrdersTotalPage.class.getName());
     }
-
     @FindBy(id = "period_date_from_trig")
     WebElement calendarIconFrom;
     @FindBy(id = "period_date_to_trig")
@@ -39,15 +33,10 @@ public class CustomersOrdersTotalPage {
     WebElement periodDropDown;
     @FindBy(xpath = "//span[text()='Refresh']")
     WebElement refreshButton;
-    @FindBy(xpath = "//span[text()='Customer Name']")
-    WebElement customerNameColumn;
-    @FindBy(xpath = "//tfoot/tr/th[text()='Total']//following-sibling::th[2]")
-    WebElement totalNumberOfOrdersField;
-    @FindBy(xpath = "//tfoot/tr/th[text()='Total']//following-sibling::th[3]")
-    WebElement averageOrderAmountField;
-    @FindBy(xpath = "//tfoot/tr/th[text()='Total']//following-sibling::th[4]")
-    WebElement totalOrderAmountField;
-    public void enterStartDate(String startDate) {
+    @FindBy(xpath = "//tfoot/tr/th[text()='Total']")
+    WebElement totalNumberOfNewCustomers;
+
+ void enterStartDate(String startDate) {
         String[] splitDate = startDate.split("/");
         int day = Integer.parseInt(splitDate[0]);
         int month = Integer.parseInt(splitDate[1]);
@@ -64,6 +53,7 @@ public class CustomersOrdersTotalPage {
         String[] yearMonth;
         while (true) {
             currentMonthYearField = driver.findElement(By.xpath("//thead/tr/td[@colspan='6' and @class='title']"));
+            functionLibrary.waitForElementVisible(currentMonthYearField);
             yearMonth = currentMonthYearField.getText().split(",");
             int currentYear = Integer.parseInt(yearMonth[1].trim());
             if (currentYear == year) {
@@ -116,20 +106,23 @@ public class CustomersOrdersTotalPage {
         functionLibrary.waitForElementVisible(currentDay);
         currentDay.click();
     }
-    public void applyFilterToReport(String startDate, String endDate){
+
+    public void applyFilterToReportNewCustomers(String startDate, String endDate) {
         enterStartDate(startDate);
         enterEndDate(endDate);
         functionLibrary.waitForElementVisible(periodDropDown);
-        Select selectPeriod=new Select(periodDropDown);
+        Select selectPeriod = new Select(periodDropDown);
         selectPeriod.selectByVisibleText("Year");
         functionLibrary.waitForElementVisible(refreshButton);
         refreshButton.click();
     }
-    public boolean verifyViewCustomersByTotalOrdersReport(){
-        int numberOfOrder=Integer.parseInt(totalNumberOfOrdersField.getText());
-        double averageOrderAmount=Double.parseDouble(averageOrderAmountField.getText().substring(1));
-        int expectedTotalOrderAmount=(int)(numberOfOrder*averageOrderAmount);
-        int actualTotalOrderAmount=(int)(Double.parseDouble(totalOrderAmountField.getText().substring(1).replace(",","")));
-        return customerNameColumn.isDisplayed() &&expectedTotalOrderAmount==actualTotalOrderAmount;
+
+    public boolean verifyViewNewCustomerReport(){
+       if(totalNumberOfNewCustomers.isDisplayed()){
+           logger.info("New Customer is viewed successfully");
+           return true;
+       }else logger.info("New Customer is not viewed");
+       return false;
     }
+
 }
