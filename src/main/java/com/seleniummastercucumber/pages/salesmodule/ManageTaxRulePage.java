@@ -2,9 +2,11 @@ package com.seleniummastercucumber.pages.salesmodule;
 
 import com.seleniummastercucumber.utility.FunctionLibrary;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
@@ -45,6 +47,14 @@ public class ManageTaxRulePage {
     WebElement saveButton;
     @FindBy(xpath = "//ul[@class='messages']")
     WebElement addTaxRuleVerification;
+    @FindBy(xpath = "//input[@id='taxRuleGrid_filter_code']")
+    WebElement filterNameSearchField;
+    @FindBy(xpath = "//span[text()='Search']")
+    WebElement searchButton;
+    @FindBy(xpath = "//span[text()='Name']")
+    WebElement nameFilter;
+    @FindAll(@FindBy (xpath = "//table[@id='taxRuleGrid_table']//tbody/tr"))
+    WebElement nameFilteredRuleList;
 
     public ManageTaxRulePage(WebDriver driver) {
         this.driver=driver;
@@ -97,10 +107,57 @@ public class ManageTaxRulePage {
         if (addTaxRuleVerification.getText().contains("has been saved")){
             logger.info("Tax rule is added successfully");
             return true;
+        }else {
+            logger.info(addTaxRuleVerification.getText());
+            logger.info("Tax rule is failed");
+            return false;
+        }
+    }
+    public void updateAddedTaxRule(String taxRuleName,
+                                   String customerIndexNumber, String productIndexNumber, String taxNumber,
+                                   String number,String nameForFilter,String updateMessage){
+        functionLibrary.waitForElementVisible(salesTab);
+        actions.click(salesTab).build().perform();
+        functionLibrary.waitForElementVisible(taxTab);
+        actions.click(taxTab).build().perform();
+        functionLibrary.waitForElementVisible(manageTaxRuleTab);
+        actions.click(manageTaxRuleTab).build().perform();
+        functionLibrary.waitForElementVisible(filterNameSearchField);
+        filterNameSearchField.sendKeys(nameForFilter);
+        functionLibrary.waitForElementVisible(searchButton);
+        searchButton.click();
+        functionLibrary.waitForElementVisible(nameFilter);
+        nameFilter.click();
+        WebElement ruleLink=driver.findElement(By.xpath(String.format(
+                "//table[@id='taxRuleGrid_table']//tbody/tr/td[contains(text(), '%s')]",taxRuleName)));
+        ruleLink.click();
+        functionLibrary.waitForElementVisible(nameField);
+        nameField.clear();
+        nameField.sendKeys(updateMessage);
+        functionLibrary.waitForElementVisible(taxCustomerClassList);
+        select=new Select(taxCustomerClassList);
+        select.deselectAll();
+        select.selectByIndex(Integer.parseInt((customerIndexNumber)));
+        functionLibrary.waitForElementVisible(taxProductClassList);
+        select=new Select(taxProductClassList);
+        select.deselectAll();
+        select.selectByIndex(Integer.parseInt(productIndexNumber));
+        functionLibrary.waitForElementVisible(priorityField);
+        priorityField.clear();
+        priorityField.sendKeys(String.valueOf(number));
+        functionLibrary.waitForElementVisible(saveButton);
+        actions.click(saveButton).build().perform();
+    }
+
+    public boolean verifyUpdatedTaxRule(){
+        if (addTaxRuleVerification.getText().contains("has been saved")){
+            logger.info("Tax rule is added successfully");
+            return true;
         }else {logger.info(addTaxRuleVerification.getText());
             logger.info("Tax rule is failed");
             return false;
         }
     }
+
 
 }
