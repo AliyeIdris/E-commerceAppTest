@@ -22,14 +22,10 @@ public class NewAccountsPage {
 
     }
 
-    @FindBy(id = "period_date_from_trig")
-    WebElement calendarIconFrom;
     @FindBy(xpath = "//input[@id='period_date_from']")
     WebElement calendarFieldFrom;
     @FindBy(xpath = "//input[@id='period_date_to']")
     WebElement calendarFieldTo;
-    @FindBy(xpath = "//*[@id=\"html-body\"]/div[6]/table/thead/tr[2]/td[3]/div")
-    WebElement TodayLink;
     @FindBy(id = "report_period")
     WebElement periodDropDown;
     @FindBy(xpath = "//span[text()='Refresh']")
