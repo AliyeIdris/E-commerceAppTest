@@ -1,11 +1,14 @@
 package com.seleniummastercucumbertest;
 
+import com.seleniummastercucumber.utility.DBConnection;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import com.seleniummastercucumber.pages.dashboardmodule.AdminDashboardPage;
 import com.seleniummastercucumber.utility.BasePage;
 import com.seleniummastercucumber.utility.DriverType;
+
+import java.sql.Connection;
 
 import static com.seleniummastercucumber.utility.FileUtility.readConfig;
 
