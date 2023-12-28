@@ -57,6 +57,6 @@ Feature: Reporting module features
 
   @ViewNewCustomerReport
   Scenario: Reporting Manager should be able to see Customers-New Accounts Report
-    Given reporting manager is on the New Customers page
+    Given reporting manager is on the New Accounts page
     When reporting manager filter customer report and search for it
     Then reporting manager should be able to see Customers Report-New Accounts Report

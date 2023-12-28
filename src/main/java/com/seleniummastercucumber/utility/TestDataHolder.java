@@ -23,6 +23,7 @@ public class TestDataHolder {
     public static int customerIndexNumber=faker.number().numberBetween(0,4);
     public static int productIndexNumber=faker.number().numberBetween(0,1);
     public static int taxIndexNumber=faker.number().numberBetween(0,20);
-
     public static int number=faker.number().numberBetween(1,100);
+    public static String startDate= String.valueOf(01/01/2022);
+    public static String endDate=String.valueOf(28/12/2023);
 }

@@ -85,14 +85,13 @@ public class ReportingDashboardPage {
         functionLibrary.waitForElementVisible(customersByOrderTotalLink);
         customersByOrderTotalLink.click();
     }
-    public void navigateToNewCustomersPage(){
+    public void navigateToNewAccountsPage(){
         functionLibrary.waitForElementVisible(reportsLink);
         actions.moveToElement(reportsLink).perform();
         functionLibrary.waitForElementVisible(customersLink);
         actions.moveToElement(customersLink).perform();
         functionLibrary.waitForElementVisible(newAccountsLink);
         newAccountsLink.click();
-
     }
 
 }

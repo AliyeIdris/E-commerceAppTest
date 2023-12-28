@@ -1,14 +1,14 @@
 package com.seleniummastercucumbertest.stepdefinitions;
 
+import com.seleniummastercucumber.pages.dashboardmodule.AdminDashboardPage;
+import com.seleniummastercucumber.pages.dashboardmodule.AdminLoginPage;
+import com.seleniummastercucumber.pages.dashboardmodule.AdminRole;
 import com.seleniummastercucumber.pages.reportingmodule.*;
+import com.seleniummastercucumber.utility.BasePage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import com.seleniummastercucumber.pages.dashboardmodule.AdminDashboardPage;
-import com.seleniummastercucumber.pages.dashboardmodule.AdminLoginPage;
-import com.seleniummastercucumber.pages.dashboardmodule.AdminRole;
-import com.seleniummastercucumber.utility.BasePage;
 import org.junit.Assert;
 
 public class ReportingModuleStepDefinitions extends BasePage {
@@ -22,6 +22,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
     TaxReportPage taxReportPage=new TaxReportPage(driver);
     CustomersOrdersTotalPage customersOrdersTotalPage=new CustomersOrdersTotalPage(driver);
     NewAccountsPage newAccountsPage=new NewAccountsPage(driver);
+
      @Given("report manager login")
      public void reportManagerLogin() {
          adminLoginPage.login(AdminRole.REPORTINGMANAGER);
@@ -134,16 +135,14 @@ public class ReportingModuleStepDefinitions extends BasePage {
          customersOrdersTotalPage.verifyViewCustomersByTotalOrdersReport();
     }
 
-    @Given("reporting manager is on the New Customers page")
-    public void reportingManagerIsOnTheNewCustomersPage() {
-         dashboardPage.navigateToNewCustomersPage();
+    @Given("reporting manager is on the New Accounts page")
+    public void reportingManagerIsOnTheNewAccountsPage() {
+         dashboardPage.navigateToNewAccountsPage();
     }
 
     @When("reporting manager filter customer report and search for it")
     public void reportingManagerFilterCustomerReportAndSearchForIt() {
-        String startDate="1/10/2023";
-        String endDate="31/12/2025";
-         newAccountsPage.applyFilterToReportNewCustomers(startDate,endDate);
+         newAccountsPage.applyFilterToReportNewAccounts("01/01/2022","12/28/2023");
     }
 
     @Then("reporting manager should be able to see Customers Report-New Accounts Report")
