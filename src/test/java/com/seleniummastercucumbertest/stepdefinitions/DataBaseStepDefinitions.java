@@ -3,9 +3,12 @@ package com.seleniummastercucumbertest.stepdefinitions;
 import com.seleniummastercucumber.pages.database.VerifySQLScripts;
 import com.seleniummastercucumber.utility.ConnectionType;
 import com.seleniummastercucumber.utility.DBConnection;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.After;
 import org.junit.Assert;
 
 import java.sql.Connection;
@@ -13,6 +16,7 @@ import java.sql.Connection;
 import static com.seleniummastercucumber.utility.FileUtility.readConfig;
 
 public class DataBaseStepDefinitions {
+    private Scenario scenario;
     Connection connection;
     VerifySQLScripts verifySQLScripts;
     DBConnection dbConnection = new DBConnection();
@@ -27,6 +31,12 @@ public class DataBaseStepDefinitions {
     boolean isTaxRuleNameExist;
 
     boolean isStoreViewExist;
+    boolean isCustomerAdded;
+
+    @Before
+    public void beforeDatabaseTest(Scenario scenario){
+        this.scenario=scenario;
+    }
 
     @Given("user has valid database connection")
     public void userHasValidDatabaseConnection() {
@@ -38,8 +48,6 @@ public class DataBaseStepDefinitions {
     @When("Execute SQL query to get sub category information with categoryName {}")
     public void executeSQLQueryToGetSubCategoryInformationWithCategoryName(String subCategoryName) {
         isCategoryExist = verifySQLScripts.getAddedSubCategoriesInfo(connection,subCategoryName);
-
-
     }
 
     @Then("The database returns sub category information with details")
@@ -77,5 +85,27 @@ public class DataBaseStepDefinitions {
     @Then("database returns store view information details")
     public void databaseReturnsStoreViewInformationDetails() {
         Assert.assertTrue("Store view is not exist ",isStoreViewExist);
+    }
+
+    //*************************** Verify Newly Added Customer ***************************
+    @Given("the user has read access to the mg_customer_entity table")
+    public void theUserHasReadAccessToTheMg_customer_entityTable() {
+        scenario.log("User has valid username: "+username);
+        scenario.log("User has valid password: "+password);
+    }
+
+    @When("user query to get the customer info with email {string}")
+    public void userQueryToGetTheCustomerInfoWithEmail(String email) {
+        isCustomerAdded= verifySQLScripts.getCustomerInfo(connection,email);
+    }
+
+    @Then("database should return the newly added customer with detailed info")
+    public void databaseShouldReturnTheNewlyAddedCustomerWithDetailedInfo() {
+        Assert.assertTrue(isCustomerAdded);
+    }
+    @After
+    public void closeConnection(){
+        dbConnection.closeDataBaseConnection(connection);
+        scenario.log("Connection is closed!");
     }
 }
