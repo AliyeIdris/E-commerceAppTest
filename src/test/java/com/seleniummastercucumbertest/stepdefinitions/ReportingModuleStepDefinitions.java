@@ -1,14 +1,14 @@
 package com.seleniummastercucumbertest.stepdefinitions;
 
+import com.seleniummastercucumber.pages.dashboardmodule.AdminDashboardPage;
+import com.seleniummastercucumber.pages.dashboardmodule.AdminLoginPage;
+import com.seleniummastercucumber.pages.dashboardmodule.AdminRole;
 import com.seleniummastercucumber.pages.reportingmodule.*;
+import com.seleniummastercucumber.utility.BasePage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import com.seleniummastercucumber.pages.dashboardmodule.AdminDashboardPage;
-import com.seleniummastercucumber.pages.dashboardmodule.AdminLoginPage;
-import com.seleniummastercucumber.pages.dashboardmodule.AdminRole;
-import com.seleniummastercucumber.utility.BasePage;
 import org.junit.Assert;
 
 public class ReportingModuleStepDefinitions extends BasePage {
@@ -21,6 +21,8 @@ public class ReportingModuleStepDefinitions extends BasePage {
     OrderReportPage orderReportPage=new OrderReportPage(driver);
     TaxReportPage taxReportPage=new TaxReportPage(driver);
     CustomersOrdersTotalPage customersOrdersTotalPage=new CustomersOrdersTotalPage(driver);
+    NewAccountsPage newAccountsPage=new NewAccountsPage(driver);
+
      @Given("report manager login")
      public void reportManagerLogin() {
          adminLoginPage.login(AdminRole.REPORTINGMANAGER);
@@ -131,5 +133,20 @@ public class ReportingModuleStepDefinitions extends BasePage {
     @Then("reporting manager should be able to see Customers - Customers by Orders Total Report")
     public void reportingManagerShouldBeAbleToSeeCustomersCustomersByOrdersTotalReport() {
          customersOrdersTotalPage.verifyViewCustomersByTotalOrdersReport();
+    }
+
+    @Given("reporting manager is on the New Accounts page")
+    public void reportingManagerIsOnTheNewAccountsPage() {
+         dashboardPage.navigateToNewAccountsPage();
+    }
+
+    @When("reporting manager filter customer report and search for it")
+    public void reportingManagerFilterCustomerReportAndSearchForIt() {
+         newAccountsPage.applyFilterToReportNewAccounts("01/01/2022","12/28/2023");
+    }
+
+    @Then("reporting manager should be able to see Customers Report-New Accounts Report")
+    public void reportingManagerShouldBeAbleToSeeCustomersReportNewAccountsReport() {
+         newAccountsPage.verifyViewNewCustomerReport();
     }
 }
