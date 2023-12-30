@@ -129,25 +129,24 @@ public class SalesModuleStepDefinitions extends BasePage {
 
     @When("sales manager add tax rule")
     public void salesManagerAddTaxRule() {
-        manageTaxRulePage.addTaxRule(TestDataHolder.taxRuleName,String.valueOf(TestDataHolder.customerIndexNumber)
-                ,String.valueOf(TestDataHolder.productIndexNumber)
-                ,String.valueOf(TestDataHolder.taxIndexNumber),String.valueOf(TestDataHolder.number));
+        manageTaxRulePage.addTaxRule(TestDataHolder.taxRuleName,TestDataHolder.customerIndexNumber,
+                TestDataHolder.productIndexNumber
+                ,TestDataHolder.taxIndexNumber,String.valueOf(TestDataHolder.number));
     }
     @Then("tax rule is added")
-    public void taxRuleIsAdded() {Assert.assertTrue(manageTaxRulePage.verifyAddedTaxRule());}
+    public void taxRuleIsAdded() {Assert.assertTrue(manageTaxRulePage.verifyAddedTaxRule(TestDataHolder.taxIndexNumber));}
 
     @And("sales manager update added tax rule")
     public void salesManagerUpdateAddedTaxRule() {
-        manageTaxRulePage.updateAddedTaxRule(TestDataHolder.taxRuleName, String.valueOf(TestDataHolder.customerIndexNumber+1),
-                String.valueOf(TestDataHolder.productIndexNumber+1),
-                String.valueOf(TestDataHolder.taxIndexNumber+1),String.valueOf(TestDataHolder.number),
+        manageTaxRulePage.updateAddedTaxRule(TestDataHolder.taxRuleName,TestDataHolder.customerIndexNumber,
+                TestDataHolder.productIndexNumber, TestDataHolder.taxIndexNumber,TestDataHolder.number,
                 TestDataHolder.taxRuleName,TestDataHolder.taxRuleName+" updated");
         Assert.assertTrue(manageTaxRulePage.verifyUpdatedTaxRule());
     }
 
     @Then("sales manager added and updated tax rule successfully")
     public void salesManagerAddedAndUpdatedTaxRuleSuccessfully() {
-        Assert.assertTrue(manageTaxRulePage.verifyAddedTaxRule());
+        Assert.assertTrue(manageTaxRulePage.verifyAddedTaxRule(TestDataHolder.taxIndexNumber));
         Assert.assertTrue(manageTaxRulePage.verifyUpdatedTaxRule());
     }
 
