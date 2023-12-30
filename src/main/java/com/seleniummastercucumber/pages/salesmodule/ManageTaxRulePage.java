@@ -178,12 +178,9 @@ public class ManageTaxRulePage {
                 functionLibrary.waitForElementVisible(taxRateList);
                 select=new Select(taxRateList);
                 select.deselectAll();
-                select.selectByIndex(i);
+                select.selectByIndex(i+3);
                 functionLibrary.waitForElementVisible(saveButton);
                 actions.click(saveButton).build().perform();
-                nameField.clear();
-                functionLibrary.waitForElementVisible(nameField);
-                nameField.sendKeys("this is test");
                 logger.info("Tax rule is failed");
                 continue;
             }else {
