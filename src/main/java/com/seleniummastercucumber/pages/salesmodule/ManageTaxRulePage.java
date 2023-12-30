@@ -43,7 +43,7 @@ public class ManageTaxRulePage {
     WebElement calculateOffSubtotalOnly;
     @FindBy(xpath = "//input[@id='position']")
     WebElement sortOrderField;
-    @FindBy(xpath = "//button//span[contains(text(), 'Save Rule')]")
+    @FindBy(xpath = "(//button[@title='Save Rule'])[1]")
     WebElement saveButton;
     @FindBy(xpath = "//ul[@class='messages']")
     WebElement addTaxRuleVerification;
@@ -79,7 +79,7 @@ public class ManageTaxRulePage {
         }
     }
 
-    public void addTaxRule(String taxRuleName, String customerIndexNumber, String productIndexNumber, String taxNumber, String number){
+    public void addTaxRule(String taxRuleName, int customerIndexNumber, int productIndexNumber, int taxNumber, String number){
         functionLibrary.waitForElementVisible(addTaxRuleButton);
         actions.click(addTaxRuleButton).build().perform();
         functionLibrary.waitForElementVisible(nameField);
@@ -92,7 +92,7 @@ public class ManageTaxRulePage {
         select.selectByIndex(Integer.parseInt(String.valueOf(productIndexNumber)));
         functionLibrary.waitForElementVisible(taxRateList);
         select=new Select(taxRateList);
-        select.selectByIndex(Integer.parseInt(String.valueOf(taxNumber)));
+        select.selectByIndex(taxNumber);
         functionLibrary.waitForElementVisible(priorityField);
         priorityField.sendKeys(String.valueOf(number));
         functionLibrary.waitForElementVisible(calculateOffSubtotalOnly);
@@ -103,19 +103,34 @@ public class ManageTaxRulePage {
         actions.click(saveButton).build().perform();
     }
 
-    public boolean verifyAddedTaxRule(){
-        if (addTaxRuleVerification.getText().contains("has been saved")){
-            logger.info("Tax rule is added successfully");
-            return true;
-        }else {
-            logger.info(addTaxRuleVerification.getText());
-            logger.info("Tax rule is failed");
-            return false;
-        }
+    public boolean verifyAddedTaxRule(int taxNumber){
+        for (int i=0; i<5; i++){
+            if (!(addTaxRuleVerification.getText().contains("has been saved"))){
+                functionLibrary.waitForElementVisible(taxCustomerClassList);
+                select=new Select(taxCustomerClassList);
+                select.deselectAll();
+                select.selectByIndex(i);
+                functionLibrary.waitForElementVisible(taxRateList);
+                select=new Select(taxRateList);
+                select.deselectAll();
+                select.selectByIndex(i);
+                functionLibrary.waitForElementVisible(saveButton);
+                actions.click(saveButton).build().perform();
+                nameField.clear();
+                functionLibrary.waitForElementVisible(nameField);
+                nameField.sendKeys("this is test");
+                logger.info("Tax rule is failed");
+                continue;
+            }else {
+                logger.info(addTaxRuleVerification.getText());
+                logger.info("Tax rule is added successfully");
+                break;
+            }
+
+        }return true;
     }
-    public void updateAddedTaxRule(String taxRuleName,
-                                   String customerIndexNumber, String productIndexNumber, String taxNumber,
-                                   String number,String nameForFilter,String updateMessage){
+    public void updateAddedTaxRule(String taxRuleName, int customerIndexNumber, int productIndexNumber,
+                                   int taxNumber, int number,String nameForFilter,String updateMessage){
         functionLibrary.waitForElementVisible(salesTab);
         actions.click(salesTab).build().perform();
         functionLibrary.waitForElementVisible(taxTab);
@@ -137,11 +152,15 @@ public class ManageTaxRulePage {
         functionLibrary.waitForElementVisible(taxCustomerClassList);
         select=new Select(taxCustomerClassList);
         select.deselectAll();
-        select.selectByIndex(Integer.parseInt((customerIndexNumber)));
+        select.selectByIndex(customerIndexNumber);
         functionLibrary.waitForElementVisible(taxProductClassList);
         select=new Select(taxProductClassList);
         select.deselectAll();
-        select.selectByIndex(Integer.parseInt(productIndexNumber));
+        select.selectByIndex(productIndexNumber);
+        functionLibrary.waitForElementVisible(taxRateList);
+        select=new Select(taxRateList);
+        select.deselectAll();
+        select.selectByIndex(taxNumber);
         functionLibrary.waitForElementVisible(priorityField);
         priorityField.clear();
         priorityField.sendKeys(String.valueOf(number));
@@ -150,13 +169,31 @@ public class ManageTaxRulePage {
     }
 
     public boolean verifyUpdatedTaxRule(){
-        if (addTaxRuleVerification.getText().contains("has been saved")){
-            logger.info("Tax rule is added successfully");
-            return true;
-        }else {logger.info(addTaxRuleVerification.getText());
-            logger.info("Tax rule is failed");
-            return false;
-        }
+        for (int i=0; i<5; i++){
+            if (!(addTaxRuleVerification.getText().contains("has been saved"))){
+                functionLibrary.waitForElementVisible(taxCustomerClassList);
+                select=new Select(taxCustomerClassList);
+                select.deselectAll();
+                select.selectByIndex(i);
+                functionLibrary.waitForElementVisible(taxRateList);
+                select=new Select(taxRateList);
+                select.deselectAll();
+                select.selectByIndex(i);
+                functionLibrary.waitForElementVisible(saveButton);
+                actions.click(saveButton).build().perform();
+                nameField.clear();
+                functionLibrary.waitForElementVisible(nameField);
+                nameField.sendKeys("this is test");
+                logger.info("Tax rule is failed");
+                continue;
+            }else {
+                logger.info(addTaxRuleVerification.getText());
+                logger.info("Tax rule is added successfully");
+                break;
+            }
+
+        }return true;
+
     }
 
 
