@@ -3,12 +3,17 @@ package com.seleniummastercucumber.pages.reportingmodule;
 import com.seleniummastercucumber.utility.FunctionLibrary;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.logging.Logger;
 
 public class ReportViewPage {
     WebDriver driver;
     FunctionLibrary functionLibrary;
+    Actions actions;
+    Logger logger;
 
     public ReportViewPage(WebDriver driver) {
         this.driver = driver;
@@ -24,6 +29,43 @@ public class ReportViewPage {
     WebElement showReportButton;
     @FindBy(xpath = "//tr[@class='totals']")
     WebElement totalShipped;
+// see Abandoned Carts Report
+    @FindBy(xpath = "//span[text()='Reports']")
+    WebElement ReportsButton;
+    @FindBy(xpath ="//span[text()='Shopping Cart']")
+    WebElement ShoppingCartButton;
+    @FindBy(xpath ="//span[text()='Abandoned carts']")
+    WebElement AbandonedCartsButton;
+    @FindBy(xpath = "//td[@class=' wilbur.ritchie@gmail.com ']")
+    WebElement Wilbur;
+    @FindBy(xpath = "/html/body/div[1]/div[3]/div")
+    WebElement VerifyMassage;
+
+    public void navigateToTheReport(){
+ReportsButton.click();
+ShoppingCartButton.click();
+AbandonedCartsButton.click();
+        //actions.moveToElement(ReportsButton).moveToElement(ShoppingCartButton).moveToElement(AbandonedCartsButton).click();
+    }
+    public void ChooseOneOfTheReport(){
+        Wilbur.click();
+        Wilbur.click();
+    }
+
+    public boolean seeAbandonedCartsVerify() {
+        functionLibrary.waitForElementVisible(VerifyMassage);
+        if (VerifyMassage.isDisplayed()) {
+            logger.info("There İs A Mİstake");
+            return false;
+        } else {
+            logger.info("Successful!!!");
+            return  true;
+        }
+    }
+
+
+
+
     public void viewTotalShippedReport(String dateFrom, String dateTo){
         functionLibrary.waitForElementVisible(shippingReportDateFrom);
         shippingReportDateFrom.sendKeys(dateFrom);

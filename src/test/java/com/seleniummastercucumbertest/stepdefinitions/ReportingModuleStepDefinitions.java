@@ -149,4 +149,19 @@ public class ReportingModuleStepDefinitions extends BasePage {
     public void reportingManagerShouldBeAbleToSeeCustomersReportNewAccountsReport() {
          newAccountsPage.verifyViewNewCustomerReport();
     }
+
+    @Given("Reporting Manager Navigate to The Reports Than Shopping Cart And Choose Abandoned carts")
+    public void reportingManagerNavigateToTheReportsThanShoppingCartAndChooseAbandonedCarts() {
+        reportViewPage.navigateToTheReport();
+    }
+
+    @When("Reporting Manager Should Choose One of The Customer Name")
+    public void reportingManagerShouldChooseOneOfTheCustomerName() {
+        reportViewPage.ChooseOneOfTheReport();
+    }
+
+    @Then("Reporting Manager Should Get Report From Abandoned Carts")
+    public void ReportingManagerShouldGetReportFromAbandonedCarts() {
+         reportViewPage.seeAbandonedCartsVerify();
+    }
 }

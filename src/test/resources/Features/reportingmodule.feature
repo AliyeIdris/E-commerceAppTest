@@ -60,3 +60,9 @@ Feature: Reporting module features
     Given reporting manager is on the New Accounts page
     When reporting manager filter customer report and search for it
     Then reporting manager should be able to see Customers Report-New Accounts Report
+
+    @SeeShoppingCart-AbandonedCartsReport
+    Scenario: Reporting Manager should be able to see Shopping Cart - Abandoned carts Report
+      Given Reporting Manager Navigate to The Reports Than Shopping Cart And Choose Abandoned carts
+      When Reporting Manager Should Choose One of The Customer Name and See The Result
+      Then Reporting Manager Should Get Report From Abandoned Carts
