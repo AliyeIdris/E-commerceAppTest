@@ -51,3 +51,5 @@ Feature: Sales module features
           Then tax rule is added
           And sales manager update added tax rule
           Then sales manager added and updated tax rule successfully
+
+  @
