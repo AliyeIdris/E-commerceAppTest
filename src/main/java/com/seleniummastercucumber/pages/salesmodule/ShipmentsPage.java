@@ -46,7 +46,7 @@ public class ShipmentsPage {
     WebElement visibleOnFrontend;
     @FindBy(xpath = "//span[contains(text(),'Submit Comment')]")
     WebElement submitButton;
-    @FindAll(@FindBy(xpath = "//select[@class=\"select\"]//option"))
+    @FindAll(@FindBy(xpath = "//select[@class=\"select\"]"))
     WebElement customerValue;
     @FindBy(id = "tracking_number")
     WebElement trackingNumberField;
@@ -77,9 +77,10 @@ public class ShipmentsPage {
         functionLibrary.waitForElementVisible(trackingNumberField);
         trackingNumberField.sendKeys(trackingNumber);
         functionLibrary.waitForElementVisible(addButton);
-        addButton.click();
+        functionLibrary.javaScriptClick(addButton);
         functionLibrary.waitForElementVisible(sendTrackingInfo);
-        sendTrackingInfo.click();
+        functionLibrary.javaScriptClick(sendTrackingInfo);
+        driver.switchTo().alert().accept();
     }
     public boolean verifySentTrackingInfoMessage(){
         if (sentInfoMessage.isDisplayed()){
