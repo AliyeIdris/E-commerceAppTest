@@ -34,3 +34,10 @@ Scenario: User retrieves sub category info from the database
       Given the user has read access to the mg_customer_entity table
       When user query to get the customer info with email "aliyeidiris@gmail.com"
       Then database should return the newly added customer with detailed info
+
+
+  @VerifyAddedCartRule
+  Scenario: verify newly added cart rule should be in the database
+    Given user has read access to the mg_salesrule table
+    When user execute query to get the added rule with "71"
+    Then database should return the newly added rule with expected information
