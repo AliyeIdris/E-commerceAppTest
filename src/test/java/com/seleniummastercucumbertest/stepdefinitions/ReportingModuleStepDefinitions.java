@@ -22,6 +22,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
     TaxReportPage taxReportPage=new TaxReportPage(driver);
     CustomersOrdersTotalPage customersOrdersTotalPage=new CustomersOrdersTotalPage(driver);
     NewAccountsPage newAccountsPage=new NewAccountsPage(driver);
+    SeeTagsForProductPage seeTagsForProductPage=new SeeTagsForProductPage(driver);
 
      @Given("report manager login")
      public void reportManagerLogin() {
@@ -148,5 +149,18 @@ public class ReportingModuleStepDefinitions extends BasePage {
     @Then("reporting manager should be able to see Customers Report-New Accounts Report")
     public void reportingManagerShouldBeAbleToSeeCustomersReportNewAccountsReport() {
          newAccountsPage.verifyViewNewCustomerReport();
+    }
+
+    @Given("reporting manager should be navigate to dashboard page")
+    public void reportingManagerShouldBeNavigateToDashboardPage() {
+
+    }
+
+    @When("reportng manager see tags for product")
+    public void reportngManagerSeeTagsForProduct() {
+    }
+
+    @Then("product tag should be visible on the reporting page")
+    public void productTagShouldBeVisibleOnTheReportingPage() {
     }
 }
