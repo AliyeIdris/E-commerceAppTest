@@ -18,13 +18,13 @@ import java.util.Random;
  * @created : 04/01/2024,00:56
  * @project : SDET2023Magento_Team1Cucumber
  */
-public class shipmentsPage {
+public class ShipmentsPage {
     WebDriver driver;
     FunctionLibrary functionLibrary;
     Actions actions;
     Logger logger;
 
-    public shipmentsPage(WebDriver driver) {
+    public ShipmentsPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
         functionLibrary = new FunctionLibrary(driver);
@@ -54,11 +54,16 @@ public class shipmentsPage {
     WebElement addButton;
     @FindBy(xpath = "//span[contains(text(),'Send Tracking Information')]")
     WebElement sendTrackingInfo;
+    @FindBy(xpath = "//span[text()=\"The shipment has been sent.\"]")
+    WebElement sentInfoMessage;
 
-    public void updateShipmentsMethod(String commentText,String trackingNumber){
-    actions.moveToElement(salesTap).moveToElement(shipmentsLink).click().build().perform();
-
+    public void navigateToShipmentsMethod(){
+        actions.moveToElement(salesTap).moveToElement(shipmentsLink).click().build().perform();
+    }
+    public void selectShipmentForView(){
         shipments.get(new Random().nextInt(shipments.size())).click();
+    }
+    public void updateShipmentsMethod(String commentText,String trackingNumber){
         actions.scrollToElement(commentTextField).build().perform();
         actions.click(commentTextField).sendKeys(commentText).build().perform();
         functionLibrary.waitForElementVisible(notifyCustomerCheckBox);
@@ -75,8 +80,12 @@ public class shipmentsPage {
         addButton.click();
         functionLibrary.waitForElementVisible(sendTrackingInfo);
         sendTrackingInfo.click();
-
-
-
+    }
+    public boolean verifySentTrackingInfoMessage(){
+        if (sentInfoMessage.isDisplayed()){
+            logger.info("The shipment has been sent.");
+            return true;
+        }else
+            return false;
     }
 }

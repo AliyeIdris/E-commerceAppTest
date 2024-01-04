@@ -26,6 +26,7 @@ public class SalesModuleStepDefinitions extends BasePage {
     CouponsPage couponsPage = new CouponsPage(driver);
     RefundsPage refundsPage = new RefundsPage(driver);
     ManageTaxRulePage manageTaxRulePage=new ManageTaxRulePage(driver);
+    ShipmentsPage shipmentsPage =new ShipmentsPage(driver);
     int quantity;
 
     //*************************** Background ***************************
@@ -150,6 +151,26 @@ public class SalesModuleStepDefinitions extends BasePage {
         Assert.assertTrue(manageTaxRulePage.verifyUpdatedTaxRule());
     }
 
+//abdugeni
+    @Given("sales manager on the dashboard page and can navigate to shipments page")
+    public void salesManagerOnTheDashboardPageAndCanNavigateToShipmentsPage() {
+        shipmentsPage.navigateToShipmentsMethod();
+    }
 
+    @When("sales manager can view shipmentsList and random select one for update")
+    public void salesManagerCanViewShipmentsListAndRandomSelectOneForUpdate() {
+        shipmentsPage.selectShipmentForView();
+    }
+
+    @And("sales manager update shipments and send tracking information")
+    public void salesManagerUpdateShipmentsAndSendTrackingInformation() {
+        shipmentsPage.updateShipmentsMethod("this is istanbul team",
+                TestDataHolder.timeStamp());
+    }
+
+    @Then("sales manager sent tracking information and info should be displayed")
+    public void salesManagerSentTrackingInformationAndInfoShouldBeDisplayed() {
+        shipmentsPage.verifySentTrackingInfoMessage();
+    }
 }
 
