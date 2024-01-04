@@ -22,7 +22,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
     TaxReportPage taxReportPage=new TaxReportPage(driver);
     CustomersOrdersTotalPage customersOrdersTotalPage=new CustomersOrdersTotalPage(driver);
     NewAccountsPage newAccountsPage=new NewAccountsPage(driver);
-    SeeTagsForProductPage seeTagsForProductPage=new SeeTagsForProductPage(driver);
+    SeeTagsForProductPage seeTagsForProductsPage=new SeeTagsForProductPage(driver);
 
      @Given("report manager login")
      public void reportManagerLogin() {
@@ -156,8 +156,8 @@ public class ReportingModuleStepDefinitions extends BasePage {
 
     }
 
-    @When("reportng manager see tags for product")
-    public void reportngManagerSeeTagsForProduct() {
+    @When("reporting manager see tags for product")
+    public void reportingManagerSeeTagsForProduct() {
     }
 
     @Then("product tag should be visible on the reporting page")

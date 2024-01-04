@@ -28,22 +28,22 @@ public class SeeTagsForProductPage {
     WebElement reports;
     @FindBy(xpath = "//span[text()='Tags']")
     WebElement tags;
-    @FindBy(xpath = "//span[text()='Product']")
-    WebElement product;
+    @FindBy(xpath = "//span[text()='Products']")
+    WebElement products;
     @FindAll(
             @FindBy(xpath = "//td[@class=' last']")
     )
     List<WebElement> listNumber;
-    public void seePopularTag(){
+    public void seeProductsTag(){
        Actions actions = new Actions(driver);
         functionLibrary.waitForElementVisible(reports);
         actions.moveToElement(reports).click().build().perform();
         functionLibrary.waitForElementVisible(tags);
         actions.moveToElement(tags).click().build().perform();
-        functionLibrary.waitForElementVisible(product);
-        product.click();
+        functionLibrary.waitForElementVisible(products);
+        products.click();
     }
-    public boolean verifyProductTags(){
+    public boolean verifyProductsTags(){
 
         boolean flag;
         if (listNumber.isEmpty()){

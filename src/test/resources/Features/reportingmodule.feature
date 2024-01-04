@@ -61,8 +61,8 @@ Feature: Reporting module features
     When reporting manager filter customer report and search for it
     Then reporting manager should be able to see Customers Report-New Accounts Report
 
-    @SeeTagForProduct
-    Scenario:  Reporting Manager should be able to see Tags for product
+    @SeeTagForProducts
+    Scenario:  Reporting Manager should be able to see Tags for products
       Given reporting manager should be navigate to dashboard page
-      When reporting manager see tags for product
-      Then product tag should be visible on the reporting page
+      When reporting manager see tags for products
+      Then products tag should be visible on the reporting page
