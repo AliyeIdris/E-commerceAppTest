@@ -1,7 +1,6 @@
 package com.seleniummastercucumber.pages.reportingmodule;
 
 import com.seleniummastercucumber.utility.FunctionLibrary;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +12,6 @@ import org.openqa.selenium.support.ui.Select;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -28,7 +26,6 @@ public class CustomersOrdersTotalPage {
     Logger logger;
 
     public CustomersOrdersTotalPage(WebDriver driver) {
-        this.driver = driver;
         PageFactory.initElements(driver,this);
         functionLibrary=new FunctionLibrary(driver);
         logger=Logger.getLogger(CustomersOrdersTotalPage.class.getName());

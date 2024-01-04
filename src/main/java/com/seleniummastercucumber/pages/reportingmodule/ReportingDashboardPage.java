@@ -1,8 +1,6 @@
 package com.seleniummastercucumber.pages.reportingmodule;
 
-import com.seleniummastercucumber.pages.salesmodule.RefundsPage;
 import com.seleniummastercucumber.utility.FunctionLibrary;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -10,11 +8,6 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.text.DateFormatSymbols;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -52,6 +45,8 @@ public class ReportingDashboardPage {
     WebElement customersLink;
     @FindBy(xpath = "//span[text()='Customers by orders total']")
     WebElement customersByOrderTotalLink;
+    @FindBy(xpath = "//span[text()='New Accounts']")
+    WebElement newAccountsLink;
     public void openShippingPage() {
         functionLibrary.waitForElementVisible(reportsLink);
         actions.moveToElement(reportsLink).moveToElement(salesLink).moveToElement(shippingLink).click().perform();
@@ -90,4 +85,13 @@ public class ReportingDashboardPage {
         functionLibrary.waitForElementVisible(customersByOrderTotalLink);
         customersByOrderTotalLink.click();
     }
+    public void navigateToNewAccountsPage(){
+        functionLibrary.waitForElementVisible(reportsLink);
+        actions.moveToElement(reportsLink).perform();
+        functionLibrary.waitForElementVisible(customersLink);
+        actions.moveToElement(customersLink).perform();
+        functionLibrary.waitForElementVisible(newAccountsLink);
+        newAccountsLink.click();
+    }
+
 }
