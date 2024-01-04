@@ -237,4 +237,63 @@ public class VerifySQLScripts {
             throw new RuntimeException(e);
         }
     }
+
+    public boolean getNewlyAddedCartRule(Connection connection,String cartRuleId){ 
+     boolean isCartRuleNameExist=false; 
+     Statement statement=null; 
+     ResultSet resultSet=null; 
+     CachedRowSet cachedRowSet=null; 
+  
+     try { 
+         cachedRowSet= RowSetProvider.newFactory().createCachedRowSet(); 
+     } catch (SQLException e) { 
+         e.printStackTrace(); 
+     } 
+     try { 
+         statement = connection.createStatement(); 
+     } catch (SQLException e) { 
+         e.printStackTrace(); 
+     } 
+  
+     String cartRuleSqlScript=String.format("select * from i9362596_mg2.mg_salesrule where  rule_id='%s';",cartRuleId); 
+     try { 
+         resultSet=statement.executeQuery(cartRuleSqlScript); 
+     } catch (SQLException e) { 
+         e.printStackTrace(); 
+     } 
+  
+     if(resultSet==null){ 
+         System.out.println("no records found"); 
+         return isCartRuleNameExist; 
+     }else{ 
+         try { 
+             cachedRowSet.populate(resultSet); 
+         } catch (SQLException e) { 
+             e.printStackTrace(); 
+         } 
+         int count=0; 
+         while (true){ 
+             try { 
+                 if(!cachedRowSet.next()){ 
+                     break; 
+                 } 
+             } catch (SQLException e) { 
+                 e.printStackTrace(); 
+             } 
+             try { 
+                 String rule_id = cachedRowSet.getString("rule_id"); 
+                 System.out.println(rule_id); 
+                 count = cachedRowSet.getRow(); 
+             }catch(SQLException e){ 
+                 e.printStackTrace(); 
+             } 
+         } 
+         if(count>=1) 
+             isCartRuleNameExist=true; 
+         System.out.println(count+" row(s) returned"); 
+  
+         return isCartRuleNameExist; 
+     } 
+ } 
+
 }
