@@ -60,3 +60,12 @@ Feature: Reporting module features
     Given reporting manager is on the New Accounts page
     When reporting manager filter customer report and search for it
     Then reporting manager should be able to see Customers Report-New Accounts Report
+
+  @ProductsOrderedReport
+  Scenario Outline: Reporting Manager should be able to see Products - Products Ordered Report
+    Given reporting manager is on the Products Ordered page
+    When reporting manager filter Products Ordered Report by date "<dateFrom>" and"<dateTo>"
+    Then reporting manager should be able to see Products Ordered Report
+    Examples:
+      | dateFrom   | dateTo     |
+      | 01/01/2022 | 04/01/2024 |
