@@ -23,6 +23,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
     CustomersOrdersTotalPage customersOrdersTotalPage=new CustomersOrdersTotalPage(driver);
     NewAccountsPage newAccountsPage=new NewAccountsPage(driver);
     ProductsOrderedPage productsOrderedPage=new ProductsOrderedPage(driver);
+    ProductsMostViewedPage productsMostViewedPage=new ProductsMostViewedPage(driver);
 
      @Given("report manager login")
      public void reportManagerLogin() {
@@ -164,5 +165,15 @@ public class ReportingModuleStepDefinitions extends BasePage {
     @Then("reporting manager should be able to see Products Ordered Report")
     public void reportingManagerShouldBeAbleToSeeProductsOrderedReport() {
          productsOrderedPage.verifyProductsOrderedReportDisplayed();
+    }
+
+    @When("reporting manager navigate to most viewed page data with {string} and{string}")
+    public void reportingManagerNavigateToMostViewedPageDataWithAnd(String arg0, String arg1) {
+        productsMostViewedPage.mostViewedProducts(arg0,arg1);
+    }
+
+    @Then("most viewed products should be displayed")
+    public void mostViewedProductsShouldBeDisplayed() {
+        Assert.assertTrue(productsMostViewedPage.checkMostViewedProducts());
     }
 }
