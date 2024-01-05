@@ -23,9 +23,9 @@ public class ProductsMostViewedPage {
         logger = Logger.getLogger(ProductsMostViewedPage.class.getName());
     }
     @FindBy(id = "sales_report_from")
-    WebElement shippingReportDateFrom;
+    WebElement reportDateFrom;
     @FindBy(id = "sales_report_to")
-    WebElement shippingReportDateTo;
+    WebElement reportDateTo;
     @FindBy(xpath = "//span[text()='Show Report']")
     WebElement showReportButton;
     @FindBy(xpath = "//tr[@class='totals']")
@@ -42,10 +42,10 @@ public class ProductsMostViewedPage {
         reportsLink.click();
         functionLibrary.waitForElementVisible(productsLink);
         actions.moveToElement(productsLink).moveToElement(mostViewedLink).click(mostViewedLink).build().perform();
-        functionLibrary.waitForElementVisible(shippingReportDateFrom);
-        shippingReportDateFrom.sendKeys(dateFrom);
-        functionLibrary.waitForElementVisible(shippingReportDateTo);
-        shippingReportDateTo.sendKeys(dateTo);
+        functionLibrary.waitForElementVisible(reportDateFrom);
+        reportDateFrom.sendKeys(dateFrom);
+        functionLibrary.waitForElementVisible(reportDateTo);
+        reportDateTo.sendKeys(dateTo);
         functionLibrary.waitForElementVisible(showReportButton);
         showReportButton.click();
     }
