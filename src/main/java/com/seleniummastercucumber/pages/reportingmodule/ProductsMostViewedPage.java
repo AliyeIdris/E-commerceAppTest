@@ -49,6 +49,7 @@ public class ProductsMostViewedPage {
         functionLibrary.waitForElementVisible(showReportButton);
         showReportButton.click();
     }
+
     public boolean checkMostViewedProducts(){
         functionLibrary.waitForElementVisible(totalShipped);
         if (totalShipped.isDisplayed()){
