@@ -61,6 +61,25 @@ Feature: Reporting module features
     When reporting manager filter customer report and search for it
     Then reporting manager should be able to see Customers Report-New Accounts Report
 
+  @ProductsOrderedReport
+  Scenario Outline: Reporting Manager should be able to see Products - Products Ordered Report
+    Given reporting manager is on the Products Ordered page
+    When reporting manager filter Products Ordered Report by date "<dateFrom>" and"<dateTo>"
+    Then reporting manager should be able to see Products Ordered Report
+    Examples:
+      | dateFrom   | dateTo     |
+      | 01/01/2022 | 04/01/2024 |
+
+  @MostViewedProductsReport
+  Scenario Outline: Reporting Manager should be able to see Products Most Viewed Report
+    Given report manager is on the dashboard page
+    When reporting manager navigate to most viewed page data with "<dateFrom>" and"<dateTo>"
+    Then most viewed products should be displayed
+    Examples:
+      | dateFrom   | dateTo     |
+      | 01/01/2022 | 31/12/2023 |
+
+
     @SeeShoppingCart-AbandonedCartsReport
     Scenario: Reporting Manager should be able to see Shopping Cart - Abandoned carts Report
       Given Reporting Manager Navigate to The Reports Than Shopping Cart And Choose Abandoned carts

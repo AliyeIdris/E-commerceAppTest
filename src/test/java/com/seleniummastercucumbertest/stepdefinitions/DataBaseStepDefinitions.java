@@ -32,6 +32,7 @@ public class DataBaseStepDefinitions {
 
     boolean isStoreViewExist;
     boolean isCustomerAdded;
+    boolean isCartRuleAdded;
 
     @Before
     public void beforeDatabaseTest(Scenario scenario){
@@ -103,6 +104,23 @@ public class DataBaseStepDefinitions {
     public void databaseShouldReturnTheNewlyAddedCustomerWithDetailedInfo() {
         Assert.assertTrue(isCustomerAdded);
     }
+
+    @Given("user has read access to the mg_salesrule table")
+    public void userHasReadAccessToTheMg_salesruleTable() {
+    scenario.log("User has valid username: "+username);
+    scenario.log("User has valid password: "+password);
+    }
+
+    @When("user execute query to get the added rule with {string}")
+    public void userExecuteQueryToGetTheAddedRuleWith(String id) {
+    isCartRuleAdded=verifySQLScripts.getNewlyAddedCartRule(connection,id);
+}
+
+    @Then("database should return the newly added rule with expected information")
+    public void databaseShouldReturnTheNewlyAddedRuleWithExpectedInfo() {
+    Assert.assertTrue(isCartRuleAdded);
+}
+
     @After
     public void closeConnection(){
         dbConnection.closeDataBaseConnection(connection);

@@ -22,6 +22,8 @@ public class ReportingModuleStepDefinitions extends BasePage {
     TaxReportPage taxReportPage=new TaxReportPage(driver);
     CustomersOrdersTotalPage customersOrdersTotalPage=new CustomersOrdersTotalPage(driver);
     NewAccountsPage newAccountsPage=new NewAccountsPage(driver);
+    ProductsOrderedPage productsOrderedPage=new ProductsOrderedPage(driver);
+    ProductsMostViewedPage productsMostViewedPage=new ProductsMostViewedPage(driver);
 
      @Given("report manager login")
      public void reportManagerLogin() {
@@ -148,6 +150,31 @@ public class ReportingModuleStepDefinitions extends BasePage {
     @Then("reporting manager should be able to see Customers Report-New Accounts Report")
     public void reportingManagerShouldBeAbleToSeeCustomersReportNewAccountsReport() {
          newAccountsPage.verifyViewNewCustomerReport();
+    }
+
+    @Given("reporting manager is on the Products Ordered page")
+    public void reportingManagerIsOnTheProductsOrderedPage() {
+         dashboardPage.navigateToProductsOrderedPage();
+    }
+
+    @When("reporting manager filter Products Ordered Report by date {string} and{string}")
+    public void reportingManagerFilterProductsOrderedReportByDateAnd(String arg0, String arg1) {
+     productsOrderedPage.viewProductsOrderedReport(arg0,arg1);
+    }
+
+    @Then("reporting manager should be able to see Products Ordered Report")
+    public void reportingManagerShouldBeAbleToSeeProductsOrderedReport() {
+         productsOrderedPage.verifyProductsOrderedReportDisplayed();
+    }
+
+    @When("reporting manager navigate to most viewed page data with {string} and{string}")
+    public void reportingManagerNavigateToMostViewedPageDataWithAnd(String arg0, String arg1) {
+        productsMostViewedPage.mostViewedProducts(arg0,arg1);
+    }
+
+    @Then("most viewed products should be displayed")
+    public void mostViewedProductsShouldBeDisplayed() {
+        Assert.assertTrue(productsMostViewedPage.checkMostViewedProducts());
     }
 
     @Given("Reporting Manager Navigate to The Reports Than Shopping Cart And Choose Abandoned carts")

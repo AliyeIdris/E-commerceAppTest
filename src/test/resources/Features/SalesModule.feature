@@ -51,3 +51,11 @@ Feature: Sales module features
           Then tax rule is added
           And sales manager update added tax rule
           Then sales manager added and updated tax rule successfully
+
+  @updateShipments
+  Scenario: Sales Manager should be able to update (
+              add shipment history and tracking information) shipments
+    Given sales manager on the dashboard page and can navigate to shipments page
+    When sales manager can view shipmentsList and random select one for update
+    And sales manager update shipments and send tracking information
+    Then sales manager sent tracking information and info should be displayed

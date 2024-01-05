@@ -26,4 +26,5 @@ public class TestDataHolder {
     public static int number=faker.number().numberBetween(1,100);
     public static String startDate= String.valueOf(01/01/2022);
     public static String endDate=String.valueOf(28/12/2023);
+
 }
