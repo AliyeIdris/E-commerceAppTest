@@ -36,8 +36,8 @@ public class ReportViewPage {
     WebElement ShoppingCartButton;
     @FindBy(xpath ="//span[text()='Abandoned carts']")
     WebElement AbandonedCartsButton;
-    @FindBy(xpath = "/html/body/div[1]/div[3]/div/div[3]/div/div/div/table/tbody/tr[1]/td[1]")
-    WebElement ortiz;
+@FindBy(xpath = "//tr[@class='pointer']/td[@class='nikosh vikosh']\n")
+   WebElement customer;
     @FindBy(xpath = "/html/body/div[1]/div[3]/div")
     WebElement VerifyMassage;
 
@@ -48,8 +48,8 @@ AbandonedCartsButton.click();
         //actions.moveToElement(ReportsButton).moveToElement(ShoppingCartButton).moveToElement(AbandonedCartsButton).click();
     }
     public void ChooseOneOfTheReport(){
-        functionLibrary.waitForElementVisible(ortiz);
-        ortiz.click();
+        functionLibrary.waitForElementVisible(customer);
+        customer.click();
     }
 
     public boolean seeAbandonedCartsVerify() {
