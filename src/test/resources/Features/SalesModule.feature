@@ -59,4 +59,3 @@ Feature: Sales module features
     When sales manager can view shipmentsList and random select one for update
     And sales manager update shipments and send tracking information
     Then sales manager sent tracking information and info should be displayed
-
