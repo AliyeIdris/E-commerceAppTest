@@ -24,6 +24,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
     NewAccountsPage newAccountsPage=new NewAccountsPage(driver);
     ProductsOrderedPage productsOrderedPage=new ProductsOrderedPage(driver);
     ProductsMostViewedPage productsMostViewedPage=new ProductsMostViewedPage(driver);
+    InvoicedPage invoicedPage=new InvoicedPage(driver);
 
      @Given("report manager login")
      public void reportManagerLogin() {
@@ -177,31 +178,30 @@ public class ReportingModuleStepDefinitions extends BasePage {
         Assert.assertTrue(productsMostViewedPage.checkMostViewedProducts());
     }
 
-
-    //abdugeni *****************able to see Sales - Total Invoiced vs Paid Report
-    @Given("Logged into Dashboard as ReportingManager")
-    public void loggedIntoDashboardAsReportingManager() {
-    }
-
-    @When("Reporting Manager Navigate To Total Invoiced vs Paid Report page")
+//abdugeni *****************able to see Sales - Total Invoiced vs Paid Report
+    @Given("Reporting Manager Navigate To Total Invoiced vs Paid Report page")
     public void reportingManagerNavigateToTotalInvoicedVsPaidReportPage() {
+         dashboardPage.navigateToInvoicedPage();
     }
 
-    @And("Fill Out Criteria For Search")
+    @When("Fill Out Criteria For Search")
     public void fillOutCriteriaForSearch() {
+         invoicedPage.showReport("27","Last Invoice Created Date","Month",
+                 "01/08/2014","01/08/2024");
     }
 
     @Then("Reporting Manager Can see Sales - Total Invoiced vs Paid Report")
     public void reportingManagerCanSeeSalesTotalInvoicedVsPaidReport() {
+         Assert.assertTrue(invoicedPage.verifyReport());
     }
 
-   // abdugeni ********************can see coupons usage report
+// abdugeni ********************can see coupons usage report
 
-    @When("The reporting manager opens coupons page")
+    @Given("The reporting manager opens coupons page")
     public void theReportingManagerOpensCouponsPage() {
     }
 
-    @Then("the coupons report should be displayed")
+    @When("the coupons report should be displayed")
     public void theCouponsReportShouldBeDisplayed() {
     }
 

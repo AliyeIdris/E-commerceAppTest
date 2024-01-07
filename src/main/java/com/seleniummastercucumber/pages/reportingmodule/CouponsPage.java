@@ -1,5 +1,6 @@
 package com.seleniummastercucumber.pages.reportingmodule;
 
+import com.seleniummastercucumber.pages.salesmodule.RefundsPage;
 import com.seleniummastercucumber.utility.FunctionLibrary;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,6 +30,7 @@ public class CouponsPage {
         functionLibrary = new FunctionLibrary(driver);
         actions = new Actions(driver);
         dashboardPage = new ReportingDashboardPage(driver);
+        logger= Logger.getLogger(RefundsPage.class.getName());
     }
     @FindBy(id = "store_switcher")
     WebElement selectShowReportFor;

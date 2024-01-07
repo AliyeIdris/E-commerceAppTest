@@ -1,5 +1,6 @@
 package com.seleniummastercucumber.pages.reportingmodule;
 
+import com.seleniummastercucumber.pages.salesmodule.RefundsPage;
 import com.seleniummastercucumber.utility.FunctionLibrary;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,6 +31,7 @@ public class InvoicedPage {
         functionLibrary=new FunctionLibrary(driver);
         actions=new Actions(driver);
         dashboardPage=new ReportingDashboardPage(driver);
+        logger= Logger.getLogger(RefundsPage.class.getName());
     }
     @FindAll(@FindBy(xpath = "//div[@class=\"nav-bar\"]/ul/li/a"))
     List<WebElement> homePageAllRootTab;
@@ -56,27 +58,10 @@ public class InvoicedPage {
     @FindBy(xpath = "//tr[@class=\"totals\"]")
     WebElement total;
 
-    public void navigateToTotalInvoicedVsPaidReportPage() {
-        logger.info("Start see Sales - Total Invoiced vs Paid Report ");
-        for (WebElement each : homePageAllRootTab) {
-            if (each.getText().equals("Reports")) {
-                Actions actions = new Actions(driver);
-                actions.moveToElement(each).build().perform();
-                break;
-            }
-        }
-        functionLibrary.waitForElementVisible(salesLink);
-        Actions actions = new Actions(driver);
-        actions.moveToElement(salesLink).build().perform();
-        functionLibrary.waitForElementVisible(invoicedLink);
-        invoicedLink.click();
-    }
-
-    public void showReport(String reportFor, String periodTo, String period, String fromDate, String toDate, String status, String empty) {
-        logger.info("filling Report criteria");
+    public void showReport(String reportFor, String periodTo, String period, String fromDate, String toDate) {
         functionLibrary.waitForElementVisible(shouReportForSelection);
         Select select = new Select(shouReportForSelection);
-        select.selectByVisibleText(reportFor);
+        select.selectByValue(reportFor);
         functionLibrary.waitForElementVisible(matchPeriodToSelection);
         Select select1 = new Select(matchPeriodToSelection);
         select1.selectByVisibleText(periodTo);
@@ -87,23 +72,18 @@ public class InvoicedPage {
         from.sendKeys(fromDate);
         functionLibrary.waitForElementVisible(to);
         to.sendKeys(toDate);
-        functionLibrary.waitForElementVisible(orderStatus);
-        Select select3 = new Select(orderStatus);
-        select3.selectByVisibleText(status);
-        functionLibrary.waitForElementVisible(emptyRows);
-        Select select4 = new Select(emptyRows);
-        select4.selectByVisibleText(empty);
         functionLibrary.waitForElementVisible(showReportButton);
         showReportButton.click();
     }
 
     public boolean verifyReport() {
         functionLibrary.waitForElementVisible(total);
-        if (total.isDisplayed()) {
+        if (total.isDisplayed() && total.getText().equalsIgnoreCase(" ")) {
+            logger.info("No records found, ---Please select correct Report ");
+            return false;
+
+        } else if (total.isDisplayed() && total.getText().contains("23334567890")) {
             logger.info("Total Report : " + total.getText());
-            return true;
-        } else {
-            logger.info("No records found");
         }
         return true;
     }
