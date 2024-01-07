@@ -53,7 +53,6 @@ public class CouponsPage {
     }
 
     public void filterCouponsUsageReports(String websiteName, String fromDate, String toDate) {
-        logger.info("select website to show report and fill From and To date  fields to filter report");
         functionLibrary.waitForElementVisible(selectShowReportFor);
         selectShowReportFor.sendKeys(websiteName);
         functionLibrary.waitForElementVisible(fromDateField);
@@ -61,7 +60,6 @@ public class CouponsPage {
         functionLibrary.waitForElementVisible(toDateField);
         toDateField.sendKeys(toDate);
         functionLibrary.waitForElementVisible(showReportsButton);
-        logger.info("click on show report button");
         showReportsButton.click();
     }
 

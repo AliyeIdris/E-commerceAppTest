@@ -33,12 +33,6 @@ public class InvoicedPage {
         dashboardPage=new ReportingDashboardPage(driver);
         logger= Logger.getLogger(RefundsPage.class.getName());
     }
-    @FindAll(@FindBy(xpath = "//div[@class=\"nav-bar\"]/ul/li/a"))
-    List<WebElement> homePageAllRootTab;
-    @FindBy(xpath = "//div//li//span[text()=\"Sales\"]")
-    WebElement salesLink;
-    @FindBy(xpath = "//div//li//span[text()=\"Invoiced\"]")
-    WebElement invoicedLink;
     @FindBy(xpath = "//select[@id=\"store_switcher\"]")
     WebElement shouReportForSelection;
     @FindBy(xpath = "//select[@id=\"sales_report_report_type\"]")
@@ -49,10 +43,6 @@ public class InvoicedPage {
     WebElement from;
     @FindBy(xpath = "//input[@id=\"sales_report_to\"]")
     WebElement to;
-    @FindBy(xpath = "//select[@id=\"sales_report_show_order_statuses\"]")
-    WebElement orderStatus;
-    @FindBy(xpath = "//select[@id=\"sales_report_show_empty_rows\"]")
-    WebElement emptyRows;
     @FindBy(xpath = "//div[@id=\"anchor-content\"]//*[@title=\"Show Report\"]")
     WebElement showReportButton;
     @FindBy(xpath = "//tr[@class=\"totals\"]")

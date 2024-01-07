@@ -25,6 +25,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
     ProductsOrderedPage productsOrderedPage=new ProductsOrderedPage(driver);
     ProductsMostViewedPage productsMostViewedPage=new ProductsMostViewedPage(driver);
     InvoicedPage invoicedPage=new InvoicedPage(driver);
+    CouponsPage couponsPage=new CouponsPage(driver);
 
      @Given("report manager login")
      public void reportManagerLogin() {
@@ -199,17 +200,21 @@ public class ReportingModuleStepDefinitions extends BasePage {
 
     @Given("The reporting manager opens coupons page")
     public void theReportingManagerOpensCouponsPage() {
+         dashboardPage.navigateToCouponsPage();
     }
 
     @When("the coupons report should be displayed")
     public void theCouponsReportShouldBeDisplayed() {
+         couponsPage.isSalesCouponsUsagePageDisplayed();
     }
 
     @And("the manager fills in the filter details{string} {string} {string}")
     public void theManagerFillsInTheFilterDetails(String arg0, String arg1, String arg2) {
+        couponsPage.filterCouponsUsageReports(arg0,arg1,arg2);
     }
 
     @Then("no records found displayed")
     public void noRecordsFoundDisplayed() {
+         couponsPage.verifyCouponsUsageReport();
     }
 }
