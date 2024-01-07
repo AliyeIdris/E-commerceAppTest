@@ -176,4 +176,40 @@ public class ReportingModuleStepDefinitions extends BasePage {
     public void mostViewedProductsShouldBeDisplayed() {
         Assert.assertTrue(productsMostViewedPage.checkMostViewedProducts());
     }
+
+
+    //abdugeni *****************able to see Sales - Total Invoiced vs Paid Report
+    @Given("Logged into Dashboard as ReportingManager")
+    public void loggedIntoDashboardAsReportingManager() {
+    }
+
+    @When("Reporting Manager Navigate To Total Invoiced vs Paid Report page")
+    public void reportingManagerNavigateToTotalInvoicedVsPaidReportPage() {
+    }
+
+    @And("Fill Out Criteria For Search")
+    public void fillOutCriteriaForSearch() {
+    }
+
+    @Then("Reporting Manager Can see Sales - Total Invoiced vs Paid Report")
+    public void reportingManagerCanSeeSalesTotalInvoicedVsPaidReport() {
+    }
+
+   // abdugeni ********************can see coupons usage report
+
+    @When("The reporting manager opens coupons page")
+    public void theReportingManagerOpensCouponsPage() {
+    }
+
+    @Then("the coupons report should be displayed")
+    public void theCouponsReportShouldBeDisplayed() {
+    }
+
+    @And("the manager fills in the filter details{string} {string} {string}")
+    public void theManagerFillsInTheFilterDetails(String arg0, String arg1, String arg2) {
+    }
+
+    @Then("no records found displayed")
+    public void noRecordsFoundDisplayed() {
+    }
 }
