@@ -127,7 +127,7 @@ public class DataBaseStepDefinitions {
 //abdugeni//
     @Given("user has valid database connection and ready to test")
     public void userHasValidDatabaseConnectionAndReadyToTest() throws SQLException {
-        System.out.println("DataBase ready to test , Database position is : \n----->   "+
+        scenario.log("DataBase ready to test , Database position is : \n----->   "+
                 connection.getAutoCommit());
     }
     @When("Execute SQL query to get root category information with categoryName {string}")
@@ -144,7 +144,4 @@ public class DataBaseStepDefinitions {
         dbConnection.closeDataBaseConnection(connection);
         scenario.log("Connection is closed!");
     }
-
-
-
 }
