@@ -70,6 +70,23 @@ Feature: Reporting module features
       | dateFrom   | dateTo     |
       | 01/01/2022 | 04/01/2024 |
 
+#abdugeni
+  Scenario: Reporting Manager should be able to see Sales - Total Invoiced vs Paid Report
+    Given  Reporting Manager Navigate To Total Invoiced vs Paid Report page
+    When   Fill Out Criteria For Search
+    Then Reporting Manager Can see Sales - Total Invoiced vs Paid Report
+
+  Scenario Outline: Reporting manager can see coupons usage report
+    Given The reporting manager opens coupons page
+    When the coupons report should be displayed
+    And  the manager fills in the filter details"<websiteName>" "<fromDate>" "<toDate>"
+    Then no records found displayed
+
+    Examples:
+      | websiteName  | fromDate   | toDate     |
+      | All Websites | 06/28/2023 | 12/28/2023|
+#*******
+
   @MostViewedProductsReport
   Scenario Outline: Reporting Manager should be able to see Products Most Viewed Report
     Given report manager is on the dashboard page
