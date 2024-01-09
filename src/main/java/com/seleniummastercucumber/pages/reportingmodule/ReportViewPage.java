@@ -36,8 +36,10 @@ public class ReportViewPage {
     WebElement ShoppingCartButton;
     @FindBy(xpath ="//span[text()='Abandoned carts']")
     WebElement AbandonedCartsButton;
-@FindBy(xpath = "//tr[@class='pointer']/td[@class='nikosh vikosh']\n")
+    @FindBy(css =" //#gridAbandoned_table > tbody > tr:nth-child(19) > td:nth-child(1)")
    WebElement customer;
+
+
     @FindBy(xpath = "/html/body/div[1]/div[3]/div")
     WebElement VerifyMassage;
 
