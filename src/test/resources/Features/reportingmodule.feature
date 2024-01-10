@@ -99,6 +99,6 @@ Feature: Reporting module features
 
     @SeeShoppingCart-AbandonedCartsReport
     Scenario: Reporting Manager should be able to see Shopping Cart - Abandoned carts Report
-      Given Reporting Manager Navigate to The Reports Than Shopping Cart And Choose Abandoned carts
-      When Reporting Manager Should Choose One of The Customer Name and See The Result
+      Given reportingManagerIsOnTheDashboardPage
+      When  Reporting Manager Navigate to The Reports Than Shopping Cart And Choose Abandoned carts
       Then Reporting Manager Should Get Report From Abandoned Carts

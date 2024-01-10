@@ -19,6 +19,7 @@ public class ReportViewPage {
         this.driver = driver;
         PageFactory.initElements(driver,this);
         functionLibrary=new FunctionLibrary(driver);
+        actions= new Actions(driver);
     }
     //Shemshinur
     @FindBy(id = "sales_report_from")
@@ -36,11 +37,8 @@ public class ReportViewPage {
     WebElement ShoppingCartButton;
     @FindBy(xpath ="//span[text()='Abandoned carts']")
     WebElement AbandonedCartsButton;
-    @FindBy(css =" //#gridAbandoned_table > tbody > tr:nth-child(19) > td:nth-child(1)")
-   WebElement customer;
 
-
-    @FindBy(xpath = "/html/body/div[1]/div[3]/div")
+    @FindBy(xpath = "//h3[contains(@class, 'icon-head') and contains(@class, 'head-report-shopcart-abandoned')]")
     WebElement VerifyMassage;
 
     public void navigateToTheReport(){
@@ -49,21 +47,14 @@ ShoppingCartButton.click();
 AbandonedCartsButton.click();
         //actions.moveToElement(ReportsButton).moveToElement(ShoppingCartButton).moveToElement(AbandonedCartsButton).click();
     }
-    public void ChooseOneOfTheReport(){
-        functionLibrary.waitForElementVisible(customer);
-        customer.click();
-    }
 
     public boolean seeAbandonedCartsVerify() {
         functionLibrary.waitForElementVisible(VerifyMassage);
-        if (VerifyMassage.isDisplayed()) {
-            logger.info("There İs A Mİstake");
-            return false;
-        } else {
-            logger.info("Successful!!!");
-            return  true;
-        }
+        if (VerifyMassage.isDisplayed())
+            return true;
+        else return false;
     }
+
 
 
 

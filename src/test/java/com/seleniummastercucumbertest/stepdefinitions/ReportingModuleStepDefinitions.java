@@ -218,14 +218,12 @@ public class ReportingModuleStepDefinitions extends BasePage {
          couponsPage.verifyCouponsUsageReport();
     }
 
-    @Given("Reporting Manager Navigate to The Reports Than Shopping Cart And Choose Abandoned carts")
-    public void reportingManagerNavigateToTheReportsThanShoppingCartAndChooseAbandonedCarts() {
-        reportViewPage.navigateToTheReport();
-    }
+    @Given("reportingManagerIsOnTheDashboardPage")
 
-    @When("Reporting Manager Should Choose One of The Customer Name")
-    public void reportingManagerShouldChooseOneOfTheCustomerName() {
-        reportViewPage.ChooseOneOfTheReport();
+
+    @When("Reporting Manager Navigate to The Reports Than Shopping Cart And Choose Abandoned carts")
+    public void ReportingManagerNavigatetoTheReportsThanShoppingCartAnChooseAbandonedcarts() {
+        reportViewPage.navigateToTheReport();
     }
 
     @Then("Reporting Manager Should Get Report From Abandoned Carts")
