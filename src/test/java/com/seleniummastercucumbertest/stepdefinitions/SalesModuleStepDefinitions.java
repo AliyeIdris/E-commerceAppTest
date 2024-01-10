@@ -28,6 +28,7 @@ public class SalesModuleStepDefinitions extends BasePage {
     ManageTaxRulePage manageTaxRulePage=new ManageTaxRulePage(driver);
     ShipmentsPage shipmentsPage =new ShipmentsPage(driver);
     int quantity;
+    CreditMemosPage creditMemosPage=new CreditMemosPage(driver);
 
     //*************************** Background ***************************
     @Given("sales manager login")
@@ -171,6 +172,21 @@ public class SalesModuleStepDefinitions extends BasePage {
     @Then("sales manager sent tracking information and info should be displayed")
     public void salesManagerSentTrackingInformationAndInfoShouldBeDisplayed() {
         shipmentsPage.verifySentTrackingInfoMessage();
+    }
+
+    @Given("sales manager is on the credit memos page")
+    public void salesManagerIsOnTheCreditMemosPage() {
+        creditMemosPage.navigateToCreditMemosPage();
+    }
+
+    @When("sales manager view credit memos")
+    public void salesManagerViewCreditMemos() {
+        creditMemosPage.viewCreditMemos();
+    }
+
+    @Then("Sales manager should be able to view credit memos successfully")
+    public void salesManagerShouldBeAbleToViewCreditMemosSuccessfully() {
+        creditMemosPage.verifyCreditMemos();
     }
 }
 

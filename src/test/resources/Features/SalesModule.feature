@@ -59,3 +59,9 @@ Feature: Sales module features
     When sales manager can view shipmentsList and random select one for update
     And sales manager update shipments and send tracking information
     Then sales manager sent tracking information and info should be displayed
+
+  @ViewCreditMemos
+  Scenario: Sales Manager should be able to view credit memos
+    Given sales manager is on the credit memos page
+    When sales manager view credit memos
+    Then Sales manager should be able to view credit memos successfully
