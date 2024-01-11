@@ -1,14 +1,11 @@
 package com.seleniummastercucumbertest;
 
-import com.seleniummastercucumber.utility.DBConnection;
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
-import io.cucumber.java.Scenario;
 import com.seleniummastercucumber.pages.dashboardmodule.AdminDashboardPage;
 import com.seleniummastercucumber.utility.BasePage;
 import com.seleniummastercucumber.utility.DriverType;
-
-import java.sql.Connection;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 
 import static com.seleniummastercucumber.utility.FileUtility.readConfig;
 
@@ -17,7 +14,7 @@ import static com.seleniummastercucumber.utility.FileUtility.readConfig;
  * @created : 8.12.2023,17:03
  * @Email :aliyeidiris@gmail.com
  **/
-public class Hooks extends BasePage {
+public class  Hooks extends BasePage {
     @Before
     public void setUp(Scenario scenario) {
         if (scenario.getSourceTagNames().contains("@UITest")) {

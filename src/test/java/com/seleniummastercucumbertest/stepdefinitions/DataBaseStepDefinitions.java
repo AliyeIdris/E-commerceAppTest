@@ -12,6 +12,7 @@ import org.junit.After;
 import org.junit.Assert;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import static com.seleniummastercucumber.utility.FileUtility.readConfig;
 
@@ -33,6 +34,7 @@ public class DataBaseStepDefinitions {
     boolean isStoreViewExist;
     boolean isCustomerAdded;
     boolean isCartRuleAdded;
+    boolean isRootCategoryExist;
 
     @Before
     public void beforeDatabaseTest(Scenario scenario){
@@ -102,11 +104,12 @@ public class DataBaseStepDefinitions {
 
     @Then("database should return the newly added customer with detailed info")
     public void databaseShouldReturnTheNewlyAddedCustomerWithDetailedInfo() {
+
         Assert.assertTrue(isCustomerAdded);
     }
 
     @Given("user has read access to the mg_salesrule table")
-    public void userHasReadAccessToTheMg_salesruleTable() {
+    public void  userHasReadAccessToTheMg_salesruleTable() {
     scenario.log("User has valid username: "+username);
     scenario.log("User has valid password: "+password);
     }
@@ -118,8 +121,23 @@ public class DataBaseStepDefinitions {
 
     @Then("database should return the newly added rule with expected information")
     public void databaseShouldReturnTheNewlyAddedRuleWithExpectedInfo() {
-    Assert.assertTrue(isCartRuleAdded);
-}
+
+        Assert.assertTrue(isCartRuleAdded);
+    }
+//abdugeni//
+    @Given("user has valid database connection and ready to test")
+    public void userHasValidDatabaseConnectionAndReadyToTest() throws SQLException {
+        scenario.log("DataBase ready to test , Database position is : \n----->   "+
+                connection.getAutoCommit());
+    }
+    @When("Execute SQL query to get root category information with categoryName {string}")
+    public void executeSQLQueryToGetRootCategoryInformationWithCategoryName(String arg0) {
+        isRootCategoryExist=verifySQLScripts.getAddedRootCategoriesInfo(connection,arg0);
+    }
+    @Then("The database returns root category information with details")
+    public void theDatabaseReturnsRootCategoryInformationWithDetails() {
+        Assert.assertTrue(isRootCategoryExist);
+    }
 
     @After
     public void closeConnection(){

@@ -247,7 +247,21 @@ public class ReportingModuleStepDefinitions extends BasePage {
     }
 
     @Then("show customers Tags successful")
-    public void showCustomersTagsSuccessful() {
-         customersTagsPage.verifyViewCustomersTagsReport();
+    public void showCustomersTagsSuccessful() {customersTagsPage.verifyViewCustomersTagsReport(); }
+
+    @Given("reportingManagerIsOnTheDashboardPage")
+
+    @When("Reporting Manager Navigate to The Reports Than Shopping Cart And Choose Abandoned carts")
+    public void ReportingManagerNavigateToTheReportsThanShoppingCartAndChooseAbandonedCarts() {
+
+            reportViewPage.navigateToTheReport();
+
+    }
+
+    @Then("Reporting Manager Should Get Report From Abandoned Carts")
+    public void reportingManagerShouldGetReportFromAbandonedCarts() {
+        reportViewPage.seeAbandonedCartsVerify();
     }
 }
+
+

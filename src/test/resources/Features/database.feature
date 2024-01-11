@@ -41,3 +41,9 @@ Scenario: User retrieves sub category info from the database
     Given user has read access to the mg_salesrule table
     When user execute query to get the added rule with "71"
     Then database should return the newly added rule with expected information
+
+  @AddedRootCategory
+  Scenario: newly added product root category should be in the database
+    Given user has valid database connection and ready to test
+    When Execute SQL query to get root category information with categoryName "Team1-Istanbul-DO Not Delete"
+    Then The database returns root category information with details
