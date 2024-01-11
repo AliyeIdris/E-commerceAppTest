@@ -30,30 +30,6 @@ public class ReportViewPage {
     WebElement showReportButton;
     @FindBy(xpath = "//tr[@class='totals']")
     WebElement totalShipped;
-// see Abandoned Carts Report
-    @FindBy(xpath = "//span[text()='Reports']")
-    WebElement ReportsButton;
-    @FindBy(xpath ="//span[text()='Shopping Cart']")
-    WebElement ShoppingCartButton;
-    @FindBy(xpath ="//span[text()='Abandoned carts']")
-    WebElement AbandonedCartsButton;
-
-    @FindBy(xpath = "//h3[contains(@class, 'icon-head') and contains(@class, 'head-report-shopcart-abandoned')]")
-    WebElement VerifyMassage;
-
-    public void navigateToTheReport(){
-ReportsButton.click();
-ShoppingCartButton.click();
-AbandonedCartsButton.click();
-        //actions.moveToElement(ReportsButton).moveToElement(ShoppingCartButton).moveToElement(AbandonedCartsButton).click();
-    }
-
-    public boolean seeAbandonedCartsVerify() {
-        functionLibrary.waitForElementVisible(VerifyMassage);
-        if (VerifyMassage.isDisplayed())
-            return true;
-        else return false;
-    }
 
 
 
