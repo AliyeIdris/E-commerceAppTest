@@ -20,7 +20,7 @@ public class CustomersTagsPage {
         this.driver = driver;
         PageFactory.initElements(driver,this);
         functionLibrary=new FunctionLibrary(driver);
-        Actions actions=new Actions(driver);
+        actions=new Actions(driver);
         logger= Logger.getLogger(RefundsPage.class.getName());
     }
     @FindBy(xpath = "//span[text()='Reports']")
@@ -31,8 +31,14 @@ public class CustomersTagsPage {
     WebElement customersLink;
     @FindBy(xpath = "//div/div/div/table/tbody/tr/td/h3[text()='Customers Tags']")
     WebElement customersTagsPage;
+    @FindBy(xpath = "//select[@name='limit']")
+    WebElement viewSelection;
+    @FindBy(xpath = "//option[text()='200']")
+    WebElement view200;
     @FindBy(xpath = "//a[text()='Show Tags']")
     WebElement showTagsLink;
+    @FindBy(xpath = "//span[text()='Tag Name']")
+    WebElement tagName;
 
     public void navigateToCustomersTagsPage(){
         functionLibrary.waitForElementVisible(reportsTab);
@@ -43,6 +49,21 @@ public class CustomersTagsPage {
         actions.moveToElement(customersLink).click().build().perform();
     }
     public void viewTagsCustomersReport(){
+        functionLibrary.waitForElementVisible(customersTagsPage);
+        customersTagsPage.isDisplayed();
+        functionLibrary.waitForElementVisible(viewSelection);
+        actions.moveToElement(viewSelection).click().build().perform();
+        functionLibrary.waitForElementVisible(view200);
+        actions.moveToElement(view200).click().build().perform();
+        functionLibrary.waitForElementVisible(showTagsLink);
+        actions.moveToElement(showTagsLink).click().build().perform();
+    }
+    public boolean verifyViewCustomersTagsReport(){
+        if (tagName.isDisplayed()){
+            logger.info("See customers tags report successfully!");
+            return true;
+        }else
+            return false;
 
     }
 

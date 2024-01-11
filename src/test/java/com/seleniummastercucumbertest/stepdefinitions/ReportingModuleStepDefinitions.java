@@ -26,6 +26,8 @@ public class ReportingModuleStepDefinitions extends BasePage {
     ProductsMostViewedPage productsMostViewedPage=new ProductsMostViewedPage(driver);
     InvoicedPage invoicedPage=new InvoicedPage(driver);
     CouponsPage couponsPage=new CouponsPage(driver);
+    ProductInCartPage productInCartPage=new ProductInCartPage(driver);
+    CustomersTagsPage customersTagsPage=new CustomersTagsPage(driver);
 
      @Given("report manager login")
      public void reportManagerLogin() {
@@ -221,25 +223,31 @@ public class ReportingModuleStepDefinitions extends BasePage {
     //mihrigul
     @Given("reporting manager navigate to product in carts page")
     public void reportingManagerNavigateToProductInCartsPage() {
+         productInCartPage.navigateToProductInCartsPage();
     }
 
     @When("the page opened and report manager see the report")
     public void thePageOpenedAndReportManagerSeeTheReport() {
+         productInCartPage.viewProductInCarts();
     }
 
     @Then("product in cart should be displayed")
     public void productInCartShouldBeDisplayed() {
+         productInCartPage.verifyViewProductsInShoppingCartsReport();
     }
 
     @Given("reporting manager navigate to Customers Tags page")
     public void reportingManagerNavigateToCustomersTagsPage() {
+         customersTagsPage.navigateToCustomersTagsPage();
     }
 
     @When("the page opened and report manager sees the report of customer")
     public void thePageOpenedAndReportManagerSeesTheReportOfCustomer() {
+         customersTagsPage.viewTagsCustomersReport();
     }
 
     @Then("show customers Tags successful")
     public void showCustomersTagsSuccessful() {
+         customersTagsPage.verifyViewCustomersTagsReport();
     }
 }
