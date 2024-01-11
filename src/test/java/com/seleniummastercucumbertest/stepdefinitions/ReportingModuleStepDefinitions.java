@@ -216,6 +216,21 @@ public class ReportingModuleStepDefinitions extends BasePage {
     @Then("no records found displayed")
     public void noRecordsFoundDisplayed() {
          couponsPage.verifyCouponsUsageReport();
-    }}
+    }
+
+    @Given("reportingManagerIsOnTheDashboardPage")
+
+    @When("Reporting Manager Navigate to The Reports Than Shopping Cart And Choose Abandoned carts")
+    public void reportingManagerNavigateToTheReportsThanShoppingCartAndChooseAbandonedCarts() {
+
+            reportViewPage.navigateToTheReport();
+
+    }
+
+    @Then("Reporting Manager Should Get Report From Abandoned Carts")
+    public void reportingManagerShouldGetReportFromAbandonedCarts() {
+        reportViewPage.seeAbandonedCartsVerify();
+    }
+}
 
 
