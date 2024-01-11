@@ -217,4 +217,29 @@ public class ReportingModuleStepDefinitions extends BasePage {
     public void noRecordsFoundDisplayed() {
          couponsPage.verifyCouponsUsageReport();
     }
+
+    //mihrigul
+    @Given("reporting manager navigate to product in carts page")
+    public void reportingManagerNavigateToProductInCartsPage() {
+    }
+
+    @When("the page opened and report manager see the report")
+    public void thePageOpenedAndReportManagerSeeTheReport() {
+    }
+
+    @Then("product in cart should be displayed")
+    public void productInCartShouldBeDisplayed() {
+    }
+
+    @Given("reporting manager navigate to Customers Tags page")
+    public void reportingManagerNavigateToCustomersTagsPage() {
+    }
+
+    @When("the page opened and report manager sees the report of customer")
+    public void thePageOpenedAndReportManagerSeesTheReportOfCustomer() {
+    }
+
+    @Then("show customers Tags successful")
+    public void showCustomersTagsSuccessful() {
+    }
 }
