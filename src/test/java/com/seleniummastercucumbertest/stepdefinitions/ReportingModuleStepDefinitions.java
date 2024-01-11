@@ -222,7 +222,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
 
 
     @When("Reporting Manager Navigate to The Reports Than Shopping Cart And Choose Abandoned carts")
-    public void ReportingManagerNavigatetoTheReportsThanShoppingCartAnChooseAbandonedcarts() {
+    public void ReportingManagerNavigateToTheReportsThanShoppingCartAnChooseAbandonedcarts() {
         reportViewPage.navigateToTheReport();
     }
 
