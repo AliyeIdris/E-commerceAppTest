@@ -45,7 +45,7 @@ public class ReportViewPage {
         ReportsButton.click();
         ShoppingCartButton.click();
         AbandonedCartsButton.click();
-        //actions.moveToElement(ReportsButton).moveToElement(ShoppingCartButton).moveToElement(AbandonedCartsButton).click();
+
     }
 
     public boolean seeAbandonedCartsVerify() {
