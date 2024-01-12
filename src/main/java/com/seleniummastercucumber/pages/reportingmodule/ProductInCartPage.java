@@ -54,7 +54,7 @@ public class ProductInCartPage {
         functionLibrary.waitForElementVisible(viewPerPageSelection);
         actions.moveToElement(viewPerPageSelection).click().build().perform();
         functionLibrary.waitForElementVisible(view200option);
-        actions.moveToElement(view200option).click().build().perform();
+        actions.moveToElement(view200option).click().build();
     }
     public boolean verifyViewProductsInShoppingCartsReport(){
         if (productsList.size()>=1){

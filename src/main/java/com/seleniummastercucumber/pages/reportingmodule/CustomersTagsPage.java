@@ -27,8 +27,8 @@ public class CustomersTagsPage {
     WebElement reportsTab;
     @FindBy(xpath = "//span[text()='Tags']")
     WebElement tagsLink;
-    @FindBy(xpath = "//div/ul/li/ul/li/a/span[text()='Customers']")
-    WebElement customersLink;
+    @FindBy(xpath = "//*[@id=\"nav\"]/li[2]/ul/li[5]/ul/li/a/span[text()='Customers']")
+    WebElement customersTags;
     @FindBy(xpath = "//div/div/div/table/tbody/tr/td/h3[text()='Customers Tags']")
     WebElement customersTagsPage;
     @FindBy(xpath = "//select[@name='limit']")
@@ -42,11 +42,14 @@ public class CustomersTagsPage {
 
     public void navigateToCustomersTagsPage(){
         functionLibrary.waitForElementVisible(reportsTab);
+        actions.pause(2000).perform();
         actions.moveToElement(reportsTab).build().perform();
         functionLibrary.waitForElementVisible(tagsLink);
         actions.moveToElement(tagsLink).build().perform();
-        functionLibrary.waitForElementVisible(customersLink);
-        actions.moveToElement(customersLink).click().build().perform();
+        functionLibrary.waitForElementVisible(customersTags);
+        actions.pause(2000).perform();
+        actions.moveToElement(customersTags).build().perform();
+        customersTags.click();
     }
     public void viewTagsCustomersReport(){
         functionLibrary.waitForElementVisible(customersTagsPage);
@@ -54,7 +57,7 @@ public class CustomersTagsPage {
         functionLibrary.waitForElementVisible(viewSelection);
         actions.moveToElement(viewSelection).click().build().perform();
         functionLibrary.waitForElementVisible(view200);
-        actions.moveToElement(view200).click().build().perform();
+        actions.moveToElement(view200).click().build();
         functionLibrary.waitForElementVisible(showTagsLink);
         actions.moveToElement(showTagsLink).click().build().perform();
     }
@@ -62,7 +65,9 @@ public class CustomersTagsPage {
         if (tagName.isDisplayed()){
             logger.info("See customers tags report successfully!");
             return true;
-        }else
+        }else{
+            logger.info("There are no customers tags !");
+        }
             return false;
 
     }
