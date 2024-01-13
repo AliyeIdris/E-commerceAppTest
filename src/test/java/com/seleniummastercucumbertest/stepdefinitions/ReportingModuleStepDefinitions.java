@@ -246,20 +246,18 @@ public class ReportingModuleStepDefinitions extends BasePage {
          Assert.assertTrue(customersTagsPage.verifyViewCustomersTagsReport()); }
 
 // İhram
-    @Given("reportingManagerIsNavigateToTheAbandonedPage")
-    public void reportingmanagerisnavigatetotheabandonedpage() {
-        reportViewPage.navigateToTheReport();
-
+    @Given("reporting Manager Is Navigate To The AbandonedPage")
+    public void reportingManagerIsNavigateToTheAbandonedPage() {reportViewPage.navigateToTheReport();
     }
 
-    @When("Reporting Manager Navigate to The Reports Than Shopping Cart And Choose Abandoned carts")
-    public void ReportingManagerNavigateToTheReportsThanShoppingCartAndChooseAbandonedCarts() {
-
-        reportViewPage.clickReportMethod();
+    @When("Reporting Manager Navigate to The Shopping Cart And Choose Abandoned carts")
+    public void reportingManagerNavigateToTheShoppingCartAndChooseAbandonedCarts() {
+        reportViewPage.clickReportMethod("lakesha.schinner@hotmail.com");
     }
 
-    @Then("Reporting Manager Should Get Report From Abandoned Carts")
-    public void reportingManagerShouldGetReportFromAbandonedCarts() {
+
+    @Then("Reporting Manager Should Get Report From AbandonedCart")
+    public void reportingManagerShouldGetReportFromAbandonedCart() {
         Assert.assertTrue(reportViewPage.seeAbandonedCartsVerify());
     }
 }
