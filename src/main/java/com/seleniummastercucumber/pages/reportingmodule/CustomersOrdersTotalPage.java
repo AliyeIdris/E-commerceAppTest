@@ -109,16 +109,16 @@ public class CustomersOrdersTotalPage {
         functionLibrary.waitForElementVisible(dayField);
         dayField.click();
     }
-    public void enterEndDate(String endDate){
+    public void enterEndDate(){
         functionLibrary.waitForElementVisible(calendarIconTo);
         calendarIconTo.click();
         WebElement currentDay = driver.findElement(By.xpath("(//div[text()='today'])[2]"));
         functionLibrary.waitForElementVisible(currentDay);
         currentDay.click();
     }
-    public void applyFilterToReport(String startDate, String endDate){
+    public void applyFilterToReport(String startDate){
         enterStartDate(startDate);
-        enterEndDate(endDate);
+        enterEndDate();
         functionLibrary.waitForElementVisible(periodDropDown);
         Select selectPeriod=new Select(periodDropDown);
         selectPeriod.selectByVisibleText("Year");
