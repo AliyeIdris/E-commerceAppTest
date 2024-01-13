@@ -249,7 +249,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
     @Then("show customers Tags successful")
     public void showCustomersTagsSuccessful() {customersTagsPage.verifyViewCustomersTagsReport(); }
 
-// İhram ferhat
+// İhram
     @Given("reportingManagerIsNavigateToTheAbandonedPage")
     public void reportingmanagerisnavigatetotheabandonedpage() {
         reportViewPage.navigateToTheReport();
