@@ -2,6 +2,7 @@ package com.seleniummastercucumber.pages.reportingmodule;
 
 import com.seleniummastercucumber.utility.FunctionLibrary;
 import com.seleniummastercucumber.utility.ScreenShotUtility;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -39,13 +40,10 @@ public class ReportViewPage {
     WebElement ShoppingCartButton;
     @FindBy(xpath ="//span[text()='Abandoned carts']")
     WebElement AbandonedCartsButton;
-    @FindBy(xpath = "//td[contains(text(),'busra.uygur608@gmail.com')]")
-    WebElement reportEmail;
 
     @FindBy(xpath = "//h1[contains(text(),'Access denied')]")
     WebElement VerifyMassage;
-    @FindBy(xpath = "//class[contains(text(),'Access denied')]")
-    WebElement VerifyMassageNote;
+
 
     //İhram
     public void navigateToTheReport(){
@@ -55,7 +53,8 @@ public class ReportViewPage {
 
 
     }
-    public void clickReportMethod(){
+    public void clickReportMethod(String reportemail){
+        WebElement reportEmail= driver.findElement(By.xpath(String.format("//td[contains(text(),'%s')]",reportemail)));
         reportEmail.click();
     }
 
@@ -63,10 +62,11 @@ public class ReportViewPage {
         functionLibrary.waitForElementVisible(VerifyMassage);
         if (VerifyMassage.isDisplayed()) {
             System.out.println("There is A Bug");
+            return true;
+        } else {
+            return false;
         }
-        return false;
     }
-
 
 
 
