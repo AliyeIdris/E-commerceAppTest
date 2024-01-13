@@ -4,9 +4,12 @@ import com.seleniummastercucumber.utility.FunctionLibrary;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+import java.util.Random;
 import java.util.logging.Logger;
 
 public class CreditMemosPage {
@@ -32,6 +35,17 @@ public class CreditMemosPage {
     WebElement views;
     @FindBy(xpath = "//h4[text()='Credit Memo Totals']")
     WebElement creditMemosTotals;
+    @FindAll(@FindBy(xpath = "//a[text()='View']"))
+    List<WebElement> allViewLink;
+    @FindBy(name = "comment[comment]")
+    WebElement commentLink;
+    @FindBy(xpath = "//span[text()='Submit Comment']")
+    WebElement submitCommentButton;
+    @FindBy(xpath = "//span[text()='Send Email'][1]")
+    WebElement sendEmailButton;
+    @FindBy(xpath = "//span[text()='The message was sent.']")
+    WebElement commentSentSuccess;
+
 
     public void navigateToCreditMemosPage(){
         functionLibrary.waitForElementVisible(salesTab);
@@ -54,4 +68,25 @@ public class CreditMemosPage {
             return false;
         }
     }
+
+    public void addCreditMemosComment(String commentText){
+        allViewLink.get(new Random().nextInt(allViewLink.size())).click();
+        //actions.scrollToElement(commentLink).build().perform();
+        commentLink.sendKeys(commentText);
+        functionLibrary.waitForElementVisible(submitCommentButton);
+        submitCommentButton.click();
+        functionLibrary.waitForElementVisible(sendEmailButton);
+        sendEmailButton.click();
+    }
+    public boolean verifyAddedCreditMemos(){
+        if(commentSentSuccess.isDisplayed()){
+            logger.info(commentSentSuccess.getText());
+            return true;
+        }else {
+            logger.info("Credit Memos Comment False !!!");
+            return false;
+        }
+    }
+
+
 }
