@@ -96,6 +96,18 @@ Feature: Reporting module features
       | dateFrom   | dateTo     |
       | 01/01/2022 | 31/12/2023 |
 
+  @ViewProductInShoppingCartsReport
+  Scenario:Reporting Manager should be able to see shopping cart-product in carts report
+    Given reporting manager navigate to product in carts page
+    When the page opened and report manager see the report
+    Then  product in cart should be displayed
+
+  @ViewTagsCustomersReport
+  Scenario:Reporting Manager should be able to see Tags-customers report
+    Given reporting manager navigate to Customers Tags page
+    When the page opened and report manager sees the report of customer
+    Then show customers Tags successful
+
 
   @SeeShoppingCart-AbandonedCartsReport
   Scenario: Reporting Manager should be able to see Shopping Cart - Abandoned carts Report
