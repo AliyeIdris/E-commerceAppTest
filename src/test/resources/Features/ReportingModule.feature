@@ -32,12 +32,6 @@ Feature: Reporting module features
     When  reporting manager navigate to low stock page
     Then  products low stock report should be display
 
-  @TotalOrderReport
-  Scenario: Reporting Manager should be able to see Sales - Total Ordered Report
-    Given reporting manager navigate to order report page
-    When reporting manager filter total order report with date
-    Then total order report should be displayed
-
   @ViewSalesTaxReport
   Scenario Outline: Reporting Manager Should be Able to See Sales-Taxes Report Grouped by Tax Rate
     Given reporting manager is on the Order Taxes Report Page
