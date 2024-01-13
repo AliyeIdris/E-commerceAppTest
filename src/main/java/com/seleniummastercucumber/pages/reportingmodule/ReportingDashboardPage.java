@@ -1,6 +1,5 @@
 package com.seleniummastercucumber.pages.reportingmodule;
 
-import com.seleniummastercucumber.pages.salesmodule.RefundsPage;
 import com.seleniummastercucumber.utility.FunctionLibrary;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -40,6 +39,21 @@ public class ReportingDashboardPage {
     List<WebElement> lowStockReport;
     @FindBy(xpath = "//span[text()='Orders']")
     WebElement ordersLink;
+    @FindBy(xpath = "//a/span[text()='Tax']")
+    WebElement taxLink;
+    @FindBy(xpath = "//span[text()='Customers']")
+    WebElement customersLink;
+    @FindBy(xpath = "//span[text()='Customers by orders total']")
+    WebElement customersByOrderTotalLink;
+    @FindBy(xpath = "//span[text()='New Accounts']")
+    WebElement newAccountsLink;
+    @FindBy(xpath = "//span[text()='Products Ordered']")
+    WebElement productsOrderedLink;
+    @FindBy(xpath = "//span[text()='Invoiced']")
+    WebElement invoicedLink;
+    @FindBy(xpath = "//span[text()='Coupons']")
+    WebElement couponsLink;
+
     public void openShippingPage() {
         functionLibrary.waitForElementVisible(reportsLink);
         actions.moveToElement(reportsLink).moveToElement(salesLink).moveToElement(shippingLink).click().perform();
@@ -62,4 +76,52 @@ public class ReportingDashboardPage {
         functionLibrary.waitForElementVisible(reportsLink);
         actions.moveToElement(reportsLink).moveToElement(salesLink).moveToElement(ordersLink).click().build().perform();
     }
+    public void navigateToTaxReportPage(){
+        functionLibrary.waitForElementVisible(reportsLink);
+        actions.moveToElement(reportsLink).perform();
+        functionLibrary.waitForElementVisible(salesLink);
+        actions.moveToElement(salesLink).perform();
+        functionLibrary.waitForElementVisible(taxLink);
+        taxLink.click();
+    }
+    public void navigateToCustomersOrderTotalPage(){
+        functionLibrary.waitForElementVisible(reportsLink);
+        actions.moveToElement(reportsLink).perform();
+        functionLibrary.waitForElementVisible(customersLink);
+        actions.moveToElement(customersLink).perform();
+        functionLibrary.waitForElementVisible(customersByOrderTotalLink);
+        customersByOrderTotalLink.click();
+    }
+    public void navigateToNewAccountsPage(){
+        functionLibrary.waitForElementVisible(reportsLink);
+        actions.moveToElement(reportsLink).perform();
+        functionLibrary.waitForElementVisible(customersLink);
+        actions.moveToElement(customersLink).perform();
+        functionLibrary.waitForElementVisible(newAccountsLink);
+        newAccountsLink.click();
+    }
+    public void navigateToProductsOrderedPage(){
+        functionLibrary.waitForElementVisible(reportsLink);
+        actions.moveToElement(reportsLink).perform();
+        functionLibrary.waitForElementVisible(productsLink);
+        actions.moveToElement(productsLink).moveToElement(productsOrderedLink).click(productsOrderedLink).build().perform();
+    }
+
+    public void navigateToInvoicedPage(){
+        functionLibrary.waitForElementVisible(reportsLink);
+        actions.moveToElement(reportsLink).perform();
+        functionLibrary.waitForElementVisible(salesLink);
+        actions.moveToElement(salesLink).perform();
+        functionLibrary.waitForElementVisible(invoicedLink);
+        invoicedLink.click();
+    }
+    public void navigateToCouponsPage(){
+        functionLibrary.waitForElementVisible(reportsLink);
+        actions.moveToElement(reportsLink).perform();
+        functionLibrary.waitForElementVisible(salesLink);
+        actions.moveToElement(salesLink).perform();
+        functionLibrary.waitForElementVisible(couponsLink);
+        couponsLink.click();
+    }
+
 }

@@ -10,7 +10,7 @@ Feature: Sales module features
       description: (You need to open a customer and manage shopping cart) -Aliye
       Given sales manager is on customer's shopping cart page "aliyeidiris@gmail.com"
       When sales manager empty Customer's Shopping Cart
-      Then sales manager should be able to manage customer's shopping cart successfully
+      Then sales manager managed shopping cart successfully
 
       @ManageInvoicesAndComment
       Scenario: Sales manager should be able to view invoices and add comments
@@ -42,3 +42,26 @@ Feature: Sales module features
         Given sales manager go to the shopping cart page with email "zubi@gmail.com"
         When sales manager update the existing shopping cart
         Then updated shopping cart info should be displayed
+
+        @ManageTaxRules
+        Scenario: Sales Manager should be able to manage add and update tax rules
+          description: (see Tax link under Store)
+          Given sales manager is on Manage Tax Rules page
+          When sales manager add tax rule
+          Then tax rule is added
+          And sales manager update added tax rule
+          Then sales manager added and updated tax rule successfully
+
+  @updateShipments
+  Scenario: Sales Manager should be able to update (
+              add shipment history and tracking information) shipments
+    Given sales manager on the dashboard page and can navigate to shipments page
+    When sales manager can view shipmentsList and random select one for update
+    And sales manager update shipments and send tracking information
+    Then sales manager sent tracking information and info should be displayed
+
+  @ViewCreditMemos
+  Scenario: Sales Manager should be able to view credit memos
+    Given sales manager is on the credit memos page
+    When sales manager view credit memos
+    Then Sales manager should be able to view credit memos successfully

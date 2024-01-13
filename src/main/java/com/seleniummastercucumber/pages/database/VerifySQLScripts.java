@@ -1,5 +1,7 @@
 package com.seleniummastercucumber.pages.database;
 
+import org.apache.log4j.Logger;
+
 import javax.sql.rowset.CachedRowSet;
 import javax.sql.rowset.RowSetProvider;
 import java.sql.Connection;
@@ -8,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class VerifySQLScripts {
+    Logger logger=Logger.getLogger(VerifySQLScripts.class.getName());
     public boolean getAddedSubCategoriesInfo(Connection connection, String subCategoryName){
         boolean isSubCategoryExist = false;
         Statement statement;
@@ -158,7 +161,7 @@ public class VerifySQLScripts {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        String selectUser = String.format("select entity_id,website_id,email,group_id from i9362596_mg2.mg_customer_entity where email '%s'", userEmail);
+        String selectUser = String.format("select entity_id,email from mg_customer_entity where email='%s'", userEmail);
         try {
             resultSet = statement.executeQuery(selectUser);
         } catch (SQLException e) {
@@ -185,10 +188,8 @@ public class VerifySQLScripts {
 
                 try {
                     int entity_id = cachedRowSet.getInt("entity_id");
-                    int website_id = cachedRowSet.getInt("website_id");
-                    String email = cachedRowSet.getNString("email");
-                    int group_id = cachedRowSet.getInt("group_id");
-                    System.out.println(String.format("entity_id=%s website_id=%s email=%s group_id=%s", entity_id, website_id, email, group_id));
+                    String email = cachedRowSet.getString("email");
+                    System.out.println(String.format("entity_id=%d email=%s", entity_id,email));
                     count = cachedRowSet.getRow();
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -200,5 +201,195 @@ public class VerifySQLScripts {
         }
 
     }
+    public boolean getCustomerInfo(Connection connection,String customerEmail){
+        Statement statement;
+        ResultSet resultSet;
+        CachedRowSet cachedRowSet;
+        try {
+            statement=connection.createStatement();
+            String sqlScriptForCustomer=String.format("Select * from mg_customer_entity where email='%s';",customerEmail);
+            resultSet=statement.executeQuery(sqlScriptForCustomer);
+            cachedRowSet=RowSetProvider.newFactory().createCachedRowSet();
+            cachedRowSet.populate(resultSet);
+            if (!cachedRowSet.next()){
+                logger.info("No record fund!");
+                return false;
+            }else {
+                int rowCount;
+                do {
+                    rowCount = cachedRowSet.getRow();
+                    int entityId = cachedRowSet.getInt("entity_id");
+                    String email = cachedRowSet.getString("email");
+                    String createDate = cachedRowSet.getString("created_at");
+                    if (rowCount>0 && email.equalsIgnoreCase(customerEmail)) {
+                        logger.info("Customer is found!");
+                        System.out.printf("Customer_Id: %d, Customer_Email: %s, Created Date: %s",
+                                entityId, email, createDate);
+                    } else {
+                        logger.info("Customer info does not match!!!");
+                    }
+                }while (cachedRowSet.next());
+                System.out.println("\nRow count is: "+rowCount);
+                return true;
+                }
 
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean getNewlyAddedCartRule(Connection connection,String cartRuleId) {
+        boolean isCartRuleNameExist = false;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        CachedRowSet cachedRowSet = null;
+
+        try {
+            cachedRowSet = RowSetProvider.newFactory().createCachedRowSet();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            statement = connection.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        String cartRuleSqlScript = String.format("select * from i9362596_mg2.mg_salesrule where  rule_id='%s';", cartRuleId);
+        try {
+            resultSet = statement.executeQuery(cartRuleSqlScript);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (resultSet == null) {
+            System.out.println("no records found");
+            return isCartRuleNameExist;
+        } else {
+            try {
+                cachedRowSet.populate(resultSet);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            int count = 0;
+            while (true) {
+                try {
+                    if (!cachedRowSet.next()) {
+                        break;
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    String rule_id = cachedRowSet.getString("rule_id");
+                    System.out.println(rule_id);
+                    count = cachedRowSet.getRow();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (count >= 1)
+                isCartRuleNameExist = true;
+            System.out.println(count + " row(s) returned");
+
+            return isCartRuleNameExist;
+        }
+    }
+
+    public boolean getAddedRootCategoriesInfo(Connection connection, String rootCategoryName) {
+        boolean isSubCategoryExist = false;
+        Statement statement;
+        ResultSet resultSet;
+        CachedRowSet cachedRowSet;
+        try {
+            statement = connection.createStatement();
+            String sqlScriptForSubCategory = String.format("select value_id,entity_id,value from i9362596_mg2." +
+                            "mg_catalog_category_entity_varchar where value='%s'"
+                    , rootCategoryName);
+            resultSet = statement.executeQuery(sqlScriptForSubCategory);
+            cachedRowSet = RowSetProvider.newFactory().createCachedRowSet();
+            if (resultSet == null) {
+                System.out.println("No records found");
+            } else {
+                cachedRowSet.populate(resultSet);
+                int rowCount = 0;
+                String value = "";
+                while (true) {
+                    if (!cachedRowSet.next()) {
+                        break;
+                    }
+                    int value_id = cachedRowSet.getInt("value_id");
+                    int entity_id = cachedRowSet.getInt("entity_id");
+                    value = cachedRowSet.getString("value");
+                    System.out.println(String.format("value_id=%d entity_id=%d value=%s", value_id, entity_id, value));
+                    rowCount = cachedRowSet.getRow();
+                }
+                System.out.println("row Count: " + rowCount);
+                if (rowCount >= 1 && value.equalsIgnoreCase(rootCategoryName)) {
+                    isSubCategoryExist = true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return isSubCategoryExist;
+
+    }
+
+    public boolean VerifyNewlyAddedStock(Connection connection, String productID) {
+        boolean isNewlyAddedStockExist = false;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        CachedRowSet cachedRowSet = null;
+        try {
+            cachedRowSet = RowSetProvider.newFactory().createCachedRowSet();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            statement = connection.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        String sqlScripAddedStocks = String.format("select * from i9362596_mg2.mg_cataloginventory_stock_status_idx where product_id='%s';", productID);
+        try {
+            resultSet = statement.executeQuery(sqlScripAddedStocks);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if (resultSet == null) {
+            System.out.println("No records found");
+            return isNewlyAddedStockExist;
+        } else {
+            try {
+                cachedRowSet.populate(resultSet);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            int rowCount = 0;
+            while (true) {
+                try {
+                    if (!cachedRowSet.next()) {
+                        break;
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    String productId = cachedRowSet.getString("product_id");
+                    System.out.println(productId);
+                    rowCount = cachedRowSet.getRow();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (rowCount >= 1) {
+                isNewlyAddedStockExist = true;
+                System.out.println(rowCount+"Row Return");
+            }
+            return isNewlyAddedStockExist;
+
+        }
+
+    }
 }

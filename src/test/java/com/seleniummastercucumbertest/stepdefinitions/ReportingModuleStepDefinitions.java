@@ -1,14 +1,14 @@
 package com.seleniummastercucumbertest.stepdefinitions;
 
+import com.seleniummastercucumber.pages.dashboardmodule.AdminDashboardPage;
+import com.seleniummastercucumber.pages.dashboardmodule.AdminLoginPage;
+import com.seleniummastercucumber.pages.dashboardmodule.AdminRole;
 import com.seleniummastercucumber.pages.reportingmodule.*;
+import com.seleniummastercucumber.utility.BasePage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import com.seleniummastercucumber.pages.dashboardmodule.AdminDashboardPage;
-import com.seleniummastercucumber.pages.dashboardmodule.AdminLoginPage;
-import com.seleniummastercucumber.pages.dashboardmodule.AdminRole;
-import com.seleniummastercucumber.utility.BasePage;
 import org.junit.Assert;
 
 public class ReportingModuleStepDefinitions extends BasePage {
@@ -19,6 +19,16 @@ public class ReportingModuleStepDefinitions extends BasePage {
     DownloadsPage downloadsPage =new DownloadsPage(driver);
     ProductsReviewsPage reviewsPage=new ProductsReviewsPage(driver);
     OrderReportPage orderReportPage=new OrderReportPage(driver);
+    TaxReportPage taxReportPage=new TaxReportPage(driver);
+    CustomersOrdersTotalPage customersOrdersTotalPage=new CustomersOrdersTotalPage(driver);
+    NewAccountsPage newAccountsPage=new NewAccountsPage(driver);
+    ProductsOrderedPage productsOrderedPage=new ProductsOrderedPage(driver);
+    ProductsMostViewedPage productsMostViewedPage=new ProductsMostViewedPage(driver);
+    InvoicedPage invoicedPage=new InvoicedPage(driver);
+    CouponsPage couponsPage=new CouponsPage(driver);
+    ProductInCartPage productInCartPage=new ProductInCartPage(driver);
+    CustomersTagsPage customersTagsPage=new CustomersTagsPage(driver);
+
      @Given("report manager login")
      public void reportManagerLogin() {
          adminLoginPage.login(AdminRole.REPORTINGMANAGER);
@@ -98,4 +108,166 @@ public class ReportingModuleStepDefinitions extends BasePage {
          orderReportPage.verifyDisplayedTotalOrderReport();
     }
 
+    //*************************** View Tax Report Grouped By Tax Rate ***************************
+    @Given("reporting manager is on the Order Taxes Report Page")
+    public void reportingManagerIsOnTheOrderTaxesReportPage() {
+         dashboardPage.navigateToTaxReportPage();
+    }
+
+    @When("reporting manager fills the filter options with {string} and {string}")
+    public void reportingManagerFillsTheFilterOptionsWithAnd(String dateFrom, String dateTo) {
+         taxReportPage.filterTaxReportDate(dateFrom,dateTo);
+    }
+
+    @Then("reporting manager should be able to see the Sales-Taxes Report Grouped By Tax Rate")
+    public void reportingManagerShouldBeAbleToSeeTheSalesTaxesReportGroupedByTaxRate() {
+         Assert.assertTrue(taxReportPage.verifyTaxReportViewedSuccessfully());
+    }
+    //*************************** View Customers By Order Total ***************************
+    @Given("reporting manager is on the Customers by Orders Total page")
+    public void reportingManagerIsOnTheCustomersByOrdersTotalPage() {
+         dashboardPage.navigateToCustomersOrderTotalPage();
+    }
+
+    @When("reporting manager apply filters for the report")
+    public void reportingManagerApplyFiltersForTheReport() {
+         String startDate="1/10/2023";
+         String endDate="31/12/2025";
+         customersOrdersTotalPage.applyFilterToReport(startDate,endDate);
+    }
+
+    @Then("reporting manager should be able to see Customers - Customers by Orders Total Report")
+    public void reportingManagerShouldBeAbleToSeeCustomersCustomersByOrdersTotalReport() {
+         customersOrdersTotalPage.verifyViewCustomersByTotalOrdersReport();
+    }
+
+    @Given("reporting manager is on the New Accounts page")
+    public void reportingManagerIsOnTheNewAccountsPage() {
+         dashboardPage.navigateToNewAccountsPage();
+    }
+
+    @When("reporting manager filter customer report and search for it")
+    public void reportingManagerFilterCustomerReportAndSearchForIt() {
+         newAccountsPage.applyFilterToReportNewAccounts("01/01/2022","12/28/2023");
+    }
+
+    @Then("reporting manager should be able to see Customers Report-New Accounts Report")
+    public void reportingManagerShouldBeAbleToSeeCustomersReportNewAccountsReport() {
+         newAccountsPage.verifyViewNewCustomerReport();
+    }
+
+    @Given("reporting manager is on the Products Ordered page")
+    public void reportingManagerIsOnTheProductsOrderedPage() {
+         dashboardPage.navigateToProductsOrderedPage();
+    }
+
+    @When("reporting manager filter Products Ordered Report by date {string} and{string}")
+    public void reportingManagerFilterProductsOrderedReportByDateAnd(String arg0, String arg1) {
+     productsOrderedPage.viewProductsOrderedReport(arg0,arg1);
+    }
+
+    @Then("reporting manager should be able to see Products Ordered Report")
+    public void reportingManagerShouldBeAbleToSeeProductsOrderedReport() {
+         productsOrderedPage.verifyProductsOrderedReportDisplayed();
+    }
+
+    @When("reporting manager navigate to most viewed page data with {string} and{string}")
+    public void reportingManagerNavigateToMostViewedPageDataWithAnd(String arg0, String arg1) {
+        productsMostViewedPage.mostViewedProducts(arg0,arg1);
+    }
+
+    @Then("most viewed products should be displayed")
+    public void mostViewedProductsShouldBeDisplayed() {
+        Assert.assertTrue(productsMostViewedPage.checkMostViewedProducts());
+    }
+
+//abdugeni *****************able to see Sales - Total Invoiced vs Paid Report
+    @Given("Reporting Manager Navigate To Total Invoiced vs Paid Report page")
+    public void reportingManagerNavigateToTotalInvoicedVsPaidReportPage() {
+         dashboardPage.navigateToInvoicedPage();
+    }
+
+    @When("Fill Out Criteria For Search")
+    public void fillOutCriteriaForSearch() {
+         invoicedPage.showReport("27","Last Invoice Created Date","Month",
+                 "01/08/2014","01/08/2024");
+    }
+
+    @Then("Reporting Manager Can see Sales - Total Invoiced vs Paid Report")
+    public void reportingManagerCanSeeSalesTotalInvoicedVsPaidReport() {
+         Assert.assertTrue(invoicedPage.verifyReport());
+    }
+
+// abdugeni ********************can see coupons usage report
+
+    @Given("The reporting manager opens coupons page")
+    public void theReportingManagerOpensCouponsPage() {
+         dashboardPage.navigateToCouponsPage();
+    }
+
+    @When("the coupons report should be displayed")
+    public void theCouponsReportShouldBeDisplayed() {
+         couponsPage.isSalesCouponsUsagePageDisplayed();
+    }
+
+    @And("the manager fills in the filter details{string} {string} {string}")
+    public void theManagerFillsInTheFilterDetails(String arg0, String arg1, String arg2) {
+        couponsPage.filterCouponsUsageReports(arg0,arg1,arg2);
+    }
+
+    @Then("no records found displayed")
+    public void noRecordsFoundDisplayed() {
+         couponsPage.verifyCouponsUsageReport();
+    }
+
+    //mihrigul
+    @Given("reporting manager navigate to product in carts page")
+    public void reportingManagerNavigateToProductInCartsPage() {
+         productInCartPage.navigateToProductInCartsPage();
+    }
+
+    @When("the page opened and report manager see the report")
+    public void thePageOpenedAndReportManagerSeeTheReport() {
+         productInCartPage.viewProductInCarts();
+    }
+
+    @Then("product in cart should be displayed")
+    public void productInCartShouldBeDisplayed() {
+         productInCartPage.verifyViewProductsInShoppingCartsReport();
+    }
+
+    @Given("reporting manager navigate to Customers Tags page")
+    public void reportingManagerNavigateToCustomersTagsPage() {
+         customersTagsPage.navigateToCustomersTagsPage();
+    }
+
+    @When("the page opened and report manager sees the report of customer")
+    public void thePageOpenedAndReportManagerSeesTheReportOfCustomer() {
+         customersTagsPage.viewTagsCustomersReport();
+    }
+
+    @Then("show customers Tags successful")
+    public void showCustomersTagsSuccessful() {customersTagsPage.verifyViewCustomersTagsReport(); }
+
+// İhram
+    @Given("reportingManagerIsNavigateToTheAbandonedPage")
+    public void reportingmanagerisnavigatetotheabandonedpage() {
+        reportViewPage.navigateToTheReport();
+
+    }
+
+    @When("Reporting Manager Navigate to The Reports Than Shopping Cart And Choose Abandoned carts")
+    public void ReportingManagerNavigateToTheReportsThanShoppingCartAndChooseAbandonedCarts() {
+
+        reportViewPage.clickReportMethod();
+    }
+
+    @Then("Reporting Manager Should Get Report From Abandoned Carts")
+    public void reportingManagerShouldGetReportFromAbandonedCarts() {
+        reportViewPage.seeAbandonedCartsVerify();
+    }
 }
+
+
+
+

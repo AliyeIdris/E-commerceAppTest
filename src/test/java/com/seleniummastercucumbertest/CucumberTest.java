@@ -14,8 +14,8 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         plugin = {"pretty","html:target/cucumber-testReport.html", "junit:target/cucumber-results.xml" },
 
-        features = {"classpath:features/reportingmodule.feature"},
-        tags="@TotalOrderReport"
+        features = {"classpath:Features/"},
+        tags="@VerifyNewlyAddedCustomer"
 )
 public class CucumberTest {
 }
