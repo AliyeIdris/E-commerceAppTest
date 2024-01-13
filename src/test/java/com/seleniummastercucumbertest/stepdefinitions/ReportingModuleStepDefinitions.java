@@ -249,13 +249,17 @@ public class ReportingModuleStepDefinitions extends BasePage {
     @Then("show customers Tags successful")
     public void showCustomersTagsSuccessful() {customersTagsPage.verifyViewCustomersTagsReport(); }
 
-    @Given("reportingManagerIsOnTheDashboardPage")
+
+    @Given("reportingManagerIsNavigateToTheAbandonedPage")
+    public void reportingmanagerisnavigatetotheabandonedpage() {
+        reportViewPage.navigateToTheReport();
+
+    }
 
     @When("Reporting Manager Navigate to The Reports Than Shopping Cart And Choose Abandoned carts")
     public void ReportingManagerNavigateToTheReportsThanShoppingCartAndChooseAbandonedCarts() {
 
-            reportViewPage.navigateToTheReport();
-
+        reportViewPage.clickReportMethod();
     }
 
     @Then("Reporting Manager Should Get Report From Abandoned Carts")
@@ -263,5 +267,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
         reportViewPage.seeAbandonedCartsVerify();
     }
 }
+
+
 
 

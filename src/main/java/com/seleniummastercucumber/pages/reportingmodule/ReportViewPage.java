@@ -37,23 +37,35 @@ public class ReportViewPage {
     WebElement ShoppingCartButton;
     @FindBy(xpath ="//span[text()='Abandoned carts']")
     WebElement AbandonedCartsButton;
+    @FindBy(xpath = "//td[contains(text(),'busra.uygur608@gmail.com')]")
+    WebElement reportEmail;
 
-    @FindBy(xpath = "//h3[contains(@class, 'icon-head') and contains(@class, 'head-report-shopcart-abandoned')]")
+    @FindBy(xpath = "//h1[contains(text(),'Access denied')]")
     WebElement VerifyMassage;
+    @FindBy(xpath = "//class[contains(text(),'Access denied')]")
+    WebElement VerifyMassageNote;
 
     public void navigateToTheReport(){
         ReportsButton.click();
         ShoppingCartButton.click();
         AbandonedCartsButton.click();
 
+
+    }
+    public void clickReportMethod(){
+        reportEmail.click();
     }
 
     public boolean seeAbandonedCartsVerify() {
         functionLibrary.waitForElementVisible(VerifyMassage);
-        if (VerifyMassage.isDisplayed())
-            return true;
-        else return false;
+        if (VerifyMassage.isDisplayed()) {
+            System.out.println("There is A Bug");
+        }
+        return false;
     }
+
+
+
 
 
 
