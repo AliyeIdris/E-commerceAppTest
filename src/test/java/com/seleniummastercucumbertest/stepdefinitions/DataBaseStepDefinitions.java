@@ -154,13 +154,13 @@ public class DataBaseStepDefinitions {
         verifySQLScripts = new VerifySQLScripts();
     }
 
-    @When("Execute SQL query to get stock information with stock id {}")
+    @When("Execute SQL query to get stock information with stock id {string}")
     public void executeSQLQueryToGetStockInformationWith(String stockId) {
      isNewlyAddedStockExist= verifySQLScripts.VerifyNewlyAddedStock(connection,stockId);
     }
     @Then("The database returns stock information with details")
     public void theDatabaseReturnsStockInformationWithDetails() {
-        Assert.assertTrue("get product successfully",isNewlyAddedStockExist);
+     Assert.assertTrue(isNewlyAddedStockExist);
     }
 
 

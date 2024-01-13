@@ -344,18 +344,18 @@ public class VerifySQLScripts {
         try {
             cachedRowSet = RowSetProvider.newFactory().createCachedRowSet();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         try {
             statement = connection.createStatement();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
-        String sqlScripAddedStocks = String.format("select *from i9362596_mg2.mg_cataloginventory_stock_status_idx where product_id='%s';", productID);
+        String sqlScripAddedStocks = String.format("select * from i9362596_mg2.mg_cataloginventory_stock_status_idx where product_id='%s';", productID);
         try {
             resultSet = statement.executeQuery(sqlScripAddedStocks);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         if (resultSet == null) {
             System.out.println("No records found");
@@ -373,21 +373,19 @@ public class VerifySQLScripts {
                         break;
                     }
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
                 try {
                     String productId = cachedRowSet.getString("product_id");
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-                try {
+                    System.out.println(productId);
                     rowCount = cachedRowSet.getRow();
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             }
             if (rowCount >= 1) {
                 isNewlyAddedStockExist = true;
+                System.out.println(rowCount+"Row Return");
             }
             return isNewlyAddedStockExist;
 
