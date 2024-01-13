@@ -66,3 +66,58 @@ Feature: Reporting module features
       Given reporting manager should be navigate to dashboard page
       When reporting manager see tags for products
       Then products tag should be visible on the reporting page
+
+
+  @ProductsOrderedReport
+  Scenario Outline: Reporting Manager should be able to see Products - Products Ordered Report
+    Given reporting manager is on the Products Ordered page
+    When reporting manager filter Products Ordered Report by date "<dateFrom>" and"<dateTo>"
+    Then reporting manager should be able to see Products Ordered Report
+    Examples:
+      | dateFrom   | dateTo     |
+      | 01/01/2022 | 04/01/2024 |
+
+#abdugeni
+  Scenario: Reporting Manager should be able to see Sales - Total Invoiced vs Paid Report
+    Given  Reporting Manager Navigate To Total Invoiced vs Paid Report page
+    When   Fill Out Criteria For Search
+    Then Reporting Manager Can see Sales - Total Invoiced vs Paid Report
+
+  Scenario Outline: Reporting manager can see coupons usage report
+    Given The reporting manager opens coupons page
+    When the coupons report should be displayed
+    And  the manager fills in the filter details"<websiteName>" "<fromDate>" "<toDate>"
+    Then no records found displayed
+
+    Examples:
+      | websiteName  | fromDate   | toDate     |
+      | All Websites | 06/28/2023 | 12/28/2023|
+#*******
+
+  @MostViewedProductsReport
+  Scenario Outline: Reporting Manager should be able to see Products Most Viewed Report
+    Given report manager is on the dashboard page
+    When reporting manager navigate to most viewed page data with "<dateFrom>" and"<dateTo>"
+    Then most viewed products should be displayed
+    Examples:
+      | dateFrom   | dateTo     |
+      | 01/01/2022 | 31/12/2023 |
+
+  @ViewProductInShoppingCartsReport
+  Scenario:Reporting Manager should be able to see shopping cart-product in carts report
+    Given reporting manager navigate to product in carts page
+    When the page opened and report manager see the report
+    Then  product in cart should be displayed
+
+  @ViewTagsCustomersReport
+  Scenario:Reporting Manager should be able to see Tags-customers report
+    Given reporting manager navigate to Customers Tags page
+    When the page opened and report manager sees the report of customer
+    Then show customers Tags successful
+
+
+  @SeeShoppingCart-AbandonedCartsReport
+  Scenario: Reporting Manager should be able to see Shopping Cart - Abandoned carts Report
+    Given reportingManagerIsOnTheDashboardPage
+    When  Reporting Manager Navigate to The Reports Than Shopping Cart And Choose Abandoned carts
+    Then Reporting Manager Should Get Report From Abandoned Carts

@@ -47,6 +47,13 @@ public class ReportingDashboardPage {
     WebElement customersByOrderTotalLink;
     @FindBy(xpath = "//span[text()='New Accounts']")
     WebElement newAccountsLink;
+    @FindBy(xpath = "//span[text()='Products Ordered']")
+    WebElement productsOrderedLink;
+    @FindBy(xpath = "//span[text()='Invoiced']")
+    WebElement invoicedLink;
+    @FindBy(xpath = "//span[text()='Coupons']")
+    WebElement couponsLink;
+
     public void openShippingPage() {
         functionLibrary.waitForElementVisible(reportsLink);
         actions.moveToElement(reportsLink).moveToElement(salesLink).moveToElement(shippingLink).click().perform();
@@ -92,6 +99,29 @@ public class ReportingDashboardPage {
         actions.moveToElement(customersLink).perform();
         functionLibrary.waitForElementVisible(newAccountsLink);
         newAccountsLink.click();
+    }
+    public void navigateToProductsOrderedPage(){
+        functionLibrary.waitForElementVisible(reportsLink);
+        actions.moveToElement(reportsLink).perform();
+        functionLibrary.waitForElementVisible(productsLink);
+        actions.moveToElement(productsLink).moveToElement(productsOrderedLink).click(productsOrderedLink).build().perform();
+    }
+
+    public void navigateToInvoicedPage(){
+        functionLibrary.waitForElementVisible(reportsLink);
+        actions.moveToElement(reportsLink).perform();
+        functionLibrary.waitForElementVisible(salesLink);
+        actions.moveToElement(salesLink).perform();
+        functionLibrary.waitForElementVisible(invoicedLink);
+        invoicedLink.click();
+    }
+    public void navigateToCouponsPage(){
+        functionLibrary.waitForElementVisible(reportsLink);
+        actions.moveToElement(reportsLink).perform();
+        functionLibrary.waitForElementVisible(salesLink);
+        actions.moveToElement(salesLink).perform();
+        functionLibrary.waitForElementVisible(couponsLink);
+        couponsLink.click();
     }
 
 }
