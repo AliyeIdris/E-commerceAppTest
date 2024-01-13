@@ -47,6 +47,7 @@ public class ReportViewPage {
     @FindBy(xpath = "//class[contains(text(),'Access denied')]")
     WebElement VerifyMassageNote;
 
+    //İhram ferhat
     public void navigateToTheReport(){
         ReportsButton.click();
         ShoppingCartButton.click();
