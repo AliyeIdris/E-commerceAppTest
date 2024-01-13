@@ -29,11 +29,11 @@ Feature: Sales module features
       | fromDate   | toDate     |
       | 10/20/2023 | 12/12/2023 |
 
-  @viewRefundsReports
+  @viewRefundsReports     #Xamxinur.A
   Scenario: Sales Manager should be able to view refunds in the Reports
     Given sales manager is on the refunds page
-    When sales manager select on from and to date fill and click on show report
-    Then total refunded report should be display with information
+    When sales manager select on from and to date field and click on show report
+    Then total refunded report should be displayed with information
 
       @UpdateShoppingCart   #Safiya
       Scenario: Sales Manager should be able to manage update an existing shopping cart for customers.
