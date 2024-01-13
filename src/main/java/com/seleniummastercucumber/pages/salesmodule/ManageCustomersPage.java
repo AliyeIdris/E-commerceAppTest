@@ -61,6 +61,7 @@ public class ManageCustomersPage {
     @FindAll(@FindBy(xpath = "//dd[@class='last']/div/select/option"))
     List<WebElement> sizeSelectOptions;
     String eachSize;
+
     int linkSize;
 
     public int getLinkSize() {
@@ -137,7 +138,6 @@ public class ManageCustomersPage {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        functionLibrary.waitForElementVisible(editIcon);
         editIcon.click();
         functionLibrary.waitForElementVisible(shoppingCartLink);
         shoppingCartLink.click();
@@ -146,22 +146,7 @@ public class ManageCustomersPage {
     public void updateShoppingCart(int quantityCount) {
         functionLibrary.waitForElementVisible(configureIcon);
         configureIcon.click();
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        select = new Select(sizeSelectField);
-        for (WebElement element : sizeSelectOptions) {
-            if (element.getText().equalsIgnoreCase("XS")) {
-                select.selectByVisibleText("XL");
-                eachSize = "XL";
-                break;
-            } else {
-                select.selectByVisibleText("XS");
-                eachSize = "XS";
-            }
-        }
+
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -174,7 +159,7 @@ public class ManageCustomersPage {
         driver.navigate().refresh();
     }
 
-    public boolean verifyUpdatedShoppingCart() {
+    public boolean verifyUpdatedShoppingCart(int quantityCount) {
         functionLibrary.waitForElementVisible(shoppingCartLink);
         shoppingCartLink.click();
         try {
@@ -182,11 +167,10 @@ public class ManageCustomersPage {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        WebElement selectedSizePath = driver.findElement(By.xpath(String.format("//div[@class='bundle-product-options']/dl/dd[contains(text(),'%s')]", eachSize)));
-
-        if (selectedSizePath.isDisplayed()) {
-            logger.info("Shopping cart is Updated  ");
-            return true;
+        WebElement updatedQuantityCount=driver.findElement(By.xpath(String.format("//table[@class='data']/tbody/tr/td[contains(text(),'%d')]",quantityCount)));
+        if (updatedQuantityCount.isDisplayed()) {
+            logger.info("Quantity of product updated to " +quantityCount);
+               return true;
         } else {
             logger.info("Update failed ");
             return false;
