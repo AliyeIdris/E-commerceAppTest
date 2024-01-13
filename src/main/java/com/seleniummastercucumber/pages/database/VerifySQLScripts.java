@@ -351,7 +351,7 @@ public class VerifySQLScripts {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        String sqlScripAddedStocks = String.format("select *from mg_cataloginventory_stock_status_idx where product_id='%s';", productID);
+        String sqlScripAddedStocks = String.format("select *from i9362596_mg2.mg_cataloginventory_stock_status_idx where product_id='%s';", productID);
         try {
             resultSet = statement.executeQuery(sqlScripAddedStocks);
         } catch (SQLException e) {
