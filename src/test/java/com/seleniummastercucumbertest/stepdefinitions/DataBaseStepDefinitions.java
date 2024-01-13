@@ -35,6 +35,7 @@ public class DataBaseStepDefinitions {
     boolean isCustomerAdded;
     boolean isCartRuleAdded;
     boolean isRootCategoryExist;
+    boolean isNewlyAddedStockExist;
 
     @Before
     public void beforeDatabaseTest(Scenario scenario){
@@ -144,4 +145,24 @@ public class DataBaseStepDefinitions {
         dbConnection.closeDataBaseConnection(connection);
         scenario.log("Connection is closed!");
     }
+
+
+    @Given("User has valid database connection and ready to test")
+    public void UserHasValidDatabaseConnectionAndReadyToTest() {
+        connection = dbConnection.connectToDataBaseServer(dbUrl, dbPort, username, password, dbName
+                , ConnectionType.MYSQL);
+        verifySQLScripts = new VerifySQLScripts();
+    }
+
+    @When("Execute SQL query to get stock information with stock id {string}")
+    public void executeSQLQueryToGetStockInformationWith(String stockId) {
+     isNewlyAddedStockExist= verifySQLScripts.VerifyNewlyAddedStock(connection,stockId);
+    }
+    @Then("The database returns stock information with details")
+    public void theDatabaseReturnsStockInformationWithDetails() {
+     Assert.assertTrue(isNewlyAddedStockExist);
+    }
+
+
+
 }
