@@ -14,6 +14,7 @@ public class ProductsOrderedPage {
     Logger logger;
 
     public ProductsOrderedPage(WebDriver driver) {
+        this.driver=driver;
         PageFactory.initElements(driver,this);
         functionLibrary=new FunctionLibrary(driver);
         logger=Logger.getLogger(ProductsOrderedPage.class.getName());

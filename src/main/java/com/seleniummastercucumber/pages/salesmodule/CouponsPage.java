@@ -1,6 +1,7 @@
 package com.seleniummastercucumber.pages.salesmodule;
 
 import com.seleniummastercucumber.utility.FunctionLibrary;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -14,12 +15,14 @@ public class CouponsPage {
     WebDriver driver;
     FunctionLibrary functionLibrary;
     Actions actions;
+    Logger logger;
 
     public CouponsPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver,this);
         functionLibrary=new FunctionLibrary(driver);
         actions=new Actions(driver);
+        logger=Logger.getLogger(CouponsPage.class.getName());
     }
     @FindBy(xpath = "//span[text()='Reports']")
     WebElement Reports;
@@ -56,7 +59,7 @@ public class CouponsPage {
     }
     public boolean verifyCouponsReports(){
         if (verifyShowReport1.size()>=1);
-        System.out.println("Coupons Usage Report is disply");
+        logger.info("Coupons Usage Report is disply");
         return true;
     }
 }

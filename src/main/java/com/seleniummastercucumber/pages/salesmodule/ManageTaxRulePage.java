@@ -19,7 +19,15 @@ public class ManageTaxRulePage {
     Logger logger;
     Actions actions;
     Select select;
-    Random random;
+
+    public ManageTaxRulePage(WebDriver driver) {
+        this.driver=driver;
+        PageFactory.initElements(driver,this);
+        functionLibrary=new FunctionLibrary(driver);
+        logger=Logger.getLogger(ManageTaxRulePage.class);
+        actions=new Actions(driver);
+
+    }
 
     @FindBy(xpath = "//span[text()='Sales']")
     WebElement salesTab;
@@ -53,17 +61,6 @@ public class ManageTaxRulePage {
     WebElement searchButton;
     @FindBy(xpath = "//span[text()='Name']")
     WebElement nameFilter;
-    @FindAll(@FindBy (xpath = "//table[@id='taxRuleGrid_table']//tbody/tr"))
-    WebElement nameFilteredRuleList;
-
-    public ManageTaxRulePage(WebDriver driver) {
-        this.driver=driver;
-        PageFactory.initElements(driver,this);
-        functionLibrary=new FunctionLibrary(driver);
-        logger=Logger.getLogger(ManageTaxRulePage.class);
-        actions=new Actions(driver);
-
-    }
 
     public void navigateToManageTaxRulePage() {
         functionLibrary.waitForElementVisible(salesTab);
@@ -127,7 +124,8 @@ public class ManageTaxRulePage {
                 break;
             }
 
-        }return true;
+        }
+        return true;
     }
     public void updateAddedTaxRule(String taxRuleName, int customerIndexNumber, int productIndexNumber,
                                    int taxNumber, int number,String nameForFilter,String updateMessage){
