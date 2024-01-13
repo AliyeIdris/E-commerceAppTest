@@ -61,16 +61,12 @@ public class CustomersTagsPage {
         functionLibrary.waitForElementVisible(showTagsLink);
         actions.moveToElement(showTagsLink).click().build().perform();
     }
-    public boolean verifyViewCustomersTagsReport(){
-        if (tagName.isDisplayed()){
+    public boolean verifyViewCustomersTagsReport() {
+        if (tagName.isDisplayed()) {
             logger.info("See customers tags report successfully!");
             return true;
-        }else{
+        } else
             logger.info("There are no customers tags !");
-        }
-            return false;
-
+        return false;
     }
-
-
 }

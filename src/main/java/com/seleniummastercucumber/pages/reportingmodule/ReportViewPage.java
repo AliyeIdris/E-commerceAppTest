@@ -14,8 +14,6 @@ public class ReportViewPage {
     WebDriver driver;
     FunctionLibrary functionLibrary;
     Actions actions;
-    Logger logger;
-    ScreenShotUtility screenShotUtility;
 
     public ReportViewPage(WebDriver driver) {
         this.driver = driver;
@@ -44,16 +42,12 @@ public class ReportViewPage {
 
     @FindBy(xpath = "//h1[contains(text(),'Access denied')]")
     WebElement VerifyMassage;
-    @FindBy(xpath = "//class[contains(text(),'Access denied')]")
-    WebElement VerifyMassageNote;
 
     //İhram
     public void navigateToTheReport(){
         ReportsButton.click();
         ShoppingCartButton.click();
         AbandonedCartsButton.click();
-
-
     }
     public void clickReportMethod(){
         reportEmail.click();
@@ -63,16 +57,11 @@ public class ReportViewPage {
         functionLibrary.waitForElementVisible(VerifyMassage);
         if (VerifyMassage.isDisplayed()) {
             System.out.println("There is A Bug");
+            return true;
+        }else {
+            return false;
         }
-        return false;
     }
-
-
-
-
-
-
-
     public void viewTotalShippedReport(String dateFrom, String dateTo){
         functionLibrary.waitForElementVisible(shippingReportDateFrom);
         shippingReportDateFrom.sendKeys(dateFrom);
@@ -83,8 +72,6 @@ public class ReportViewPage {
     }
     public boolean confirmIsReportAppeared(){
         functionLibrary.waitForElementVisible(totalShipped);
-        if (totalShipped.isDisplayed())
-            return true;
-        else return false;
+        return totalShipped.isDisplayed();
     }
 }

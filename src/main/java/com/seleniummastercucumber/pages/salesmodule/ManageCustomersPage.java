@@ -23,6 +23,13 @@ public class ManageCustomersPage {
     Actions actions;
     Logger logger;
     Select select;
+    public ManageCustomersPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+        functionLibrary = new FunctionLibrary(driver);
+        actions = new Actions(driver);
+        logger = Logger.getLogger(ManageCustomersPage.class.getName());
+    }
     @FindBy(xpath = "(//span[text()='Customers'])[1]")
     WebElement customersMenu;
     @FindBy(xpath = "//span[text()='Manage Customers']")
@@ -47,26 +54,15 @@ public class ManageCustomersPage {
     WebElement configureIcon;
     @FindBy(id = "attribute180")
     WebElement sizeSelectField;
-    @FindBy(xpath = "//option[contains(text(),'XL')]")
-    WebElement siteType;
     @FindBy(xpath = "//span[text()='OK']")
     WebElement okButton;
     @FindBy(id = "product_composite_configure_input_qty")
     WebElement quantity;
     @FindAll(@FindBy(xpath = "//dd[@class='last']/div/select/option"))
     List<WebElement> sizeSelectOptions;
-    @FindBy(id = "product_composite_configure_iframe")
-    WebElement iframe;
     String eachSize;
 
     int linkSize;
-    public ManageCustomersPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-        functionLibrary = new FunctionLibrary(driver);
-        actions = new Actions(driver);
-        logger = Logger.getLogger(ManageCustomersPage.class.getName());
-    }
 
     public int getLinkSize() {
         return linkSize;

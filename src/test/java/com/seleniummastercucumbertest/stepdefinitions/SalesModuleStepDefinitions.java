@@ -57,10 +57,6 @@ public class SalesModuleStepDefinitions extends BasePage {
         manageCustomersPage.verifyManageShoppingCart();
     }
 
-    @Given("manager bot to product page")
-    public void managerGotToProductPage() {
-    }
-
     @Given("sales manager is on the reports page")
     public void salesManagerIsOnTheReportsPage() {
         couponsPage.openReportsPage();
