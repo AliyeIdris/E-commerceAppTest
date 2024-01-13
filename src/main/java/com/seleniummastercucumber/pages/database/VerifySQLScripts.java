@@ -335,4 +335,63 @@ public class VerifySQLScripts {
         return isSubCategoryExist;
 
     }
+
+    public boolean VerifyNewlyAddedStock(Connection connection, String productID) {
+        boolean isNewlyAddedStockExist = false;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        CachedRowSet cachedRowSet = null;
+        try {
+            cachedRowSet = RowSetProvider.newFactory().createCachedRowSet();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            statement = connection.createStatement();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        String sqlScripAddedStocks = String.format("select *from mg_cataloginventory_stock_status_idx where product_id='%s';", productID);
+        try {
+            resultSet = statement.executeQuery(sqlScripAddedStocks);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        if (resultSet == null) {
+            System.out.println("No records found");
+            return isNewlyAddedStockExist;
+        } else {
+            try {
+                cachedRowSet.populate(resultSet);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            int rowCount = 0;
+            while (true) {
+                try {
+                    if (!cachedRowSet.next()) {
+                        break;
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                try {
+                    String productId = cachedRowSet.getString("product_id");
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                try {
+                    rowCount = cachedRowSet.getRow();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            if (rowCount >= 1) {
+                isNewlyAddedStockExist = true;
+            }
+            return isNewlyAddedStockExist;
+
+        }
+
+    }
 }
