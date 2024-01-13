@@ -15,6 +15,7 @@ public class NewAccountsPage {
     Logger logger;
     Actions actions;
     public NewAccountsPage(WebDriver driver) {
+        this.driver=driver;
         PageFactory.initElements(driver, this);
         functionLibrary = new FunctionLibrary(driver);
         logger = Logger.getLogger(CustomersOrdersTotalPage.class.getName());

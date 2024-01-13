@@ -17,7 +17,6 @@ Feature: Reporting module features
 
   @ManageProductsDownloadsReport
   Scenario: Reporting manager should be able to see products downloads reports
-    Given reporting manager is on the admin dashboard page
     When reporting manager downloads the existing reports
     Then Products reports should be see able
 
@@ -84,7 +83,7 @@ Feature: Reporting module features
 
     Examples:
       | websiteName  | fromDate   | toDate     |
-      | All Websites | 06/28/2023 | 12/28/2023|
+      | All Websites | 06/28/2023 | 12/28/2023 |
 #*******
 
   @MostViewedProductsReport

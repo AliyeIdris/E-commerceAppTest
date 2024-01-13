@@ -5,19 +5,18 @@ Feature: Sales module features
     Given sales manager login
     And sales manager on the dashboard page
 
-    @ManageShoppingCart
-    Scenario: Sales Manager should be able to manage view shopping cart for customers.
-      description: (You need to open a customer and manage shopping cart) -Aliye
-      Given sales manager is on customer's shopping cart page "aliyeidiris@gmail.com"
-      When sales manager empty Customer's Shopping Cart
-      Then sales manager managed shopping cart successfully
+  @ManageShoppingCart
+  Scenario: Sales Manager should be able to manage view shopping cart for customers.
+  description: (You need to open a customer and manage shopping cart) -Aliye
+    Given sales manager is on customer's shopping cart page "aliyeidiris@gmail.com"
+    When sales manager empty Customer's Shopping Cart
+    Then sales manager managed shopping cart successfully
 
-      @ManageInvoicesAndComment
-      Scenario: Sales manager should be able to view invoices and add comments
-        Given Sales manager is on the dashboard page and invoices are should be existing
-        When Sales manager views invoices and adds comments
-        Then Sales manager should be able to view invoices and add comments successfully
-
+  @ManageInvoicesAndComment
+  Scenario: Sales manager should be able to view invoices and add comments
+    Given Sales manager is on the dashboard page and invoices are should be existing
+    When Sales manager views invoices and adds comments
+    Then Sales manager should be able to view invoices and add comments successfully
 
 
   @viewCouponsReports
@@ -27,34 +26,34 @@ Feature: Sales module features
     Then Total coupons Report page should display with information
 
     Examples:
-      | fromDate  | toDate    |
+      | fromDate   | toDate     |
       | 10/20/2023 | 12/12/2023 |
 
-    @viewRefundsReports
-    Scenario: Sales Manager should be able to view refunds in the Reports
-      Given sales manager is on the refunds page
-      When sales manager select on from and to date fill and click on show report
-      Then total refunded report should be display with information
+  @viewRefundsReports
+  Scenario: Sales Manager should be able to view refunds in the Reports
+    Given sales manager is on the refunds page
+    When sales manager select on from and to date fill and click on show report
+    Then total refunded report should be display with information
 
-      @UpdateShoppingCart
-      Scenario: Sales Manager should be able to manage update an existing shopping cart for customers.
-      (You need to open a customer and manage shopping cart)
-        Given sales manager go to the shopping cart page with email "Jerry@gmail.com"
-        When sales manager update the existing shopping cart
-        Then updated shopping cart info should be displayed
+  @UpdateShoppingCart
+  Scenario: Sales Manager should be able to manage update an existing shopping cart for customers.
+  (You need to open a customer and manage shopping cart)
+    Given sales manager go to the shopping cart page with email "Jerry@gmail.com"
+    When sales manager update the existing shopping cart
+    Then updated shopping cart info should be displayed
 
-        @ManageTaxRules
-        Scenario: Sales Manager should be able to manage add and update tax rules
-          description: (see Tax link under Store)
-          Given sales manager is on Manage Tax Rules page
-          When sales manager add tax rule
-          Then tax rule is added
-          And sales manager update added tax rule
-          Then sales manager added and updated tax rule successfully
+  @ManageTaxRules
+  Scenario: Sales Manager should be able to manage add and update tax rules
+  description: (see Tax link under Store)
+    Given sales manager is on Manage Tax Rules page
+    When sales manager add tax rule
+    Then tax rule is added
+    And sales manager update added tax rule
+    Then sales manager added and updated tax rule successfully
 
   @updateShipments
   Scenario: Sales Manager should be able to update (
-              add shipment history and tracking information) shipments
+  add shipment history and tracking information) shipments
     Given sales manager on the dashboard page and can navigate to shipments page
     When sales manager can view shipmentsList and random select one for update
     And sales manager update shipments and send tracking information

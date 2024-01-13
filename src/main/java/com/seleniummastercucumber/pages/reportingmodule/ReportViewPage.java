@@ -2,7 +2,6 @@ package com.seleniummastercucumber.pages.reportingmodule;
 
 import com.seleniummastercucumber.utility.FunctionLibrary;
 import com.seleniummastercucumber.utility.ScreenShotUtility;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -50,8 +49,6 @@ public class ReportViewPage {
         ReportsButton.click();
         ShoppingCartButton.click();
         AbandonedCartsButton.click();
-
-
     }
     public void clickReportMethod(String reportemail){
         WebElement reportEmail= driver.findElement(By.xpath(String.format("//td[contains(text(),'%s')]",reportemail)));
@@ -83,8 +80,6 @@ public class ReportViewPage {
     }
     public boolean confirmIsReportAppeared(){
         functionLibrary.waitForElementVisible(totalShipped);
-        if (totalShipped.isDisplayed())
-            return true;
-        else return false;
+        return totalShipped.isDisplayed();
     }
 }
