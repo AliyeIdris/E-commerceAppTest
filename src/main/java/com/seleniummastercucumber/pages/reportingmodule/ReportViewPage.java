@@ -1,6 +1,7 @@
 package com.seleniummastercucumber.pages.reportingmodule;
 
 import com.seleniummastercucumber.utility.FunctionLibrary;
+import com.seleniummastercucumber.utility.ScreenShotUtility;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -14,6 +15,7 @@ public class ReportViewPage {
     FunctionLibrary functionLibrary;
     Actions actions;
     Logger logger;
+    ScreenShotUtility screenShotUtility;
 
     public ReportViewPage(WebDriver driver) {
         this.driver = driver;
