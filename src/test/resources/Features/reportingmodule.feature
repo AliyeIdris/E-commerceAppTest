@@ -32,7 +32,7 @@ Feature: Reporting module features
    When  reporting manager navigate to low stock page
    Then  products low stock report should be display
 
-   @TotalOrderReport
+   @TotalOrderReport  #Safiya
    Scenario: Reporting Manager should be able to see Sales - Total Ordered Report
      Given reporting manager navigate to order report page
      When reporting manager filter total order report with date
