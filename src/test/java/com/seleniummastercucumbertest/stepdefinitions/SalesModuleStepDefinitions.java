@@ -27,7 +27,6 @@ public class SalesModuleStepDefinitions extends BasePage {
     RefundsPage refundsPage = new RefundsPage(driver);
     ManageTaxRulePage manageTaxRulePage=new ManageTaxRulePage(driver);
     ShipmentsPage shipmentsPage =new ShipmentsPage(driver);
-    int quantity;
     CreditMemosPage creditMemosPage=new CreditMemosPage(driver);
     int quantity=(int)((Math.random())*50);
 
@@ -116,13 +115,11 @@ public class SalesModuleStepDefinitions extends BasePage {
 
     @When("sales manager update the existing shopping cart")
     public void salesManagerUpdateTheExistingShoppingCart() {
-        quantity = (int) ((Math.random()) * 50);
         manageCustomersPage.updateShoppingCart(quantity);
     }
 
     @Then("updated shopping cart info should be displayed")
     public void updatedShoppingCartInfoShouldBeDisplayed() {
-        Assert.assertTrue("shopping cart does not updated ", manageCustomersPage.verifyUpdatedShoppingCart());
         Assert.assertTrue("shopping cart does not updated ",manageCustomersPage.verifyUpdatedShoppingCart(quantity));
     }
 
