@@ -23,6 +23,13 @@ public class ManageCustomersPage {
     Actions actions;
     Logger logger;
     Select select;
+    public ManageCustomersPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+        functionLibrary = new FunctionLibrary(driver);
+        actions = new Actions(driver);
+        logger = Logger.getLogger(ManageCustomersPage.class.getName());
+    }
     @FindBy(xpath = "(//span[text()='Customers'])[1]")
     WebElement customersMenu;
     @FindBy(xpath = "//span[text()='Manage Customers']")
@@ -47,25 +54,15 @@ public class ManageCustomersPage {
     WebElement configureIcon;
     @FindBy(id = "attribute180")
     WebElement sizeSelectField;
-    @FindBy(xpath = "//option[contains(text(),'XL')]")
-    WebElement siteType;
     @FindBy(xpath = "//span[text()='OK']")
     WebElement okButton;
     @FindBy(id = "product_composite_configure_input_qty")
     WebElement quantity;
     @FindAll(@FindBy(xpath = "//dd[@class='last']/div/select/option"))
     List<WebElement> sizeSelectOptions;
-    @FindBy(id = "product_composite_configure_iframe")
-    WebElement iframe;
     String eachSize;
+
     int linkSize;
-    public ManageCustomersPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-        functionLibrary = new FunctionLibrary(driver);
-        actions = new Actions(driver);
-        logger = Logger.getLogger(ManageCustomersPage.class.getName());
-    }
 
     public int getLinkSize() {
         return linkSize;
@@ -141,7 +138,6 @@ public class ManageCustomersPage {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        functionLibrary.waitForElementVisible(editIcon);
         editIcon.click();
         functionLibrary.waitForElementVisible(shoppingCartLink);
         shoppingCartLink.click();
@@ -150,22 +146,7 @@ public class ManageCustomersPage {
     public void updateShoppingCart(int quantityCount) {
         functionLibrary.waitForElementVisible(configureIcon);
         configureIcon.click();
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        select = new Select(sizeSelectField);
-        for (WebElement element : sizeSelectOptions) {
-            if (element.getText().equalsIgnoreCase("XS")) {
-                select.selectByVisibleText("XL");
-                eachSize = "XL";
-                break;
-            } else {
-                select.selectByVisibleText("XS");
-                eachSize = "XS";
-            }
-        }
+
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -178,7 +159,7 @@ public class ManageCustomersPage {
         driver.navigate().refresh();
     }
 
-    public boolean verifyUpdatedShoppingCart() {
+    public boolean verifyUpdatedShoppingCart(int quantityCount) {
         functionLibrary.waitForElementVisible(shoppingCartLink);
         shoppingCartLink.click();
         try {
@@ -186,11 +167,10 @@ public class ManageCustomersPage {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        WebElement selectedSizePath = driver.findElement(By.xpath(String.format("//div[@class='bundle-product-options']/dl/dd[contains(text(),'%s')]", eachSize)));
-
-        if (selectedSizePath.isDisplayed()) {
-            logger.info("Shopping cart is Updated  ");
-            return true;
+        WebElement updatedQuantityCount=driver.findElement(By.xpath(String.format("//table[@class='data']/tbody/tr/td[contains(text(),'%d')]",quantityCount)));
+        if (updatedQuantityCount.isDisplayed()) {
+            logger.info("Quantity of product updated to " +quantityCount);
+               return true;
         } else {
             logger.info("Update failed ");
             return false;

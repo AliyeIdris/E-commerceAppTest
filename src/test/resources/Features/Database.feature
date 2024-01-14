@@ -47,3 +47,9 @@ Scenario: User retrieves sub category info from the database
     Given user has valid database connection and ready to test
     When Execute SQL query to get root category information with categoryName "Team1-Istanbul-DO Not Delete"
     Then The database returns root category information with details
+
+    @VerifyNewlyAddedStock
+    Scenario:Verify that newly added stock should be in the database
+      Given User has valid database connection and ready to test
+      When Execute SQL query to get stock information with stock id "231"
+      Then The database returns stock information with details
