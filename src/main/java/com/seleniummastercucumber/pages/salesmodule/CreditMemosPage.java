@@ -36,8 +36,6 @@ public class CreditMemosPage {
     WebElement views;
     @FindBy(xpath = "//h4[text()='Credit Memo Totals']")
     WebElement creditMemosTotals;
-    @FindAll(@FindBy(xpath = "//a[text()='View']"))
-    List<WebElement> allViewLink;
     @FindBy(name = "comment[comment]")
     WebElement commentLink;
     @FindBy(xpath = "//span[text()='Submit Comment']")
@@ -71,7 +69,6 @@ public class CreditMemosPage {
     }
 
     public void addCreditMemosComment(String commentText){
-        //allViewLink.get(new Random().nextInt(allViewLink.size())).click();
         actions.scrollToElement(commentLink).build().perform();
         commentLink.sendKeys(commentText);
         functionLibrary.waitForElementVisible(submitCommentButton);
