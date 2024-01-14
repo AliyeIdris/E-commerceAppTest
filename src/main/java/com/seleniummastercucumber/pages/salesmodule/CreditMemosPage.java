@@ -1,6 +1,7 @@
 package com.seleniummastercucumber.pages.salesmodule;
 
 import com.seleniummastercucumber.utility.FunctionLibrary;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -70,15 +71,22 @@ public class CreditMemosPage {
     }
 
     public void addCreditMemosComment(String commentText){
-        allViewLink.get(new Random().nextInt(allViewLink.size())).click();
-        //actions.scrollToElement(commentLink).build().perform();
+        //allViewLink.get(new Random().nextInt(allViewLink.size())).click();
+        actions.scrollToElement(commentLink).build().perform();
         commentLink.sendKeys(commentText);
         functionLibrary.waitForElementVisible(submitCommentButton);
         submitCommentButton.click();
-        functionLibrary.waitForElementVisible(sendEmailButton);
         sendEmailButton.click();
+        Alert alert =driver.switchTo().alert();
+        alert.accept();
+
     }
     public boolean verifyAddedCreditMemos(){
+        try {
+            Thread.sleep(6000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         if(commentSentSuccess.isDisplayed()){
             logger.info(commentSentSuccess.getText());
             return true;

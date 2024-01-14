@@ -187,12 +187,12 @@ public class SalesModuleStepDefinitions extends BasePage {
 
     @Then("sales manager add credit memos")
     public void salesManagerAddCreditMemos() {
-        creditMemosPage.addCreditMemosComment("sales manager successfully added credit memos comment");
+       creditMemosPage.addCreditMemosComment(TestDataHolder.comments);
     }
 
     @Then("sales manager successfully added credit memos")
     public void salesManagerSuccessfullyAddedCreditMemos() {
-        creditMemosPage.verifyAddedCreditMemos();
+        Assert.assertTrue(creditMemosPage.verifyAddedCreditMemos());
     }
 }
 
