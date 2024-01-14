@@ -392,4 +392,51 @@ public class VerifySQLScripts {
         }
 
     }
+
+    public boolean getCreditMemosInfo(Connection connection,String orderId){
+        boolean isCreditMemoExist = false;
+        Statement statement;
+        ResultSet resultSet;
+        CachedRowSet cachedRowSet;
+
+        try {
+            statement=connection.createStatement();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            cachedRowSet= RowSetProvider.newFactory().createCachedRowSet();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sqlScriptForNewlyAddedCreditMemos = String.format("select * from mg_sales_flat_creditmemo_grid where order_increment_id='%s'",orderId);
+        try {
+            resultSet=statement.executeQuery(sqlScriptForNewlyAddedCreditMemos);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        if (resultSet==null){
+            System.out.println("No records found");
+            return isCreditMemoExist;
+
+        }
+        try {
+            resultSet=statement.executeQuery(sqlScriptForNewlyAddedCreditMemos);
+            cachedRowSet.populate(resultSet);
+
+            while (cachedRowSet.next()){
+                isCreditMemoExist=true;
+                logger.info(String.format("Found %d record with order id '%s'",cachedRowSet.getRow(),orderId));
+                logger.info("Invoice_id:"+cachedRowSet.getInt("invoice_id") + "\t\t" + "billing_name : "+cachedRowSet.getString("billing_name"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        if(!isCreditMemoExist)
+            logger.info("no matching record");
+
+
+        return isCreditMemoExist;
+    }
 }

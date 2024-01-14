@@ -164,5 +164,11 @@ public class DataBaseStepDefinitions {
     }
 
 
+    @When("execute SQl query to get the new Credit Memo  information from the database")
+    public void executeSQlQueryToGetTheNewCreditMemoInformationFromTheDatabase() {
+    }
 
+    @Then("the database should contain the newly addedCreditMemo")
+    public void theDatabaseShouldContainTheNewlyAddedCreditMemo() {
+    }
 }

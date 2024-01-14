@@ -53,3 +53,8 @@ Scenario: User retrieves sub category info from the database
       Given User has valid database connection and ready to test
       When Execute SQL query to get stock information with stock id "231"
       Then The database returns stock information with details
+
+  @DatabaseAddNewCreditMemos
+  Scenario: Verify newly added Credit Memo in database
+    When execute SQl query to get the new Credit Memo  information from the database
+    Then  the database should contain the newly addedCreditMemo
