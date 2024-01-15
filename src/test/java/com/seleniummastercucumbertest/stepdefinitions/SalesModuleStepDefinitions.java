@@ -95,12 +95,12 @@ public class SalesModuleStepDefinitions extends BasePage {
         refundsPage.navigateToRefundsPage();
     }
 
-    @When("sales manager select on from and to date fill and click on show report")
+    @When("sales manager select on from and to date field and click on show report")
     public void salesManagerSelectOnFromAndToDateFillAndClickOnShowReport() {
         refundsPage.totalRefundedReport();
     }
 
-    @Then("total refunded report should be display with information")
+    @Then("total refunded report should be displayed with information")
     public void totalRefundedReportShouldBeDisplayWithInformation() {
         Assert.assertTrue(refundsPage.viewRefundsInTheReports());
     }

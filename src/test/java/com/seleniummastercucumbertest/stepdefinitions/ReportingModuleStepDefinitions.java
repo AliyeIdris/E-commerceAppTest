@@ -85,7 +85,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
          dashboardPage.navigateToLowStockPage();
     }
 
-    @Then("products low stock report should be display")
+    @Then("products low stock report should be displayed")
     public void productsLowStockReportShouldBeDisplay() {
          Assert.assertTrue(dashboardPage.viewAllLowStock());
     }
