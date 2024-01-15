@@ -4,11 +4,11 @@ Feature: eCommerce Magento Database features
   Background:
     Given user has valid database connection
 
-  @AddedSubCategories
+  @AddedSubCategories     #Xamxinur.A
   Scenario: User retrieves sub category info from the database
     Given user has valid database connection
-    When Execute SQL query to get sub category information with categoryName Mobile
-    Then The database returns sub category information with details
+    When user query to get sub category inf with categoryName Shoes
+    Then database should return the newly added sub category with detailed info
 
   @NewlyAddedStoreView
   Scenario: user get newly added store view info from database
