@@ -18,13 +18,12 @@ Feature: Reporting module features
   @ManageProductsDownloadsReport
   Scenario: Reporting manager should be able to see products downloads reports
     When reporting manager downloads the existing reports
-    Then Products reports should be see able
+    Then Products reports should be seeable
 
   @Manage_Products_Reviews
   Scenario: Reporting manager should be able to see products reviews
-    Given reporting manager is on the dashboard page
     When  reporting manager opens the reviews page and sees the reviews
-    Then  products reviews should be see able
+    Then  products reviews should be seeable
 
   @Products-low-stock-Report
   Scenario: Reporting Manager should be able to see Products low stock Report

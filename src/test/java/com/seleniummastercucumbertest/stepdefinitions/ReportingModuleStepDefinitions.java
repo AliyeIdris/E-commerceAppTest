@@ -64,7 +64,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
         downloadsPage.downloadProducts();
     }
 
-    @Then("Products reports should be see able")
+    @Then("Products reports should be seeable")
     public void productsReportsShouldBeSeeAble() {
         Assert.assertTrue(downloadsPage.verifyProductsDownloadsReport());
     }
@@ -74,7 +74,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
         reviewsPage.setProductsReviews();
     }
 
-    @Then("products reviews should be see able")
+    @Then("products reviews should be seeable")
     public void productsReviewsShouldBeSeeAble() {
         Assert.assertTrue(reviewsPage.verifyProductsReviews());
     }
