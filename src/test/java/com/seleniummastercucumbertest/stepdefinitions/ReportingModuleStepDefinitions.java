@@ -11,6 +11,9 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class ReportingModuleStepDefinitions extends BasePage {
     AdminLoginPage adminLoginPage =new AdminLoginPage(driver);
     AdminDashboardPage adminDashboardPage=new AdminDashboardPage(driver);
@@ -85,7 +88,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
          dashboardPage.navigateToLowStockPage();
     }
 
-    @Then("products low stock report should be display")
+    @Then("products low stock report should be displayed")
     public void productsLowStockReportShouldBeDisplay() {
          Assert.assertTrue(dashboardPage.viewAllLowStock());
     }
@@ -141,9 +144,10 @@ public class ReportingModuleStepDefinitions extends BasePage {
          dashboardPage.navigateToNewAccountsPage();
     }
 
-    @When("reporting manager filter customer report and search for it")
+    @When("reporting manager filters customer report and searches for it")
     public void reportingManagerFilterCustomerReportAndSearchForIt() {
-         newAccountsPage.applyFilterToReportNewAccounts("01/01/2022","12/28/2023");
+         LocalDate localDate=LocalDate.now();
+         newAccountsPage.applyFilterToReportNewAccounts("01/01/2022",(localDate.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"))));
     }
 
     @Then("reporting manager should be able to see Customers Report-New Accounts Report")
@@ -157,8 +161,8 @@ public class ReportingModuleStepDefinitions extends BasePage {
     }
 
     @When("reporting manager filter Products Ordered Report by date {string} and{string}")
-    public void reportingManagerFilterProductsOrderedReportByDateAnd(String arg0, String arg1) {
-     productsOrderedPage.viewProductsOrderedReport(arg0,arg1);
+    public void reportingManagerFilterProductsOrderedReportByDateAnd(String dateFrom, String dateTo) {
+     productsOrderedPage.viewProductsOrderedReport(dateFrom,dateTo);
     }
 
     @Then("reporting manager should be able to see Products Ordered Report")
@@ -167,8 +171,8 @@ public class ReportingModuleStepDefinitions extends BasePage {
     }
 
     @When("reporting manager navigate to most viewed page data with {string} and{string}")
-    public void reportingManagerNavigateToMostViewedPageDataWithAnd(String arg0, String arg1) {
-        productsMostViewedPage.mostViewedProducts(arg0,arg1);
+    public void reportingManagerNavigateToMostViewedPageDataWithAnd(String dateFrom, String dateTo) {
+        productsMostViewedPage.mostViewedProductsReport(dateFrom,dateTo);
     }
 
     @Then("most viewed products should be displayed")

@@ -49,12 +49,12 @@ public class DataBaseStepDefinitions {
         verifySQLScripts = new VerifySQLScripts();
     }
 
-    @When("Execute SQL query to get sub category information with categoryName {}")
+    @When("user query to get sub category inf with categoryName {}")
     public void executeSQLQueryToGetSubCategoryInformationWithCategoryName(String subCategoryName) {
         isCategoryExist = verifySQLScripts.getAddedSubCategoriesInfo(connection,subCategoryName);
     }
 
-    @Then("The database returns sub category information with details")
+    @Then("database should return the newly added sub category with detailed info")
     public void theDatabaseReturnsSubCategoryInformationWithDetails() {
         Assert.assertTrue(isCategoryExist);
     }

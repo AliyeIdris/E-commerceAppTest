@@ -238,6 +238,7 @@ public class VerifySQLScripts {
         }
     }
 
+    //ibrahim
     public boolean getNewlyAddedCartRule(Connection connection,String cartRuleId) {
         boolean isCartRuleNameExist = false;
         Statement statement = null;
@@ -255,7 +256,7 @@ public class VerifySQLScripts {
             e.printStackTrace();
         }
 
-        String cartRuleSqlScript = String.format("select * from i9362596_mg2.mg_salesrule where  rule_id='%s';", cartRuleId);
+        String cartRuleSqlScript = String.format("select * from i9362596_mg2.mg_salesrule where rule_id='%s';", cartRuleId);
         try {
             resultSet = statement.executeQuery(cartRuleSqlScript);
         } catch (SQLException e) {
