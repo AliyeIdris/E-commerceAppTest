@@ -90,13 +90,13 @@ Feature: Reporting module features
   @ViewProductInShoppingCartsReport
   Scenario:Reporting Manager should be able to see shopping cart-product in carts report
     Given reporting manager navigate to product in carts page
-    When the page opened and report manager see the report
+    When open the product in cart page
     Then  product in cart should be displayed
 
   @ViewTagsCustomersReport
   Scenario:Reporting Manager should be able to see Tags-customers report
     Given reporting manager navigate to Customers Tags page
-    When the page opened and report manager sees the report of customer
+    When click on the show tags in the report of customer
     Then show customers Tags successful
 
 

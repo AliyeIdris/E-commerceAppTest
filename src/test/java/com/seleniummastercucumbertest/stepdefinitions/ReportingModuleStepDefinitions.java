@@ -225,9 +225,9 @@ public class ReportingModuleStepDefinitions extends BasePage {
          productInCartPage.navigateToProductInCartsPage();
     }
 
-    @When("the page opened and report manager see the report")
-    public void thePageOpenedAndReportManagerSeeTheReport() {
-         productInCartPage.viewProductInCarts();
+    @When("open the product in cart page")
+    public void openTheProductInCartPage() {
+         productInCartPage.openProductInCartPage();
     }
 
     @Then("product in cart should be displayed")
@@ -240,9 +240,9 @@ public class ReportingModuleStepDefinitions extends BasePage {
          customersTagsPage.navigateToCustomersTagsPage();
     }
 
-    @When("the page opened and report manager sees the report of customer")
-    public void thePageOpenedAndReportManagerSeesTheReportOfCustomer() {
-         customersTagsPage.viewTagsCustomersReport();
+    @When("click on the show tags in the report of customer")
+    public void clickOnTheShowTagsInTheReportOfCustomer() {
+         customersTagsPage.clickTheShowTagsMethod();
     }
 
     @Then("show customers Tags successful")
@@ -264,6 +264,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
     public void reportingManagerShouldGetReportFromAbandonedCart() {
         Assert.assertTrue(reportViewPage.seeAbandonedCartsVerify());
     }
+
 }
 
 

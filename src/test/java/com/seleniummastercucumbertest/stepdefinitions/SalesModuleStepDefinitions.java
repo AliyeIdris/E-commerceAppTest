@@ -170,9 +170,9 @@ public class SalesModuleStepDefinitions extends BasePage {
         creditMemosPage.navigateToCreditMemosPage();
     }
 
-    @When("sales manager view credit memos")
-    public void salesManagerViewCreditMemos() {
-        creditMemosPage.viewCreditMemos();
+    @When("click on the reset filter and views tab")
+    public void clickOnTheResetFilterAndViewsTab() {
+        creditMemosPage.clickOnResetFilterAndViewsTab();
     }
 
     @Then("Sales manager should be able to view credit memos successfully")

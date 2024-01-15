@@ -36,6 +36,7 @@ public class DataBaseStepDefinitions {
     boolean isCartRuleAdded;
     boolean isRootCategoryExist;
     boolean isNewlyAddedStockExist;
+    boolean isCreditMemosExist;
 
     @Before
     public void beforeDatabaseTest(Scenario scenario){
@@ -166,9 +167,12 @@ public class DataBaseStepDefinitions {
 
     @When("execute SQl query to get the new Credit Memo  information from the database")
     public void executeSQlQueryToGetTheNewCreditMemoInformationFromTheDatabase() {
+        //verifySQLNewlyAddedCreditMemo.verifySQLNewlyAddedCreditMemo(connection,"145000029");
+        isCreditMemosExist=verifySQLScripts.getCreditMemosInfo(connection,"145000029");
     }
-
     @Then("the database should contain the newly addedCreditMemo")
     public void theDatabaseShouldContainTheNewlyAddedCreditMemo() {
+        Assert.assertTrue(isCreditMemosExist);
+
     }
 }
