@@ -11,6 +11,9 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class ReportingModuleStepDefinitions extends BasePage {
     AdminLoginPage adminLoginPage =new AdminLoginPage(driver);
     AdminDashboardPage adminDashboardPage=new AdminDashboardPage(driver);
@@ -141,9 +144,10 @@ public class ReportingModuleStepDefinitions extends BasePage {
          dashboardPage.navigateToNewAccountsPage();
     }
 
-    @When("reporting manager filter customer report and search for it")
+    @When("reporting manager filters customer report and searches for it")
     public void reportingManagerFilterCustomerReportAndSearchForIt() {
-         newAccountsPage.applyFilterToReportNewAccounts("01/01/2022","12/28/2023");
+         LocalDate localDate=LocalDate.now();
+         newAccountsPage.applyFilterToReportNewAccounts("01/01/2022",(localDate.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"))));
     }
 
     @Then("reporting manager should be able to see Customers Report-New Accounts Report")

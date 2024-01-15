@@ -46,11 +46,10 @@ Feature: Reporting module features
     When reporting manager apply filters for the report
     Then reporting manager should be able to see Customers - Customers by Orders Total Report
 
-
   @ViewNewCustomerReport
   Scenario: Reporting Manager should be able to see Customers-New Accounts Report
     Given reporting manager is on the New Accounts page
-    When reporting manager filter customer report and search for it
+    When reporting manager filters customer report and searches for it
     Then reporting manager should be able to see Customers Report-New Accounts Report
 
   @ProductsOrderedReport
@@ -107,8 +106,8 @@ Feature: Reporting module features
     When  Reporting Manager Navigate to The Shopping Cart And Choose Abandoned carts
     Then  Reporting Manager Should Get Report From AbandonedCart
 
-   @TotalOrderReport  #Safiya
-   Scenario: Reporting Manager should be able to see Sales - Total Ordered Report
-     Given reporting manager navigate to order report page
-     When reporting manager filter total order report with date
-     Then total order report should be displayed
+  @TotalOrderReport  #Safiya
+  Scenario: Reporting Manager should be able to see Sales - Total Ordered Report
+    Given reporting manager navigate to order report page
+    When reporting manager filter total order report with date
+    Then total order report should be displayed
