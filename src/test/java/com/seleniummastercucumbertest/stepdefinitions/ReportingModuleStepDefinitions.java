@@ -157,8 +157,8 @@ public class ReportingModuleStepDefinitions extends BasePage {
     }
 
     @When("reporting manager filter Products Ordered Report by date {string} and{string}")
-    public void reportingManagerFilterProductsOrderedReportByDateAnd(String arg0, String arg1) {
-     productsOrderedPage.viewProductsOrderedReport(arg0,arg1);
+    public void reportingManagerFilterProductsOrderedReportByDateAnd(String dateFrom, String dateTo) {
+     productsOrderedPage.viewProductsOrderedReport(dateFrom,dateTo);
     }
 
     @Then("reporting manager should be able to see Products Ordered Report")
@@ -167,8 +167,8 @@ public class ReportingModuleStepDefinitions extends BasePage {
     }
 
     @When("reporting manager navigate to most viewed page data with {string} and{string}")
-    public void reportingManagerNavigateToMostViewedPageDataWithAnd(String arg0, String arg1) {
-        productsMostViewedPage.mostViewedProducts(arg0,arg1);
+    public void reportingManagerNavigateToMostViewedPageDataWithAnd(String dateFrom, String dateTo) {
+        productsMostViewedPage.mostViewedProductsReport(dateFrom,dateTo);
     }
 
     @Then("most viewed products should be displayed")

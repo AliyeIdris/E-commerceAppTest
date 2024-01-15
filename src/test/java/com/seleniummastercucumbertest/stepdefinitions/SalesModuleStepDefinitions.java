@@ -1,5 +1,6 @@
 package com.seleniummastercucumbertest.stepdefinitions;
 
+import com.github.javafaker.Faker;
 import com.seleniummastercucumber.pages.dashboardmodule.AdminDashboardPage;
 import com.seleniummastercucumber.pages.dashboardmodule.AdminLoginPage;
 import com.seleniummastercucumber.pages.dashboardmodule.AdminRole;
@@ -182,6 +183,16 @@ public class SalesModuleStepDefinitions extends BasePage {
     @Then("Sales manager should be able to view credit memos successfully")
     public void salesManagerShouldBeAbleToViewCreditMemosSuccessfully() {
         creditMemosPage.verifyCreditMemos();
+    }
+
+    @Then("sales manager add credit memos")
+    public void salesManagerAddCreditMemos() {
+       creditMemosPage.addCreditMemosComment(TestDataHolder.comments);
+    }
+
+    @Then("sales manager successfully added credit memos")
+    public void salesManagerSuccessfullyAddedCreditMemos() {
+        Assert.assertTrue(creditMemosPage.verifyAddedCreditMemos());
     }
 }
 

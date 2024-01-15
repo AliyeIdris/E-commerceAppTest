@@ -37,7 +37,7 @@ public class ProductsMostViewedPage {
     @FindBy(xpath = "//span[text()='Most Viewed']")
     WebElement mostViewedLink;
 
-    public void mostViewedProducts(String dateFrom, String dateTo){
+    public void mostViewedProductsReport(String dateFrom, String dateTo){
         functionLibrary.waitForElementVisible(reportsLink);
         reportsLink.click();
         functionLibrary.waitForElementVisible(productsLink);
