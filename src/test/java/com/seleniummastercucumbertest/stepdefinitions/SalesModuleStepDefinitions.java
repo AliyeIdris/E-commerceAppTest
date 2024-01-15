@@ -124,24 +124,21 @@ public class SalesModuleStepDefinitions extends BasePage {
         manageTaxRulePage.navigateToManageTaxRulePage();
     }
 
-    @When("sales manager add tax rule")
-    public void salesManagerAddTaxRule() {
+    @When("sales manager adds tax rule")
+    public void salesManagerAddsTaxRule() {
         manageTaxRulePage.addTaxRule(TestDataHolder.taxRuleName,TestDataHolder.customerIndexNumber,
                 TestDataHolder.productIndexNumber
                 ,TestDataHolder.taxIndexNumber,String.valueOf(TestDataHolder.number));
     }
-    @Then("tax rule is added")
-    public void taxRuleIsAdded() {Assert.assertTrue(manageTaxRulePage.verifyAddedTaxRule(TestDataHolder.taxIndexNumber));}
-
-    @And("sales manager update added tax rule")
-    public void salesManagerUpdateAddedTaxRule() {
+    @And("sales manager updates added tax rule")
+    public void salesManagerUpdatesAddedTaxRule() {
         manageTaxRulePage.updateAddedTaxRule(TestDataHolder.taxRuleName,TestDataHolder.customerIndexNumber,
                 TestDataHolder.productIndexNumber, TestDataHolder.taxIndexNumber,TestDataHolder.number,
                 TestDataHolder.taxRuleName,TestDataHolder.taxRuleName+" updated");
         Assert.assertTrue(manageTaxRulePage.verifyUpdatedTaxRule());
     }
 
-    @Then("sales manager added and updated tax rule successfully")
+    @Then("tax rule should be added and updated successfully")
     public void salesManagerAddedAndUpdatedTaxRuleSuccessfully() {
         Assert.assertTrue(manageTaxRulePage.verifyAddedTaxRule(TestDataHolder.taxIndexNumber));
         Assert.assertTrue(manageTaxRulePage.verifyUpdatedTaxRule());
