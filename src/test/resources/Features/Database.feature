@@ -15,13 +15,11 @@ Feature: eCommerce Magento Database features
     When run SQL query to get newly added store view info with store view name "Nice Product"
     Then database returns store view information details
 
-
   @Verify_newly_Added_Customer #this should be "verifyNewlyRegisteredUser"
   Scenario: user retrieves that newly registered users information
     Given  user has valid database connection
     When Execute SQL query to get newly registered users information by email
     Then Database returns newly registered information
-
 
   @VerifyAddedTaxRule
   Scenario: verify newly added tax rule should be in the database
@@ -35,7 +33,6 @@ Feature: eCommerce Magento Database features
     When user query to get the customer info with email "aliyeidiris@gmail.com"
     Then database should return the newly added customer with detailed info
 
-
   @VerifyAddedCartRule
   Scenario: verify newly added cart rule should be in the database
     Given user has read access to the mg_salesrule table
@@ -48,8 +45,14 @@ Feature: eCommerce Magento Database features
     When Execute SQL query to get root category information with categoryName "Team1-Istanbul-DO Not Delete"
     Then The database returns root category information with details
 
-  @VerifyNewlyAddedStock
-  Scenario:Verify that newly added stock should be in the database
-    Given User has valid database connection and ready to test
-    When Execute SQL query to get stock information with stock id "231"
-    Then The database returns stock information with details
+    @VerifyNewlyAddedStock
+    Scenario:Verify that newly added stock should be in the database
+      Given User has valid database connection and ready to test
+      When Execute SQL query to get stock information with stock id "231"
+      Then The database returns stock information with details
+
+  @DatabaseAddNewCreditMemos
+  Scenario: Verify newly added Credit Memo in database
+    When execute SQl query to get the new Credit Memo  information from the database
+    Then  the database should contain the newly addedCreditMemo
+
