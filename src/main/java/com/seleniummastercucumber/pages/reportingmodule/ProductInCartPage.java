@@ -48,7 +48,7 @@ public class ProductInCartPage {
         functionLibrary.waitForElementVisible(productsInCartsLink);
         actions.moveToElement(productsInCartsLink).click().build().perform();
     }
-    public void viewProductInCarts(){
+    public void openProductInCartPage(){
         functionLibrary.waitForElementVisible(productsInCartsPage);
         productsInCartsPage.isDisplayed();
         functionLibrary.waitForElementVisible(viewPerPageSelection);

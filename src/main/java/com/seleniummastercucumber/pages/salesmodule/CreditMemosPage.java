@@ -52,7 +52,7 @@ public class CreditMemosPage {
         functionLibrary.waitForElementVisible(creditMemos);
         actions.moveToElement(creditMemos).click().build().perform();
     }
-    public void viewCreditMemos(){
+    public void clickOnResetFilterAndViewsTab(){
         functionLibrary.waitForElementVisible(resetFilterTab);
         actions.moveToElement(resetFilterTab).click().build().perform();
         functionLibrary.waitForElementVisible(views);

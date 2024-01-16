@@ -61,13 +61,13 @@ Feature: Sales module features
   @ViewCreditMemos
   Scenario: Sales Manager should be able to view credit memos
     Given sales manager is on the credit memos page
-    When sales manager view credit memos
+    When click on the reset filter and views tab
     Then Sales manager should be able to view credit memos successfully
 
   @viewAndAddCreditMemos
   Scenario: Sales Manager view and add credit memos
     Given sales manager is on the credit memos page
-    When sales manager view credit memos
+    When click on the reset filter and views tab
     Then Sales manager should be able to view credit memos successfully
      And sales manager add credit memos
     Then sales manager successfully added credit memos
