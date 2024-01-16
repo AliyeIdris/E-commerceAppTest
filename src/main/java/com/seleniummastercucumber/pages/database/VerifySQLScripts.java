@@ -177,6 +177,7 @@ public class VerifySQLScripts {
                 e.printStackTrace();
             }
             int count = 0;
+            String email="";
             while (true) {
                 try {
                     if (!cachedRowSet.next()) {
@@ -188,14 +189,14 @@ public class VerifySQLScripts {
 
                 try {
                     int entity_id = cachedRowSet.getInt("entity_id");
-                    String email = cachedRowSet.getString("email");
+                     email = cachedRowSet.getString("email");
                     System.out.println(String.format("entity_id=%d email=%s", entity_id,email));
                     count = cachedRowSet.getRow();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }
-            if (count >= 1)
+            if (count >= 1 && email.equalsIgnoreCase(userEmail))
                 isUserExist = true;
             return isUserExist;
         }
@@ -344,16 +345,9 @@ public class VerifySQLScripts {
         CachedRowSet cachedRowSet = null;
         try {
             cachedRowSet = RowSetProvider.newFactory().createCachedRowSet();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try {
             statement = connection.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        String sqlScripAddedStocks = String.format("select * from i9362596_mg2.mg_cataloginventory_stock_status_idx where product_id='%s';", productID);
-        try {
+            String sqlScripAddedStocks = String.format("select * from i9362596_mg2.mg_cataloginventory_stock_status_idx where product_id='%s';", productID);
+
             resultSet = statement.executeQuery(sqlScripAddedStocks);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -362,27 +356,20 @@ public class VerifySQLScripts {
             System.out.println("No records found");
             return isNewlyAddedStockExist;
         } else {
+            int rowCount = 0;
             try {
                 cachedRowSet.populate(resultSet);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-            int rowCount = 0;
-            while (true) {
-                try {
+
+                while (true) {
                     if (!cachedRowSet.next()) {
                         break;
                     }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                try {
                     String productId = cachedRowSet.getString("product_id");
                     System.out.println(productId);
                     rowCount = cachedRowSet.getRow();
-                } catch (SQLException e) {
-                    e.printStackTrace();
                 }
+            }catch (SQLException e) {
+                    e.printStackTrace();
             }
             if (rowCount >= 1) {
                 isNewlyAddedStockExist = true;
@@ -423,7 +410,6 @@ public class VerifySQLScripts {
 
         }
         try {
-            resultSet=statement.executeQuery(sqlScriptForNewlyAddedCreditMemos);
             cachedRowSet.populate(resultSet);
 
             while (cachedRowSet.next()){

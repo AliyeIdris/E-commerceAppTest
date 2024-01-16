@@ -22,7 +22,6 @@ Feature: Reporting module features
 
   @Manage_Products_Reviews
   Scenario: Reporting manager should be able to see products reviews
-    Given reporting manager is on the dashboard page
     When  reporting manager opens the reviews page and sees the reviews
     Then  products reviews should be see able
 

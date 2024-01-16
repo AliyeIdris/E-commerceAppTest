@@ -21,22 +21,17 @@ public class DataBaseStepDefinitions {
     Connection connection;
     VerifySQLScripts verifySQLScripts;
     DBConnection dbConnection = new DBConnection();
-    String dbUrl =readConfig("dburl");
-    String dbPort = readConfig("dbport");
-    String username = readConfig("dbusername");
-    String password = readConfig("dbpassword");
-    String dbName = readConfig("dbname");
     boolean isCategoryExist ;
     boolean isCustomerExist;
-
     boolean isTaxRuleNameExist;
-
     boolean isStoreViewExist;
     boolean isCustomerAdded;
     boolean isCartRuleAdded;
     boolean isRootCategoryExist;
     boolean isNewlyAddedStockExist;
     boolean isCreditMemosExist;
+    String username = readConfig("dbusername");
+    String password = readConfig("dbpassword");
 
     @Before
     public void beforeDatabaseTest(Scenario scenario){
@@ -45,6 +40,9 @@ public class DataBaseStepDefinitions {
 
     @Given("user has valid database connection")
     public void userHasValidDatabaseConnection() {
+        String dbUrl =readConfig("dburl");
+        String dbPort = readConfig("dbport");
+        String dbName = readConfig("dbname");
         connection = dbConnection.connectToDataBaseServer(dbUrl, dbPort, username, password, dbName
                 , ConnectionType.MYSQL);
         verifySQLScripts = new VerifySQLScripts();
@@ -72,8 +70,6 @@ public class DataBaseStepDefinitions {
     }
     @When("the user query the mg_tax_calculation_rule table with taxRuleName")
     public void theUserQueryTheMg_tax_calculation_ruleTableWithTaxRuleName() {
-       // AdminLoginPage loginPage = new AdminLoginPage(BasePage.driver);
-       // loginPage.login(AdminRole.SALES_MANAGER);
         isTaxRuleNameExist=VerifySQLScripts.getNewlyAddedTaxRule(connection,"Wholesale Customer - Tax Exempt ");
     }
 
@@ -106,7 +102,6 @@ public class DataBaseStepDefinitions {
 
     @Then("database should return the newly added customer with detailed info")
     public void databaseShouldReturnTheNewlyAddedCustomerWithDetailedInfo() {
-
         Assert.assertTrue(isCustomerAdded);
     }
 
@@ -123,7 +118,6 @@ public class DataBaseStepDefinitions {
 
     @Then("database should return the newly added rule with expected information")
     public void databaseShouldReturnTheNewlyAddedRuleWithExpectedInfo() {
-
         Assert.assertTrue(isCartRuleAdded);
     }
 //abdugeni//
@@ -133,8 +127,8 @@ public class DataBaseStepDefinitions {
                 connection.getAutoCommit());
     }
     @When("Execute SQL query to get root category information with categoryName {string}")
-    public void executeSQLQueryToGetRootCategoryInformationWithCategoryName(String arg0) {
-        isRootCategoryExist=verifySQLScripts.getAddedRootCategoriesInfo(connection,arg0);
+    public void executeSQLQueryToGetRootCategoryInformationWithCategoryName(String categoryName) {
+        isRootCategoryExist=verifySQLScripts.getAddedRootCategoriesInfo(connection,categoryName);
     }
     @Then("The database returns root category information with details")
     public void theDatabaseReturnsRootCategoryInformationWithDetails() {
@@ -150,9 +144,6 @@ public class DataBaseStepDefinitions {
 
     @Given("User has valid database connection and ready to test")
     public void UserHasValidDatabaseConnectionAndReadyToTest() {
-        connection = dbConnection.connectToDataBaseServer(dbUrl, dbPort, username, password, dbName
-                , ConnectionType.MYSQL);
-        verifySQLScripts = new VerifySQLScripts();
     }
 
     @When("Execute SQL query to get stock information with stock id {string}")
@@ -167,7 +158,6 @@ public class DataBaseStepDefinitions {
 
     @When("execute SQl query to get the new Credit Memo  information from the database")
     public void executeSQlQueryToGetTheNewCreditMemoInformationFromTheDatabase() {
-        //verifySQLNewlyAddedCreditMemo.verifySQLNewlyAddedCreditMemo(connection,"145000029");
         isCreditMemosExist=verifySQLScripts.getCreditMemosInfo(connection,"145000029");
     }
     @Then("the database should contain the newly addedCreditMemo")
