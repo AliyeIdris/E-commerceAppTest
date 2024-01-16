@@ -6,7 +6,7 @@ Feature: eCommerce Magento Database features
 
   @AddedSubCategories     #Xamxinur.A
   Scenario: User retrieves sub category info from the database
-    When user query to get sub category inf with categoryName Shoes
+    When user query to get sub category info with categoryName Shoes
     Then database should return the newly added sub category with detailed info
 
   @NewlyAddedStoreView
