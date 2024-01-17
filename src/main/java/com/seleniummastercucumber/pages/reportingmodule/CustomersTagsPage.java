@@ -51,7 +51,7 @@ public class CustomersTagsPage {
         actions.moveToElement(customersTags).build().perform();
         customersTags.click();
     }
-    public void viewTagsCustomersReport(){
+    public void clickTheShowTagsMethod(){
         functionLibrary.waitForElementVisible(customersTagsPage);
         customersTagsPage.isDisplayed();
         functionLibrary.waitForElementVisible(viewSelection);

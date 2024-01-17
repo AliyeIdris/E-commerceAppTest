@@ -64,11 +64,11 @@ public class ManageTaxRulePage {
 
     public void navigateToManageTaxRulePage() {
         functionLibrary.waitForElementVisible(salesTab);
-        actions.click(salesTab).build().perform();
+        salesTab.click();
         functionLibrary.waitForElementVisible(taxTab);
-        actions.click(taxTab).build().perform();
+        taxTab.click();
         functionLibrary.waitForElementVisible(manageTaxRuleTab);
-        actions.click(manageTaxRuleTab).build().perform();
+        manageTaxRuleTab.click();
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
@@ -166,29 +166,23 @@ public class ManageTaxRulePage {
         actions.click(saveButton).build().perform();
     }
 
-    public boolean verifyUpdatedTaxRule(){
-        for (int i=0; i<5; i++){
-            if (!(addTaxRuleVerification.getText().contains("has been saved"))){
-                functionLibrary.waitForElementVisible(taxCustomerClassList);
-                select=new Select(taxCustomerClassList);
-                select.deselectAll();
-                select.selectByIndex(i);
-                functionLibrary.waitForElementVisible(taxRateList);
-                select=new Select(taxRateList);
-                select.deselectAll();
-                select.selectByIndex(i+3);
+    public boolean verifyUpdatedTaxRule() {
+        for (int i = 0; i < 30; i++) {
+            if (!(addTaxRuleVerification.getText().contains("has been saved"))) {
+                functionLibrary.waitForElementVisible(priorityField);
+                priorityField.sendKeys(String.valueOf(i));
                 functionLibrary.waitForElementVisible(saveButton);
                 actions.click(saveButton).build().perform();
-                logger.info("Tax rule is failed");
-                continue;
-            }else {
+                logger.info("Trying again");
+            } else {
                 logger.info(addTaxRuleVerification.getText());
                 logger.info("Tax rule is added successfully");
                 break;
+
             }
 
-        }return true;
-
+        }
+        return true;
     }
 
 

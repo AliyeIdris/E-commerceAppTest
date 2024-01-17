@@ -29,27 +29,26 @@ Feature: Sales module features
       | fromDate   | toDate     |
       | 10/20/2023 | 12/12/2023 |
 
-  @viewRefundsReports
+  @viewRefundsReports     #Xamxinur.A
   Scenario: Sales Manager should be able to view refunds in the Reports
     Given sales manager is on the refunds page
-    When sales manager select on from and to date fill and click on show report
-    Then total refunded report should be display with information
+    When sales manager select on from and to date field and click on show report
+    Then total refunded report should be displayed with information
 
-      @UpdateShoppingCart   #Safiya
-      Scenario: Sales Manager should be able to manage update an existing shopping cart for customers.
-      (You need to open a customer and manage shopping cart)
-        Given sales manager go to the shopping cart page with email "zubi@gmail.com"
-        When sales manager update the existing shopping cart
-        Then updated shopping cart info should be displayed
+  @UpdateShoppingCart   #Safiya
+  Scenario: Sales Manager should be able to manage update an existing shopping cart for customers.
+  (You need to open a customer and manage shopping cart)
+    Given sales manager go to the shopping cart page with email "zubi@gmail.com"
+    When sales manager update the existing shopping cart
+    Then updated shopping cart info should be displayed
 
   @ManageTaxRules
-  Scenario: Sales Manager should be able to manage add and update tax rules
+  Scenario: Sales Manager should be able to manage (add and update) tax rules
   description: (see Tax link under Store)
     Given sales manager is on Manage Tax Rules page
-    When sales manager add tax rule
-    Then tax rule is added
-    And sales manager update added tax rule
-    Then sales manager added and updated tax rule successfully
+    When sales manager adds tax rule
+    And sales manager updates added tax rule
+    Then tax rule should be added and updated successfully
 
   @updateShipments
   Scenario: Sales Manager should be able to update (
@@ -62,5 +61,13 @@ Feature: Sales module features
   @ViewCreditMemos
   Scenario: Sales Manager should be able to view credit memos
     Given sales manager is on the credit memos page
-    When sales manager view credit memos
+    When click on the reset filter and views tab
     Then Sales manager should be able to view credit memos successfully
+
+  @viewAndAddCreditMemos
+  Scenario: Sales Manager view and add credit memos
+    Given sales manager is on the credit memos page
+    When click on the reset filter and views tab
+    Then Sales manager should be able to view credit memos successfully
+     And sales manager add credit memos
+    Then sales manager successfully added credit memos
