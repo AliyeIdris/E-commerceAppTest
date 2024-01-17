@@ -152,17 +152,9 @@ public class VerifySQLScripts {
         CachedRowSet cachedRowSet = null;
         try {
             cachedRowSet = RowSetProvider.newFactory().createCachedRowSet();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        try {
             statement = connection.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
         String selectUser = String.format("select entity_id,email from mg_customer_entity where email='%s'", userEmail);
-        try {
             resultSet = statement.executeQuery(selectUser);
         } catch (SQLException e) {
             e.printStackTrace();
