@@ -143,6 +143,7 @@ public class ManageTaxRulePage {
         nameFilter.click();
         WebElement ruleLink=driver.findElement(By.xpath(String.format(
                 "//table[@id='taxRuleGrid_table']//tbody/tr/td[contains(text(), '%s')]",taxRuleName)));
+        functionLibrary.waitForElementVisible(ruleLink);
         ruleLink.click();
         functionLibrary.waitForElementVisible(nameField);
         nameField.clear();
