@@ -237,55 +237,41 @@ public class VerifySQLScripts {
         Statement statement = null;
         ResultSet resultSet = null;
         CachedRowSet cachedRowSet = null;
-
         try {
             cachedRowSet = RowSetProvider.newFactory().createCachedRowSet();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try {
             statement = connection.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        String cartRuleSqlScript = String.format("select * from i9362596_mg2.mg_salesrule where rule_id='%s';", cartRuleId);
-        try {
+            String cartRuleSqlScript = String.format("select * from i9362596_mg2.mg_salesrule where rule_id='%s';", cartRuleId);
             resultSet = statement.executeQuery(cartRuleSqlScript);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         if (resultSet == null) {
             System.out.println("no records found");
             return isCartRuleNameExist;
         } else {
             try {
                 cachedRowSet.populate(resultSet);
-            } catch (SQLException e) {
+            }    catch (SQLException e) {
                 e.printStackTrace();
             }
             int count = 0;
+            String email="";
             while (true) {
                 try {
                     if (!cachedRowSet.next()) {
                         break;
                     }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                try {
                     String rule_id = cachedRowSet.getString("rule_id");
+                    email = cachedRowSet.getString("rule_id");
                     System.out.println(rule_id);
                     count = cachedRowSet.getRow();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }
-            if (count >= 1)
+            if (count >=1 && email.equalsIgnoreCase(cartRuleId) )
                 isCartRuleNameExist = true;
-            System.out.println(count + " row(s) returned");
-
+            System.out.println(count + " row(s) returned and number "+cartRuleId+ " rule is found");
             return isCartRuleNameExist;
         }
     }
