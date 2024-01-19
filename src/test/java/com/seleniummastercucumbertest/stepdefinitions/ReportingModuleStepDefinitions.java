@@ -296,6 +296,13 @@ public class ReportingModuleStepDefinitions extends BasePage {
         Assert.assertTrue(reportViewPage.seeAbandonedCartsVerify());
     }
 
+    @When("Reporting Manager see the best seller report")
+    public void reportingManagerSeeTheBestSellerReport() {
+    }
+
+    @Then("Reporting Manager should see the best seller report")
+    public void reportingManagerShouldSeeTheBestSellerReport() {
+    }
 }
 
 
