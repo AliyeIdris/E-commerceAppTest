@@ -63,7 +63,9 @@ Feature: Reporting module features
 #abdugeni
   Scenario: Reporting Manager Should Be Able To See Sales - Total Invoiced VS Paid Report
     Given  reporting manager should be on the total invoiced vs paid report page
-    When   Fill Out Criteria For Search
+    When   Fill Out Criteria For Search "<Period>" "<fromDate>" "<toDate>"
+  "Last Invoice Created Date","Month",
+  "01/08/2014","01/08/2024")
     Then Reporting Manager Can see Sales - Total Invoiced vs Paid Report
 
   Scenario Outline: Reporting manager can see coupons usage report

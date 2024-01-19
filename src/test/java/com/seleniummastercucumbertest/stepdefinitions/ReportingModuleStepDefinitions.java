@@ -187,14 +187,13 @@ public class ReportingModuleStepDefinitions extends BasePage {
     }
 
     @When("Fill Out Criteria For Search")
-    public void fillOutCriteriaForSearch() {
-         invoicedPage.showReport("27","Last Invoice Created Date","Month",
-                 "01/08/2014","01/08/2024");
+    public void fillOutCriteriaForSearch(String Period, String From, String To ) {
+         invoicedPage.showReport( Period,  From,  To);
     }
 
     @Then("Reporting Manager Can see Sales - Total Invoiced vs Paid Report")
     public void reportingManagerCanSeeSalesTotalInvoicedVsPaidReport() {
-         Assert.assertFalse(invoicedPage.verifyReport());
+         Assert.assertTrue(invoicedPage.verifyReport());
     }
 
 // abdugeni ********************can see coupons usage report
