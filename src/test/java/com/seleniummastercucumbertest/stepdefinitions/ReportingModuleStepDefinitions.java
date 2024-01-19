@@ -181,7 +181,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
     }
 
 //abdugeni *****************able to see Sales - Total Invoiced vs Paid Report
-    @Given("Reporting Manager Navigate To Total Invoiced vs Paid Report page")
+    @Given("reporting manager should be on the total invoiced vs paid report page")
     public void reportingManagerNavigateToTotalInvoicedVsPaidReportPage() {
          dashboardPage.navigateToInvoicedPage();
     }
@@ -199,23 +199,18 @@ public class ReportingModuleStepDefinitions extends BasePage {
 
 // abdugeni ********************can see coupons usage report
 
-    @Given("The reporting manager opens coupons page")
+    @Given("The reporting manager Should Be On The coupons Page and the coupons report should be displayed")
     public void theReportingManagerOpensCouponsPage() {
          dashboardPage.navigateToCouponsPage();
+        Assert.assertTrue(couponsPage.isSalesCouponsUsagePageDisplayed());
     }
 
-    @When("the coupons report should be displayed")
-    public void theCouponsReportShouldBeDisplayed() {
-         Assert.assertTrue(couponsPage.isSalesCouponsUsagePageDisplayed());
-    }
-
-    @And("the manager fills in the filter details{string} {string} {string}")
+    @When("the manager fills in the filter details{string} {string} {string}")
     public void theManagerFillsInTheFilterDetails(String arg0, String arg1, String arg2) {
         couponsPage.filterCouponsUsageReports(arg0,arg1,arg2);
     }
-
-    @Then("no records found displayed")
-    public void noRecordsFoundDisplayed() {
+    @Then("coupons records info is displayed")
+    public void recordsDisplayed() {
          Assert.assertTrue(couponsPage.verifyCouponsUsageReport());
     }
 

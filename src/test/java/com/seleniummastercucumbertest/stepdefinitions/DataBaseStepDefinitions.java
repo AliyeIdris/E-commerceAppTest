@@ -121,7 +121,7 @@ public class DataBaseStepDefinitions {
         Assert.assertTrue(isCartRuleAdded);
     }
 //abdugeni//
-    @Given("user has valid database connection and ready to test")
+    @Given("ready to test")
     public void userHasValidDatabaseConnectionAndReadyToTest() throws SQLException {
         scenario.log("DataBase ready to test , Database position is : \n----->   "+
                 connection.getAutoCommit());
@@ -132,6 +132,7 @@ public class DataBaseStepDefinitions {
     }
     @Then("The database returns root category information with details")
     public void theDatabaseReturnsRootCategoryInformationWithDetails() {
+
         Assert.assertTrue(isRootCategoryExist);
     }
 
