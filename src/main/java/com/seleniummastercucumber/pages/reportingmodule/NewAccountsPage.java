@@ -15,6 +15,7 @@ public class NewAccountsPage {
     Logger logger;
     Actions actions;
     public NewAccountsPage(WebDriver driver) {
+        this.driver=driver;
         PageFactory.initElements(driver, this);
         functionLibrary = new FunctionLibrary(driver);
         logger = Logger.getLogger(CustomersOrdersTotalPage.class.getName());
@@ -58,7 +59,7 @@ public class NewAccountsPage {
     public boolean verifyViewNewCustomerReport(){
         functionLibrary.waitForElementVisible(totalNumberOfNewCustomers);
        if(totalNumberOfNewCustomers.isDisplayed()){
-           logger.info("New Customer is viewed successfully" +foundAccountsNumber.getText()+ " accounts are created within time range");
+           logger.info("New Customer is viewed successfully " +foundAccountsNumber.getText()+ " accounts are created within time range");
            return true;
        }else logger.info("No records are found");
        return false;

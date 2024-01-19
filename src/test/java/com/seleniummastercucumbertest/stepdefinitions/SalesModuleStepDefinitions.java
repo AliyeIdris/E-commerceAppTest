@@ -1,5 +1,6 @@
 package com.seleniummastercucumbertest.stepdefinitions;
 
+import com.github.javafaker.Faker;
 import com.seleniummastercucumber.pages.dashboardmodule.AdminDashboardPage;
 import com.seleniummastercucumber.pages.dashboardmodule.AdminLoginPage;
 import com.seleniummastercucumber.pages.dashboardmodule.AdminRole;
@@ -27,8 +28,8 @@ public class SalesModuleStepDefinitions extends BasePage {
     RefundsPage refundsPage = new RefundsPage(driver);
     ManageTaxRulePage manageTaxRulePage=new ManageTaxRulePage(driver);
     ShipmentsPage shipmentsPage =new ShipmentsPage(driver);
-    int quantity;
     CreditMemosPage creditMemosPage=new CreditMemosPage(driver);
+    int quantity=(int)((Math.random())*50);
 
     //*************************** Background ***************************
     @Given("sales manager login")
@@ -55,10 +56,6 @@ public class SalesModuleStepDefinitions extends BasePage {
     @Then("sales manager managed shopping cart successfully")
     public void salesManagerManagedShoppingCartSuccessfully() {
         manageCustomersPage.verifyManageShoppingCart();
-    }
-
-    @Given("manager bot to product page")
-    public void managerGotToProductPage() {
     }
 
     @Given("sales manager is on the reports page")
@@ -98,12 +95,12 @@ public class SalesModuleStepDefinitions extends BasePage {
         refundsPage.navigateToRefundsPage();
     }
 
-    @When("sales manager select on from and to date fill and click on show report")
+    @When("sales manager select on from and to date field and click on show report")
     public void salesManagerSelectOnFromAndToDateFillAndClickOnShowReport() {
         refundsPage.totalRefundedReport();
     }
 
-    @Then("total refunded report should be display with information")
+    @Then("total refunded report should be displayed with information")
     public void totalRefundedReportShouldBeDisplayWithInformation() {
         Assert.assertTrue(refundsPage.viewRefundsInTheReports());
     }
@@ -115,13 +112,12 @@ public class SalesModuleStepDefinitions extends BasePage {
 
     @When("sales manager update the existing shopping cart")
     public void salesManagerUpdateTheExistingShoppingCart() {
-        quantity = (int) ((Math.random()) * 50);
         manageCustomersPage.updateShoppingCart(quantity);
     }
 
     @Then("updated shopping cart info should be displayed")
     public void updatedShoppingCartInfoShouldBeDisplayed() {
-        Assert.assertTrue("shopping cart does not updated ", manageCustomersPage.verifyUpdatedShoppingCart());
+        Assert.assertTrue("shopping cart does not updated ",manageCustomersPage.verifyUpdatedShoppingCart(quantity));
     }
 
     @Given("sales manager is on Manage Tax Rules page")
@@ -129,24 +125,19 @@ public class SalesModuleStepDefinitions extends BasePage {
         manageTaxRulePage.navigateToManageTaxRulePage();
     }
 
-    @When("sales manager add tax rule")
-    public void salesManagerAddTaxRule() {
+    @When("sales manager adds tax rule")
+    public void salesManagerAddsTaxRule() {
         manageTaxRulePage.addTaxRule(TestDataHolder.taxRuleName,TestDataHolder.customerIndexNumber,
                 TestDataHolder.productIndexNumber
                 ,TestDataHolder.taxIndexNumber,String.valueOf(TestDataHolder.number));
     }
-    @Then("tax rule is added")
-    public void taxRuleIsAdded() {Assert.assertTrue(manageTaxRulePage.verifyAddedTaxRule(TestDataHolder.taxIndexNumber));}
-
-    @And("sales manager update added tax rule")
-    public void salesManagerUpdateAddedTaxRule() {
+    @And("sales manager updates added tax rule")
+    public void salesManagerUpdatesAddedTaxRule() {
         manageTaxRulePage.updateAddedTaxRule(TestDataHolder.taxRuleName,TestDataHolder.customerIndexNumber,
                 TestDataHolder.productIndexNumber, TestDataHolder.taxIndexNumber,TestDataHolder.number,
                 TestDataHolder.taxRuleName,TestDataHolder.taxRuleName+" updated");
-        Assert.assertTrue(manageTaxRulePage.verifyUpdatedTaxRule());
     }
-
-    @Then("sales manager added and updated tax rule successfully")
+    @Then("tax rule should be added and updated successfully")
     public void salesManagerAddedAndUpdatedTaxRuleSuccessfully() {
         Assert.assertTrue(manageTaxRulePage.verifyAddedTaxRule(TestDataHolder.taxIndexNumber));
         Assert.assertTrue(manageTaxRulePage.verifyUpdatedTaxRule());
@@ -179,14 +170,24 @@ public class SalesModuleStepDefinitions extends BasePage {
         creditMemosPage.navigateToCreditMemosPage();
     }
 
-    @When("sales manager view credit memos")
-    public void salesManagerViewCreditMemos() {
-        creditMemosPage.viewCreditMemos();
+    @When("click on the reset filter and views tab")
+    public void clickOnTheResetFilterAndViewsTab() {
+        creditMemosPage.clickOnResetFilterAndViewsTab();
     }
 
     @Then("Sales manager should be able to view credit memos successfully")
     public void salesManagerShouldBeAbleToViewCreditMemosSuccessfully() {
         creditMemosPage.verifyCreditMemos();
+    }
+
+    @Then("sales manager add credit memos")
+    public void salesManagerAddCreditMemos() {
+       creditMemosPage.addCreditMemosComment(TestDataHolder.comments);
+    }
+
+    @Then("sales manager successfully added credit memos")
+    public void salesManagerSuccessfullyAddedCreditMemos() {
+        Assert.assertTrue(creditMemosPage.verifyAddedCreditMemos());
     }
 }
 

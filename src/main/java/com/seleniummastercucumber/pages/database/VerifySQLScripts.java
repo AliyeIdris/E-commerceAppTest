@@ -152,17 +152,9 @@ public class VerifySQLScripts {
         CachedRowSet cachedRowSet = null;
         try {
             cachedRowSet = RowSetProvider.newFactory().createCachedRowSet();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        try {
             statement = connection.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
         String selectUser = String.format("select entity_id,email from mg_customer_entity where email='%s'", userEmail);
-        try {
             resultSet = statement.executeQuery(selectUser);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -177,6 +169,7 @@ public class VerifySQLScripts {
                 e.printStackTrace();
             }
             int count = 0;
+            String email="";
             while (true) {
                 try {
                     if (!cachedRowSet.next()) {
@@ -188,14 +181,14 @@ public class VerifySQLScripts {
 
                 try {
                     int entity_id = cachedRowSet.getInt("entity_id");
-                    String email = cachedRowSet.getString("email");
+                     email = cachedRowSet.getString("email");
                     System.out.println(String.format("entity_id=%d email=%s", entity_id,email));
                     count = cachedRowSet.getRow();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }
-            if (count >= 1)
+            if (count >= 1 && email.equalsIgnoreCase(userEmail))
                 isUserExist = true;
             return isUserExist;
         }
@@ -238,6 +231,7 @@ public class VerifySQLScripts {
         }
     }
 
+    //ibrahim
     public boolean getNewlyAddedCartRule(Connection connection,String cartRuleId) {
         boolean isCartRuleNameExist = false;
         Statement statement = null;
@@ -255,7 +249,7 @@ public class VerifySQLScripts {
             e.printStackTrace();
         }
 
-        String cartRuleSqlScript = String.format("select * from i9362596_mg2.mg_salesrule where  rule_id='%s';", cartRuleId);
+        String cartRuleSqlScript = String.format("select * from i9362596_mg2.mg_salesrule where rule_id='%s';", cartRuleId);
         try {
             resultSet = statement.executeQuery(cartRuleSqlScript);
         } catch (SQLException e) {
@@ -334,5 +328,94 @@ public class VerifySQLScripts {
         }
         return isSubCategoryExist;
 
+    }
+
+    public boolean VerifyNewlyAddedStock(Connection connection, String productID) {
+        boolean isNewlyAddedStockExist = false;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        CachedRowSet cachedRowSet = null;
+        try {
+            cachedRowSet = RowSetProvider.newFactory().createCachedRowSet();
+            statement = connection.createStatement();
+            String sqlScripAddedStocks = String.format("select * from i9362596_mg2.mg_cataloginventory_stock_status_idx where product_id='%s';", productID);
+
+            resultSet = statement.executeQuery(sqlScripAddedStocks);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if (resultSet == null) {
+            System.out.println("No records found");
+            return isNewlyAddedStockExist;
+        } else {
+            int rowCount = 0;
+            try {
+                cachedRowSet.populate(resultSet);
+
+                while (true) {
+                    if (!cachedRowSet.next()) {
+                        break;
+                    }
+                    String productId = cachedRowSet.getString("product_id");
+                    System.out.println(productId);
+                    rowCount = cachedRowSet.getRow();
+                }
+            }catch (SQLException e) {
+                    e.printStackTrace();
+            }
+            if (rowCount >= 1) {
+                isNewlyAddedStockExist = true;
+                System.out.println(rowCount+"Row Return");
+            }
+            return isNewlyAddedStockExist;
+
+        }
+
+    }
+
+    public boolean getCreditMemosInfo(Connection connection,String orderId){
+        boolean isCreditMemoExist = false;
+        Statement statement;
+        ResultSet resultSet;
+        CachedRowSet cachedRowSet;
+
+        try {
+            statement=connection.createStatement();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            cachedRowSet= RowSetProvider.newFactory().createCachedRowSet();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sqlScriptForNewlyAddedCreditMemos = String.format("select * from mg_sales_flat_creditmemo_grid where order_increment_id='%s'",orderId);
+        try {
+            resultSet=statement.executeQuery(sqlScriptForNewlyAddedCreditMemos);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        if (resultSet==null){
+            System.out.println("No records found");
+            return isCreditMemoExist;
+
+        }
+        try {
+            cachedRowSet.populate(resultSet);
+
+            while (cachedRowSet.next()){
+                isCreditMemoExist=true;
+                logger.info(String.format("Found %d record with order id '%s'",cachedRowSet.getRow(),orderId));
+                logger.info("Invoice_id:"+cachedRowSet.getInt("invoice_id") + "\t\t" + "billing_name : "+cachedRowSet.getString("billing_name"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        if(!isCreditMemoExist)
+            logger.info("no matching record");
+
+
+        return isCreditMemoExist;
     }
 }

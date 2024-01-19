@@ -29,6 +29,12 @@ public class TaxReportPage {
     WebDriver driver;
     FunctionLibrary functionLibrary;
     Logger logger;
+    public TaxReportPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+        functionLibrary = new FunctionLibrary(driver);
+        logger = Logger.getLogger(TaxReportPage.class.getName());
+    }
     @FindBy(id = "sales_report_period_type")
     WebElement periodDropdown;
     @FindBy(xpath = "//span[text()='Show Report']")
@@ -57,13 +63,6 @@ public class TaxReportPage {
     WebElement calendarIconFrom;
     @FindBy(css = "#sales_report_to_trig")
     WebElement calendarIconTo;
-
-    public TaxReportPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-        functionLibrary = new FunctionLibrary(driver);
-        logger = Logger.getLogger(TaxReportPage.class.getName());
-    }
 
     public void enterStartDate(String startDate) {
         String[] splitDate = startDate.split("/");
@@ -136,7 +135,7 @@ public class TaxReportPage {
         currentDay.click();
     }
 
-    public void filterTaxReportDate(String startDate, String endDate) {
+    public void filterTaxReportDate(String startDate) {
         functionLibrary.waitForElementVisible(periodDropdown);
         Select selectPeriod = new Select(periodDropdown);
         List<WebElement> options = selectPeriod.getOptions();

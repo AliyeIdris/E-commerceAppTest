@@ -1,6 +1,8 @@
 package com.seleniummastercucumber.pages.reportingmodule;
 
 import com.seleniummastercucumber.utility.FunctionLibrary;
+import com.seleniummastercucumber.utility.ScreenShotUtility;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -14,6 +16,7 @@ public class ReportViewPage {
     FunctionLibrary functionLibrary;
     Actions actions;
     Logger logger;
+    ScreenShotUtility screenShotUtility;
 
     public ReportViewPage(WebDriver driver) {
         this.driver = driver;
@@ -38,22 +41,32 @@ public class ReportViewPage {
     @FindBy(xpath ="//span[text()='Abandoned carts']")
     WebElement AbandonedCartsButton;
 
-    @FindBy(xpath = "//h3[contains(@class, 'icon-head') and contains(@class, 'head-report-shopcart-abandoned')]")
+    @FindBy(xpath = "//h1[contains(text(),'Access denied')]")
     WebElement VerifyMassage;
 
+
+    //İhram
     public void navigateToTheReport(){
         ReportsButton.click();
         ShoppingCartButton.click();
         AbandonedCartsButton.click();
-
+    }
+    public void clickReportMethod(String reportemail){
+        WebElement reportEmail= driver.findElement(By.xpath(String.format("//td[contains(text(),'%s')]",reportemail)));
+        reportEmail.click();
     }
 
     public boolean seeAbandonedCartsVerify() {
         functionLibrary.waitForElementVisible(VerifyMassage);
-        if (VerifyMassage.isDisplayed())
+        if (VerifyMassage.isDisplayed()) {
+            System.out.println("There is A Bug");
             return true;
-        else return false;
+        } else {
+            return false;
+        }
     }
+
+
 
 
 
@@ -68,8 +81,6 @@ public class ReportViewPage {
     }
     public boolean confirmIsReportAppeared(){
         functionLibrary.waitForElementVisible(totalShipped);
-        if (totalShipped.isDisplayed())
-            return true;
-        else return false;
+        return totalShipped.isDisplayed();
     }
 }

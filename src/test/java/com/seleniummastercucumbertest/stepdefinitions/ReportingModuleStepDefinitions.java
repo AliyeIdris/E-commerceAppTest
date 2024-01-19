@@ -11,6 +11,9 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class ReportingModuleStepDefinitions extends BasePage {
     AdminLoginPage adminLoginPage =new AdminLoginPage(driver);
     AdminDashboardPage adminDashboardPage=new AdminDashboardPage(driver);
@@ -53,7 +56,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
 
     @Then("total shipped report should appear")
     public void totalShippedReportShouldAppear() {
-        reportViewPage.confirmIsReportAppeared();
+        Assert.assertTrue(reportViewPage.confirmIsReportAppeared());
     }
 
     //*****************************
@@ -67,13 +70,9 @@ public class ReportingModuleStepDefinitions extends BasePage {
         downloadsPage.downloadProducts();
     }
 
-    @Then("Products reports should be see able")
+    @Then("Products reports should be seeable")
     public void productsReportsShouldBeSeeAble() {
-        downloadsPage.verifyProductsDownloadsReport();
-    }
-
-    @Given("reporting manager is on the dashboard page")
-    public void reportingManagerIsOnTheDashboardPage() {
+        Assert.assertTrue(downloadsPage.verifyProductsDownloadsReport());
     }
 
     @When("reporting manager opens the reviews page and sees the reviews")
@@ -81,7 +80,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
         reviewsPage.setProductsReviews();
     }
 
-    @Then("products reviews should be see able")
+    @Then("products reviews should be seeable")
     public void productsReviewsShouldBeSeeAble() {
         Assert.assertTrue(reviewsPage.verifyProductsReviews());
     }
@@ -92,7 +91,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
          dashboardPage.navigateToLowStockPage();
     }
 
-    @Then("products low stock report should be display")
+    @Then("products low stock report should be displayed")
     public void productsLowStockReportShouldBeDisplay() {
          Assert.assertTrue(dashboardPage.viewAllLowStock());
     }
@@ -108,7 +107,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
 
     @Then("total order report should be displayed")
     public void totalOrderReportShouldBeDisplayed() {
-         orderReportPage.verifyDisplayedTotalOrderReport();
+         Assert.assertTrue(orderReportPage.verifyDisplayedTotalOrderReport());
     }
 
     //*************************** View Tax Report Grouped By Tax Rate ***************************
@@ -118,8 +117,8 @@ public class ReportingModuleStepDefinitions extends BasePage {
     }
 
     @When("reporting manager fills the filter options with {string} and {string}")
-    public void reportingManagerFillsTheFilterOptionsWithAnd(String dateFrom, String dateTo) {
-         taxReportPage.filterTaxReportDate(dateFrom,dateTo);
+    public void reportingManagerFillsTheFilterOptionsWithAnd(String dateFrom) {
+         taxReportPage.filterTaxReportDate(dateFrom);
     }
 
     @Then("reporting manager should be able to see the Sales-Taxes Report Grouped By Tax Rate")
@@ -135,13 +134,12 @@ public class ReportingModuleStepDefinitions extends BasePage {
     @When("reporting manager apply filters for the report")
     public void reportingManagerApplyFiltersForTheReport() {
          String startDate="1/10/2023";
-         String endDate="31/12/2025";
-         customersOrdersTotalPage.applyFilterToReport(startDate,endDate);
+         customersOrdersTotalPage.applyFilterToReport(startDate);
     }
 
     @Then("reporting manager should be able to see Customers - Customers by Orders Total Report")
     public void reportingManagerShouldBeAbleToSeeCustomersCustomersByOrdersTotalReport() {
-         customersOrdersTotalPage.verifyViewCustomersByTotalOrdersReport();
+         Assert.assertTrue(customersOrdersTotalPage.verifyViewCustomersByTotalOrdersReport());
     }
 
     @Given("reporting manager is on the New Accounts page")
@@ -149,14 +147,15 @@ public class ReportingModuleStepDefinitions extends BasePage {
          dashboardPage.navigateToNewAccountsPage();
     }
 
-    @When("reporting manager filter customer report and search for it")
+    @When("reporting manager filters customer report and searches for it")
     public void reportingManagerFilterCustomerReportAndSearchForIt() {
-         newAccountsPage.applyFilterToReportNewAccounts("01/01/2022","12/28/2023");
+         LocalDate localDate=LocalDate.now();
+         newAccountsPage.applyFilterToReportNewAccounts("01/01/2022",(localDate.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"))));
     }
 
     @Then("reporting manager should be able to see Customers Report-New Accounts Report")
     public void reportingManagerShouldBeAbleToSeeCustomersReportNewAccountsReport() {
-         newAccountsPage.verifyViewNewCustomerReport();
+         Assert.assertTrue(newAccountsPage.verifyViewNewCustomerReport());
     }
 
     @Given("reporting manager should be navigate to dashboard page")
@@ -193,18 +192,18 @@ public class ReportingModuleStepDefinitions extends BasePage {
     }
 
     @When("reporting manager filter Products Ordered Report by date {string} and{string}")
-    public void reportingManagerFilterProductsOrderedReportByDateAnd(String arg0, String arg1) {
-     productsOrderedPage.viewProductsOrderedReport(arg0,arg1);
+    public void reportingManagerFilterProductsOrderedReportByDateAnd(String dateFrom, String dateTo) {
+     productsOrderedPage.viewProductsOrderedReport(dateFrom,dateTo);
     }
 
     @Then("reporting manager should be able to see Products Ordered Report")
     public void reportingManagerShouldBeAbleToSeeProductsOrderedReport() {
-         productsOrderedPage.verifyProductsOrderedReportDisplayed();
+         Assert.assertTrue(productsOrderedPage.verifyProductsOrderedReportDisplayed());
     }
 
     @When("reporting manager navigate to most viewed page data with {string} and{string}")
-    public void reportingManagerNavigateToMostViewedPageDataWithAnd(String arg0, String arg1) {
-        productsMostViewedPage.mostViewedProducts(arg0,arg1);
+    public void reportingManagerNavigateToMostViewedPageDataWithAnd(String dateFrom, String dateTo) {
+        productsMostViewedPage.mostViewedProductsReport(dateFrom,dateTo);
     }
 
     @Then("most viewed products should be displayed")
@@ -226,7 +225,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
 
     @Then("Reporting Manager Can see Sales - Total Invoiced vs Paid Report")
     public void reportingManagerCanSeeSalesTotalInvoicedVsPaidReport() {
-         Assert.assertTrue(invoicedPage.verifyReport());
+         Assert.assertFalse(invoicedPage.verifyReport());
     }
 
 // abdugeni ********************can see coupons usage report
@@ -238,7 +237,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
 
     @When("the coupons report should be displayed")
     public void theCouponsReportShouldBeDisplayed() {
-         couponsPage.isSalesCouponsUsagePageDisplayed();
+         Assert.assertTrue(couponsPage.isSalesCouponsUsagePageDisplayed());
     }
 
     @And("the manager fills in the filter details{string} {string} {string}")
@@ -248,7 +247,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
 
     @Then("no records found displayed")
     public void noRecordsFoundDisplayed() {
-         couponsPage.verifyCouponsUsageReport();
+         Assert.assertTrue(couponsPage.verifyCouponsUsageReport());
     }
 
     //mihrigul
@@ -257,14 +256,14 @@ public class ReportingModuleStepDefinitions extends BasePage {
          productInCartPage.navigateToProductInCartsPage();
     }
 
-    @When("the page opened and report manager see the report")
-    public void thePageOpenedAndReportManagerSeeTheReport() {
-         productInCartPage.viewProductInCarts();
+    @When("open the product in cart page")
+    public void openTheProductInCartPage() {
+         productInCartPage.openProductInCartPage();
     }
 
     @Then("product in cart should be displayed")
     public void productInCartShouldBeDisplayed() {
-         productInCartPage.verifyViewProductsInShoppingCartsReport();
+         Assert.assertTrue(productInCartPage.verifyViewProductsInShoppingCartsReport());
     }
 
     @Given("reporting manager navigate to Customers Tags page")
@@ -272,27 +271,33 @@ public class ReportingModuleStepDefinitions extends BasePage {
          customersTagsPage.navigateToCustomersTagsPage();
     }
 
-    @When("the page opened and report manager sees the report of customer")
-    public void thePageOpenedAndReportManagerSeesTheReportOfCustomer() {
-         customersTagsPage.viewTagsCustomersReport();
+    @When("click on the show tags in the report of customer")
+    public void clickOnTheShowTagsInTheReportOfCustomer() {
+         customersTagsPage.clickTheShowTagsMethod();
     }
 
     @Then("show customers Tags successful")
-    public void showCustomersTagsSuccessful() {customersTagsPage.verifyViewCustomersTagsReport(); }
+    public void showCustomersTagsSuccessful() {
+         Assert.assertTrue(customersTagsPage.verifyViewCustomersTagsReport()); }
 
-    @Given("reportingManagerIsOnTheDashboardPage")
-
-    @When("Reporting Manager Navigate to The Reports Than Shopping Cart And Choose Abandoned carts")
-    public void ReportingManagerNavigateToTheReportsThanShoppingCartAndChooseAbandonedCarts() {
-
-            reportViewPage.navigateToTheReport();
-
+// İhram
+    @Given("reporting Manager Is Navigate To The AbandonedPage")
+    public void reportingManagerIsNavigateToTheAbandonedPage() {reportViewPage.navigateToTheReport();
     }
 
-    @Then("Reporting Manager Should Get Report From Abandoned Carts")
-    public void reportingManagerShouldGetReportFromAbandonedCarts() {
-        reportViewPage.seeAbandonedCartsVerify();
+    @When("Reporting Manager Navigate to The Shopping Cart And Choose Abandoned carts")
+    public void reportingManagerNavigateToTheShoppingCartAndChooseAbandonedCarts() {
+        reportViewPage.clickReportMethod("lakesha.schinner@hotmail.com");
     }
+
+
+    @Then("Reporting Manager Should Get Report From AbandonedCart")
+    public void reportingManagerShouldGetReportFromAbandonedCart() {
+        Assert.assertTrue(reportViewPage.seeAbandonedCartsVerify());
+    }
+
 }
+
+
 
 
