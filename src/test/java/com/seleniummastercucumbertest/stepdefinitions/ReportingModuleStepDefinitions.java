@@ -29,8 +29,10 @@ public class ReportingModuleStepDefinitions extends BasePage {
     CouponsPage couponsPage=new CouponsPage(driver);
     ProductInCartPage productInCartPage=new ProductInCartPage(driver);
     CustomersTagsPage customersTagsPage=new CustomersTagsPage(driver);
+    SeeProductBestSellerReport seeProductBestSellerReport=new SeeProductBestSellerReport(driver);
 
-     @Given("report manager login")
+
+    @Given("report manager login")
      public void reportManagerLogin() {
          adminLoginPage.login(AdminRole.REPORTINGMANAGER);
      }
@@ -162,14 +164,28 @@ public class ReportingModuleStepDefinitions extends BasePage {
 
     }
 
-    @When("reporting manager see tags for product")
-    public void reportingManagerSeeTagsForProduct() {
+    @When("reporting manager see tags for products")
+    public void reportingManagerSeeTagsForProducts() {
+        seeTagsForProductsPage.seeProductsTag();
     }
 
-    @Then("product tag should be visible on the reporting page")
-    public void productTagShouldBeVisibleOnTheReportingPage() {
+    @Then("products tag should be visible on the reporting page")
+    public void productsTagShouldBeVisibleOnTheReportingPage() {
+        seeTagsForProductsPage.verifyProductsTags();
     }
-}
+
+    @When("Reporting manager see bestseller report")
+    public void reportingManagerSeeBestsellerReport() {
+        seeProductBestSellerReport.clickOnProducts();
+        seeProductBestSellerReport.openBestSellersReportPage();
+
+    }
+
+    @Then("The bestseller report should be display on the page")
+    public void theBestsellerReportShouldBeDisplayOnThePage() {
+        seeProductBestSellerReport.isProductBestSellersPageDisplayed();
+
+    }
 
     @Given("reporting manager is on the Products Ordered page")
     public void reportingManagerIsOnTheProductsOrderedPage() {
