@@ -51,6 +51,13 @@ Feature: Reporting module features
     When reporting manager filters customer report and searches for it
     Then reporting manager should be able to see Customers Report-New Accounts Report
 
+  @SeeTagForProducts
+  Scenario:  Reporting Manager should be able to see Tags for products
+    Given reporting manager should be navigate to dashboard page
+    When reporting manager see tags for products
+    Then products tag should be visible on the reporting page
+
+
   @ProductsOrderedReport
   Scenario Outline: Reporting Manager should be able to see Products - Products Ordered Report
     Given reporting manager is on the Products Ordered page
@@ -104,6 +111,11 @@ Feature: Reporting module features
     Given reporting Manager Is Navigate To The AbandonedPage
     When  Reporting Manager Navigate to The Shopping Cart And Choose Abandoned carts
     Then  Reporting Manager Should Get Report From AbandonedCart
+
+  @SeeProductBestSellerReport
+  Scenario: Reporting Manager should be able to see the best seller report
+    When Reporting Manager see the best seller report
+    Then Reporting Manager should see the best seller report
 
   @TotalOrderReport  #Safiya
   Scenario: Reporting Manager should be able to see Sales - Total Ordered Report
