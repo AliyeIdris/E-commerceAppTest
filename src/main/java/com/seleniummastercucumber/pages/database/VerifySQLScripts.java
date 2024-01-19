@@ -389,7 +389,6 @@ public class VerifySQLScripts {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
         String sqlScriptForNewlyAddedCreditMemos = String.format("select * from mg_sales_flat_creditmemo_grid where order_increment_id='%s'",orderId);
         try {
             resultSet=statement.executeQuery(sqlScriptForNewlyAddedCreditMemos);
@@ -399,9 +398,9 @@ public class VerifySQLScripts {
         if (resultSet==null){
             System.out.println("No records found");
             return isCreditMemoExist;
-
         }
         try {
+            resultSet=statement.executeQuery(sqlScriptForNewlyAddedCreditMemos);
             cachedRowSet.populate(resultSet);
 
             while (cachedRowSet.next()){
@@ -414,8 +413,6 @@ public class VerifySQLScripts {
         }
         if(!isCreditMemoExist)
             logger.info("no matching record");
-
-
         return isCreditMemoExist;
     }
 }
