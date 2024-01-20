@@ -64,12 +64,20 @@ public class InvoicesPage {
         actions.click(visibleOnFrontend).build().perform();
         functionLibrary.waitForElementVisible(submitButton);
         actions.click(submitButton).build().perform();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
     public boolean verifyInvoicesAndComment(){
-        if (verifyViewingInvoices.isDisplayed()){
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        if (verifyViewingInvoices.isDisplayed() || verifyCommentTextSuccessful.isDisplayed() ){
             logger.info("view invoices successfully!!!");
-            return true;
-        }if (verifyCommentTextSuccessful.isDisplayed()){
             logger.info("add comment proses is successful!!!");
             return true;
         }else {

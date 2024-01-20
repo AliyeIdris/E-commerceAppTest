@@ -86,7 +86,7 @@ public class SalesModuleStepDefinitions extends BasePage {
 
     @Then("Sales manager should be able to view invoices and add comments successfully")
     public void salesManagerShouldBeAbleToViewInvoicesAndAddCommentsSuccessfully() {
-        invoicesPage.verifyInvoicesAndComment();
+        Assert.assertTrue(invoicesPage.verifyInvoicesAndComment());
     }
 
 

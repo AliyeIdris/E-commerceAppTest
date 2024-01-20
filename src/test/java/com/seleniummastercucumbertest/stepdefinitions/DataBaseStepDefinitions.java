@@ -60,7 +60,7 @@ public class DataBaseStepDefinitions {
 
     @When("Execute SQL query to get newly registered users information by email")
     public void executeSQLQueryToGetNewlyRegisteredUsersInformationByEmail() {
-        isCustomerExist=verifySQLScripts.newlyRegisteredUser("uyhgur999@gmail.com",connection);
+        isCustomerExist=verifySQLScripts.newlyRegisteredUser("aurea.waelchi@gmail.com",connection);
 
     }
     @Then("Database returns newly registered information")
