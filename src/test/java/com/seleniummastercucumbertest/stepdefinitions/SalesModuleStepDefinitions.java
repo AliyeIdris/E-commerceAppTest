@@ -139,12 +139,12 @@ public class SalesModuleStepDefinitions extends BasePage {
     }
     @Then("tax rule should be added and updated successfully")
     public void salesManagerAddedAndUpdatedTaxRuleSuccessfully() {
-        Assert.assertTrue(manageTaxRulePage.verifyAddedTaxRule(TestDataHolder.taxIndexNumber));
+        Assert.assertTrue(manageTaxRulePage.verifyAddedTaxRule());
         Assert.assertTrue(manageTaxRulePage.verifyUpdatedTaxRule());
     }
 
 //abdugeni
-    @Given("sales manager on the dashboard page and can navigate to shipments page")
+    @Given("sales manager on the shipments page")
     public void salesManagerOnTheDashboardPageAndCanNavigateToShipmentsPage() {
         shipmentsPage.navigateToShipmentsMethod();
     }
@@ -159,12 +159,12 @@ public class SalesModuleStepDefinitions extends BasePage {
         shipmentsPage.updateShipmentsMethod("this is istanbul team",
                 TestDataHolder.timeStamp());
     }
-
     @Then("sales manager sent tracking information and info should be displayed")
     public void salesManagerSentTrackingInformationAndInfoShouldBeDisplayed() {
-        shipmentsPage.verifySentTrackingInfoMessage();
+        Assert.assertTrue(shipmentsPage.verifySentTrackingInfoMessage());
     }
 
+//mihrigul
     @Given("sales manager is on the credit memos page")
     public void salesManagerIsOnTheCreditMemosPage() {
         creditMemosPage.navigateToCreditMemosPage();
@@ -177,6 +177,7 @@ public class SalesModuleStepDefinitions extends BasePage {
 
     @Then("Sales manager should be able to view credit memos successfully")
     public void salesManagerShouldBeAbleToViewCreditMemosSuccessfully() {
+
         creditMemosPage.verifyCreditMemos();
     }
 

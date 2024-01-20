@@ -27,14 +27,15 @@ public class InvoicedPage {
 
     public InvoicedPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver,this);
-        functionLibrary=new FunctionLibrary(driver);
-        actions=new Actions(driver);
-        dashboardPage=new ReportingDashboardPage(driver);
-        logger= Logger.getLogger(RefundsPage.class.getName());
+        PageFactory.initElements(driver, this);
+        functionLibrary = new FunctionLibrary(driver);
+        actions = new Actions(driver);
+        dashboardPage = new ReportingDashboardPage(driver);
+        logger = Logger.getLogger(RefundsPage.class.getName());
     }
+
     @FindBy(xpath = "//select[@id=\"store_switcher\"]")
-    WebElement shouReportForSelection;
+    WebElement showReportForSelection;
     @FindBy(xpath = "//select[@id=\"sales_report_report_type\"]")
     WebElement matchPeriodToSelection;
     @FindBy(xpath = "//select[@id=\"sales_report_period_type\"]")
@@ -47,14 +48,18 @@ public class InvoicedPage {
     WebElement showReportButton;
     @FindBy(xpath = "//tr[@class=\"totals\"]")
     WebElement total;
+    @FindAll(@FindBy(xpath = "//tr[@class=\"even\"]/td"))
+    List<WebElement> noRecordsFound;
+    @FindAll(@FindBy(xpath = "//tr[@class=\"totals\"]/th"))
+    List<WebElement> totalsRecordsFound;
 
-    public void showReport(String reportFor, String periodTo, String period, String fromDate, String toDate) {
-        functionLibrary.waitForElementVisible(shouReportForSelection);
-        Select select = new Select(shouReportForSelection);
-        select.selectByValue(reportFor);
+    public void showReport(String period, String fromDate, String toDate) {
+        functionLibrary.waitForElementVisible(showReportForSelection);
+        Select select = new Select(showReportForSelection);
+        select.selectByVisibleText("All Websites");
         functionLibrary.waitForElementVisible(matchPeriodToSelection);
         Select select1 = new Select(matchPeriodToSelection);
-        select1.selectByVisibleText(periodTo);
+        select1.selectByIndex(0);
         functionLibrary.waitForElementVisible(periodSelection);
         Select select2 = new Select(periodSelection);
         select2.selectByVisibleText(period);
@@ -68,13 +73,12 @@ public class InvoicedPage {
 
     public boolean verifyReport() {
         functionLibrary.waitForElementVisible(total);
-        if (total.isDisplayed() && total.getText().equalsIgnoreCase(" ")) {
-            logger.info("No records found, ---Please select correct Report ");
-            return false;
-
-        } else if (total.isDisplayed() && total.getText().contains("23334567890")) {
+        if (totalsRecordsFound.size()>0) {
             logger.info("Total Report : " + total.getText());
+            return true;
+        } else if (noRecordsFound.size()>0) {
+            logger.info("No records found, ---Please select correct Report ");
         }
-        return true;
+        return false;
     }
 }

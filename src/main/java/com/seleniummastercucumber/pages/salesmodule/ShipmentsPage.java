@@ -55,7 +55,7 @@ public class ShipmentsPage {
     @FindBy(xpath = "//span[contains(text(),'Send Tracking Information')]")
     WebElement sendTrackingInfo;
     @FindBy(xpath = "//span[text()=\"The shipment has been sent.\"]")
-    WebElement sentInfoMessage;
+    WebElement sentInformationMessage;
 
     public void navigateToShipmentsMethod(){
         actions.moveToElement(salesTap).moveToElement(shipmentsLink).click().build().perform();
@@ -83,7 +83,8 @@ public class ShipmentsPage {
         driver.switchTo().alert().accept();
     }
     public boolean verifySentTrackingInfoMessage(){
-        if (sentInfoMessage.isDisplayed()){
+        functionLibrary.waitForElementVisible(sentInformationMessage);
+        if (sentInformationMessage.isDisplayed()){
             logger.info("The shipment has been sent.");
             return true;
         }else

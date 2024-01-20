@@ -121,7 +121,7 @@ public class DataBaseStepDefinitions {
         Assert.assertTrue(isCartRuleAdded);
     }
 //abdugeni//
-    @Given("user has valid database connection and ready to test")
+    @Given("ready to test")
     public void userHasValidDatabaseConnectionAndReadyToTest() throws SQLException {
         scenario.log("DataBase ready to test , Database position is : \n----->   "+
                 connection.getAutoCommit());
