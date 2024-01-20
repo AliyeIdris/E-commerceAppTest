@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.logging.Logger;
 
@@ -15,8 +16,6 @@ public class ReportViewPage {
     WebDriver driver;
     FunctionLibrary functionLibrary;
     Actions actions;
-    Logger logger;
-    ScreenShotUtility screenShotUtility;
 
     public ReportViewPage(WebDriver driver) {
         this.driver = driver;
@@ -43,6 +42,8 @@ public class ReportViewPage {
 
     @FindBy(xpath = "//h1[contains(text(),'Access denied')]")
     WebElement VerifyMassage;
+    @FindBy(xpath = "//*[@onchange='gridAbandonedJsObject.loadByElement(this)']")
+    WebElement limitDropdown;
 
 
     //İhram
@@ -52,8 +53,12 @@ public class ReportViewPage {
         AbandonedCartsButton.click();
     }
     public void clickReportMethod(String reportemail){
-        WebElement reportEmail= driver.findElement(By.xpath(String.format("//td[contains(text(),'%s')]",reportemail)));
-        reportEmail.click();
+        functionLibrary.waitForElementVisible(limitDropdown);
+        Select select=new Select(limitDropdown);
+        select.selectByValue("200");
+        WebElement emailLocation= driver.findElement(By.xpath(String.format("//td[contains(text(),'%s')]",reportemail)));
+        functionLibrary.waitForElementVisible(emailLocation);
+        emailLocation.click();
     }
 
     public boolean seeAbandonedCartsVerify() {
@@ -65,11 +70,6 @@ public class ReportViewPage {
             return false;
         }
     }
-
-
-
-
-
 
     public void viewTotalShippedReport(String dateFrom, String dateTo){
         functionLibrary.waitForElementVisible(shippingReportDateFrom);
