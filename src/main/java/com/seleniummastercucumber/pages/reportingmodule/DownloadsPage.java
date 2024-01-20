@@ -7,6 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 import java.util.Random;
@@ -39,7 +40,7 @@ public class DownloadsPage {
     @FindBy(xpath = "//span[contains(text(),'Export')]")
     WebElement exportButton;
     @FindBy(xpath = "//*[@id=\"downloadsGrid_export\"]")
-    WebElement CSV;
+    WebElement extensionDropdown;
     @FindAll(@FindBy(xpath = "//*[@id=\"downloadsGrid_export\"]/option"))
     List<WebElement> selectOptions;
     @FindAll(@FindBy(xpath = "//*[@title=\"#\"]"))
@@ -50,9 +51,9 @@ public class DownloadsPage {
         actions.moveToElement(dashboardPage.reportsLink).build().perform();
         functionLibrary.waitForElementVisible(productsLink);
         actions.moveToElement(productsLink).moveToElement(downloadsLink).click().build().perform();
-        functionLibrary.waitForElementVisible(CSV);
-        actions.click(CSV).build().perform();
-        selectOptions.get(new Random().nextInt(selectOptions.size())).click();
+        functionLibrary.waitForElementVisible(extensionDropdown);
+        Select select=new Select(extensionDropdown);
+        select.selectByVisibleText("CSV");
         functionLibrary.waitForElementVisible(exportButton);
         actions.click(exportButton).build().perform();
     }
