@@ -69,11 +69,6 @@ public class ManageTaxRulePage {
         taxTab.click();
         functionLibrary.waitForElementVisible(manageTaxRuleTab);
         manageTaxRuleTab.click();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public void addTaxRule(String taxRuleName, int customerIndexNumber, int productIndexNumber, int taxNumber, String number){
@@ -100,7 +95,7 @@ public class ManageTaxRulePage {
         actions.click(saveButton).build().perform();
     }
 
-    public boolean verifyAddedTaxRule(int taxNumber){
+    public boolean verifyAddedTaxRule(){
         for (int i=0; i<5; i++){
             if (!(addTaxRuleVerification.getText().contains("has been saved"))){
                 functionLibrary.waitForElementVisible(taxCustomerClassList);
@@ -117,13 +112,11 @@ public class ManageTaxRulePage {
                 functionLibrary.waitForElementVisible(nameField);
                 nameField.sendKeys("this is test");
                 logger.info("Tax rule is failed");
-                continue;
             }else {
                 logger.info(addTaxRuleVerification.getText());
                 logger.info("Tax rule is added successfully");
                 break;
             }
-
         }
         return true;
     }
@@ -179,12 +172,8 @@ public class ManageTaxRulePage {
                 logger.info(addTaxRuleVerification.getText());
                 logger.info("Tax rule is added successfully");
                 break;
-
             }
-
         }
         return true;
     }
-
-
 }
