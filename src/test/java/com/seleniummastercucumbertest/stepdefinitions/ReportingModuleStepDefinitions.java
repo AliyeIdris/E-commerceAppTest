@@ -25,14 +25,17 @@ public class ReportingModuleStepDefinitions extends BasePage {
     TaxReportPage taxReportPage=new TaxReportPage(driver);
     CustomersOrdersTotalPage customersOrdersTotalPage=new CustomersOrdersTotalPage(driver);
     NewAccountsPage newAccountsPage=new NewAccountsPage(driver);
+    SeeTagsForProductPage seeTagsForProductsPage=new SeeTagsForProductPage(driver);
     ProductsOrderedPage productsOrderedPage=new ProductsOrderedPage(driver);
     ProductsMostViewedPage productsMostViewedPage=new ProductsMostViewedPage(driver);
     InvoicedPage invoicedPage=new InvoicedPage(driver);
     CouponsPage couponsPage=new CouponsPage(driver);
     ProductInCartPage productInCartPage=new ProductInCartPage(driver);
     CustomersTagsPage customersTagsPage=new CustomersTagsPage(driver);
+    SeeProductBestSellerReport seeProductBestSellerReport=new SeeProductBestSellerReport(driver);
 
-     @Given("report manager login")
+
+    @Given("report manager login")
      public void reportManagerLogin() {
          adminLoginPage.login(AdminRole.REPORTINGMANAGER);
      }
@@ -153,6 +156,34 @@ public class ReportingModuleStepDefinitions extends BasePage {
     @Then("reporting manager should be able to see Customers Report-New Accounts Report")
     public void reportingManagerShouldBeAbleToSeeCustomersReportNewAccountsReport() {
          Assert.assertTrue(newAccountsPage.verifyViewNewCustomerReport());
+    }
+
+    @Given("reporting manager should be navigate to dashboard page")
+    public void reportingManagerShouldBeNavigateToDashboardPage() {
+
+    }
+
+    @When("reporting manager see tags for products")
+    public void reportingManagerSeeTagsForProducts() {
+        seeTagsForProductsPage.seeProductsTag();
+    }
+
+    @Then("products tag should be visible on the reporting page")
+    public void productsTagShouldBeVisibleOnTheReportingPage() {
+        seeTagsForProductsPage.verifyProductsTags();
+    }
+
+    @When("Reporting manager see bestseller report")
+    public void reportingManagerSeeBestsellerReport() {
+        seeProductBestSellerReport.clickOnProducts();
+        seeProductBestSellerReport.openBestSellersReportPage();
+
+    }
+
+    @Then("The bestseller report should be display on the page")
+    public void theBestsellerReportShouldBeDisplayOnThePage() {
+        seeProductBestSellerReport.isProductBestSellersPageDisplayed();
+
     }
 
     @Given("reporting manager is on the Products Ordered page")

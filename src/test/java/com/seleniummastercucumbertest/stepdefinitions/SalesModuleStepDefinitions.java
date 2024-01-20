@@ -139,7 +139,7 @@ public class SalesModuleStepDefinitions extends BasePage {
     }
     @Then("tax rule should be added and updated successfully")
     public void salesManagerAddedAndUpdatedTaxRuleSuccessfully() {
-        Assert.assertTrue(manageTaxRulePage.verifyAddedTaxRule(TestDataHolder.taxIndexNumber));
+        Assert.assertTrue(manageTaxRulePage.verifyAddedTaxRule());
         Assert.assertTrue(manageTaxRulePage.verifyUpdatedTaxRule());
     }
 
