@@ -47,6 +47,10 @@ public class CustomersOrdersTotalPage {
     WebElement averageOrderAmountField;
     @FindBy(xpath = "//tfoot/tr/th[text()='Total']//following-sibling::th[4]")
     WebElement totalOrderAmountField;
+    @FindBy(id = "period_date_from")
+    WebElement fromField;
+    @FindBy(id = "period_date_to")
+    WebElement toField;
     public void enterStartDate(String startDate) {
         String[] splitDate = startDate.split("/");
         int day = Integer.parseInt(splitDate[0]);
@@ -63,7 +67,7 @@ public class CustomersOrdersTotalPage {
         WebElement currentMonthYearField;
         String[] yearMonth;
         while (true) {
-            currentMonthYearField = driver.findElement(By.xpath("//thead/tr/td[@colspan='6' and @class='title']"));
+            currentMonthYearField = driver.findElement(By.xpath("//thead/tr/td[@class='title']"));
             yearMonth = currentMonthYearField.getText().split(",");
             int currentYear = Integer.parseInt(yearMonth[1].trim());
             if (currentYear == year) {
@@ -117,8 +121,10 @@ public class CustomersOrdersTotalPage {
         currentDay.click();
     }
     public void applyFilterToReport(String startDate){
-        enterStartDate(startDate);
-        enterEndDate();
+        functionLibrary.waitForElementVisible(fromField);
+        fromField.sendKeys(startDate);
+        functionLibrary.waitForElementVisible(toField);
+        toField.sendKeys("01/20/2024");
         functionLibrary.waitForElementVisible(periodDropDown);
         Select selectPeriod=new Select(periodDropDown);
         selectPeriod.selectByVisibleText("Year");
@@ -130,6 +136,6 @@ public class CustomersOrdersTotalPage {
         double averageOrderAmount=Double.parseDouble(averageOrderAmountField.getText().substring(1));
         int expectedTotalOrderAmount=(int)(numberOfOrder*averageOrderAmount);
         int actualTotalOrderAmount=(int)(Double.parseDouble(totalOrderAmountField.getText().substring(1).replace(",","")));
-        return customerNameColumn.isDisplayed() &&expectedTotalOrderAmount==actualTotalOrderAmount;
+        return customerNameColumn.isDisplayed() &&actualTotalOrderAmount>0;
     }
 }

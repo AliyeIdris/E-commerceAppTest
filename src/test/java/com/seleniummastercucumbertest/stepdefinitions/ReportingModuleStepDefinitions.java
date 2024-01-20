@@ -117,8 +117,8 @@ public class ReportingModuleStepDefinitions extends BasePage {
     }
 
     @When("reporting manager fills the filter options with {string} and {string}")
-    public void reportingManagerFillsTheFilterOptionsWithAnd(String dateFrom) {
-         taxReportPage.filterTaxReportDate(dateFrom);
+    public void reportingManagerFillsTheFilterOptionsWithAnd(String dateFrom,String endDate) {
+         taxReportPage.filterTaxReportDate(dateFrom,endDate);
     }
 
     @Then("reporting manager should be able to see the Sales-Taxes Report Grouped By Tax Rate")
@@ -158,11 +158,6 @@ public class ReportingModuleStepDefinitions extends BasePage {
          Assert.assertTrue(newAccountsPage.verifyViewNewCustomerReport());
     }
 
-    @Given("reporting manager should be navigate to dashboard page")
-    public void reportingManagerShouldBeNavigateToDashboardPage() {
-
-    }
-
     @When("reporting manager see tags for products")
     public void reportingManagerSeeTagsForProducts() {
         seeTagsForProductsPage.seeProductsTag();
@@ -171,19 +166,6 @@ public class ReportingModuleStepDefinitions extends BasePage {
     @Then("products tag should be visible on the reporting page")
     public void productsTagShouldBeVisibleOnTheReportingPage() {
         seeTagsForProductsPage.verifyProductsTags();
-    }
-
-    @When("Reporting manager see bestseller report")
-    public void reportingManagerSeeBestsellerReport() {
-        seeProductBestSellerReport.clickOnProducts();
-        seeProductBestSellerReport.openBestSellersReportPage();
-
-    }
-
-    @Then("The bestseller report should be display on the page")
-    public void theBestsellerReportShouldBeDisplayOnThePage() {
-        seeProductBestSellerReport.isProductBestSellersPageDisplayed();
-
     }
 
     @Given("reporting manager is on the Products Ordered page")
@@ -290,10 +272,13 @@ public class ReportingModuleStepDefinitions extends BasePage {
 
     @When("Reporting Manager see the best seller report")
     public void reportingManagerSeeTheBestSellerReport() {
+        seeProductBestSellerReport.clickOnProducts();
+        seeProductBestSellerReport.openBestSellersReportPage();
     }
 
     @Then("Reporting Manager should see the best seller report")
     public void reportingManagerShouldSeeTheBestSellerReport() {
+        Assert.assertTrue(seeProductBestSellerReport.isProductBestSellersPageDisplayed());
     }
 
 }

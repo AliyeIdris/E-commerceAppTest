@@ -17,7 +17,7 @@ public class TestDataHolder {
         return time;
     }
 
-    String mavenCommand="mvn -Dtest=CucumberTestRunner test";
+    String mavenCommand="mvn -Dtest=CucumberTest test";
 
     public static String taxRuleName="ibrahim "+faker.name().lastName();
     public static int customerIndexNumber=faker.number().numberBetween(0,4);

@@ -135,7 +135,7 @@ public class TaxReportPage {
         currentDay.click();
     }
 
-    public void filterTaxReportDate(String startDate) {
+    public void filterTaxReportDate(String startDate,String endDate) {
         functionLibrary.waitForElementVisible(periodDropdown);
         Select selectPeriod = new Select(periodDropdown);
         List<WebElement> options = selectPeriod.getOptions();

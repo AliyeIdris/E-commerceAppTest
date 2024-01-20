@@ -53,7 +53,6 @@ Feature: Reporting module features
 
   @SeeTagForProducts
   Scenario:  Reporting Manager should be able to see Tags for products
-    Given reporting manager should be navigate to dashboard page
     When reporting manager see tags for products
     Then products tag should be visible on the reporting page
 
