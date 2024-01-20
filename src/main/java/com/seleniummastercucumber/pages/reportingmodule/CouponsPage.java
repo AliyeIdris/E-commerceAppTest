@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Logger;
 
 /**
@@ -30,8 +31,9 @@ public class CouponsPage {
         functionLibrary = new FunctionLibrary(driver);
         actions = new Actions(driver);
         dashboardPage = new ReportingDashboardPage(driver);
-        logger= Logger.getLogger(RefundsPage.class.getName());
+        logger = Logger.getLogger(RefundsPage.class.getName());
     }
+
     @FindBy(id = "store_switcher")
     WebElement selectShowReportFor;
     @FindBy(id = "sales_report_from")
@@ -44,6 +46,8 @@ public class CouponsPage {
     WebElement couponsUsageReportText;
     @FindAll(@FindBy(xpath = "//tr[@class=\"even\"]/td"))
     List<WebElement> noRecordsFound;
+    @FindAll(@FindBy(xpath = "//tr[@class=\"totals\"]/th"))
+    List<WebElement> totalsRecordsFound;
 
     public boolean isSalesCouponsUsagePageDisplayed() {
         functionLibrary.waitForElementVisible(couponsUsageReportText);
@@ -64,10 +68,13 @@ public class CouponsPage {
     }
 
     public boolean verifyCouponsUsageReport() {
-        if (noRecordsFound.size() > 0) {
+        if (totalsRecordsFound.size()>0) {
+            logger.info("You can be see many reports");
+            return true;
+        } else if (totalsRecordsFound.size()>0 && noRecordsFound.size()>0) {
             logger.info("No Records Found");
         }
-        return true;
+        return false;
     }
 }
 

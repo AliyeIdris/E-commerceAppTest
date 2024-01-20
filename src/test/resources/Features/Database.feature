@@ -38,7 +38,7 @@ Feature: eCommerce Magento Database features
 
   @AddedRootCategory
   Scenario: newly added product root category should be in the database
-    Given user has valid database connection and ready to test
+    Given ready to test
     When Execute SQL query to get root category information with categoryName "Team1-Istanbul-DO Not Delete"
     Then The database returns root category information with details
 
