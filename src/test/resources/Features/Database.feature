@@ -11,7 +11,7 @@ Feature: eCommerce Magento Database features
 
   @NewlyAddedStoreView
   Scenario: user get newly added store view info from database
-    When run SQL query to get newly added store view info with store view name "Nice Product"
+    When run SQL query to get newly added store view info with store view name "hilpert.org"
     Then database returns store view information details
 
   @verifyNewlyRegisteredUser

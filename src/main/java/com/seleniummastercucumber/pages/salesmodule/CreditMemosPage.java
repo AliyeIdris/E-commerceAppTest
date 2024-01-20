@@ -40,7 +40,7 @@ public class CreditMemosPage {
     WebElement commentLink;
     @FindBy(xpath = "//span[text()='Submit Comment']")
     WebElement submitCommentButton;
-    @FindBy(xpath = "//span[text()='Send Email'][1]")
+    @FindBy(xpath = "//button[@title='Send Email']")
     WebElement sendEmailButton;
     @FindBy(xpath = "//span[text()='The message was sent.']")
     WebElement commentSentSuccess;
@@ -69,10 +69,12 @@ public class CreditMemosPage {
     }
 
     public void addCreditMemosComment(String commentText){
+        functionLibrary.waitForElementVisible(commentLink);
         actions.scrollToElement(commentLink).build().perform();
         commentLink.sendKeys(commentText);
         functionLibrary.waitForElementVisible(submitCommentButton);
         submitCommentButton.click();
+        functionLibrary.waitForElementVisible(sendEmailButton);
         sendEmailButton.click();
         Alert alert =driver.switchTo().alert();
         alert.accept();
