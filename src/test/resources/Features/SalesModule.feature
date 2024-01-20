@@ -1,4 +1,4 @@
-@UITest @SalesModule
+@UITest @SalesModule @RegressionTest
 Feature: Sales module features
 
   Background:
