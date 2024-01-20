@@ -132,7 +132,6 @@ public class DataBaseStepDefinitions {
     }
     @Then("The database returns root category information with details")
     public void theDatabaseReturnsRootCategoryInformationWithDetails() {
-
         Assert.assertTrue(isRootCategoryExist);
     }
 

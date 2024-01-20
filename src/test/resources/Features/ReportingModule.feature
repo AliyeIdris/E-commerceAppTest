@@ -61,13 +61,16 @@ Feature: Reporting module features
       | 01/01/2022 | 04/01/2024 |
 
 #abdugeni
-  Scenario: Reporting Manager Should Be Able To See Sales - Total Invoiced VS Paid Report
+  @SeeInvoicedAndReportTest
+  Scenario Outline: Reporting Manager Should Be Able To See Sales - Total Invoiced VS Paid Report
     Given  reporting manager should be on the total invoiced vs paid report page
-    When   Fill Out Criteria For Search "<Period>" "<fromDate>" "<toDate>"
-  "Last Invoice Created Date","Month",
-  "01/08/2014","01/08/2024")
+    When   Fill Out Criteria For Search "<period>" "<fromDate>" "<toDate>"
     Then Reporting Manager Can see Sales - Total Invoiced vs Paid Report
 
+    Examples:
+      | period  | fromDate   | toDate     |
+      | Month | 06/28/2009 | 12/28/2023 |
+  @SeeCouponsReportTest
   Scenario Outline: Reporting manager can see coupons usage report
     Given The reporting manager Should Be On The coupons Page and the coupons report should be displayed
     When the manager fills in the filter details"<websiteName>" "<fromDate>" "<toDate>"
@@ -76,6 +79,7 @@ Feature: Reporting module features
     Examples:
       | websiteName  | fromDate   | toDate     |
       | All Websites | 06/28/2009 | 12/28/2023 |
+
 #*******
 
   @MostViewedProductsReport

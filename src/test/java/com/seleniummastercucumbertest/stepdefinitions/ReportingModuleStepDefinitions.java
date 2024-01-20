@@ -185,12 +185,10 @@ public class ReportingModuleStepDefinitions extends BasePage {
     public void reportingManagerNavigateToTotalInvoicedVsPaidReportPage() {
          dashboardPage.navigateToInvoicedPage();
     }
-
-    @When("Fill Out Criteria For Search")
-    public void fillOutCriteriaForSearch(String Period, String From, String To ) {
-         invoicedPage.showReport( Period,  From,  To);
+    @When("Fill Out Criteria For Search {string} {string} {string}")
+    public void fillOutCriteriaForSearch(String period, String dateFrom, String dateTo) {
+         invoicedPage.showReport(period,dateFrom,dateTo);
     }
-
     @Then("Reporting Manager Can see Sales - Total Invoiced vs Paid Report")
     public void reportingManagerCanSeeSalesTotalInvoicedVsPaidReport() {
          Assert.assertTrue(invoicedPage.verifyReport());
@@ -258,6 +256,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
     public void reportingManagerShouldGetReportFromAbandonedCart() {
         Assert.assertTrue(reportViewPage.seeAbandonedCartsVerify());
     }
+
 
 }
 
