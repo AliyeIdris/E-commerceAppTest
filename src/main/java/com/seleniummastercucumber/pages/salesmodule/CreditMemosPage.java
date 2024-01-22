@@ -40,7 +40,7 @@ public class CreditMemosPage {
     WebElement commentLink;
     @FindBy(xpath = "//span[text()='Submit Comment']")
     WebElement submitCommentButton;
-    @FindBy(xpath = "//button[@title='Send Email']")
+    @FindBy(xpath = "//span[text()='Send Email']")
     WebElement sendEmailButton;
     @FindBy(xpath = "//span[text()='The message was sent.']")
     WebElement commentSentSuccess;
@@ -75,14 +75,13 @@ public class CreditMemosPage {
         functionLibrary.waitForElementVisible(submitCommentButton);
         submitCommentButton.click();
         functionLibrary.waitForElementVisible(sendEmailButton);
-        sendEmailButton.click();
-        Alert alert =driver.switchTo().alert();
-        alert.accept();
+        functionLibrary.javaScriptClick(sendEmailButton);
+        driver.switchTo().alert().accept();
 
     }
     public boolean verifyAddedCreditMemos(){
         try {
-            Thread.sleep(6000);
+            Thread.sleep(7000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -94,6 +93,4 @@ public class CreditMemosPage {
             return false;
         }
     }
-
-
 }
