@@ -132,9 +132,6 @@ public class CustomersOrdersTotalPage {
         refreshButton.click();
     }
     public boolean verifyViewCustomersByTotalOrdersReport(){
-        int numberOfOrder=Integer.parseInt(totalNumberOfOrdersField.getText());
-        double averageOrderAmount=Double.parseDouble(averageOrderAmountField.getText().substring(1));
-        int expectedTotalOrderAmount=(int)(numberOfOrder*averageOrderAmount);
         int actualTotalOrderAmount=(int)(Double.parseDouble(totalOrderAmountField.getText().substring(1).replace(",","")));
         return customerNameColumn.isDisplayed() &&actualTotalOrderAmount>0;
     }
