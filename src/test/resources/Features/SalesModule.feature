@@ -38,7 +38,7 @@ Feature: Sales module features
   @UpdateShoppingCart   #Safiya
   Scenario: Sales Manager should be able to manage update an existing shopping cart for customers.
   (You need to open a customer and manage shopping cart)
-    Given sales manager go to the shopping cart page with email "zubi@gmail.com"
+    Given sales manager go to the shopping cart page with email "ibrahim.csr.uetp@gmail.com"
     When sales manager update the existing shopping cart
     Then updated shopping cart info should be displayed
 

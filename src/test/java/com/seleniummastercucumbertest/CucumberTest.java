@@ -18,7 +18,7 @@ import org.junit.runner.RunWith;
                 "junit:target/cucumber-xml-report.xml" },
 
         features = {"classpath:Features/"},
-        tags="@SalesModule"
+        tags="@RegressionTest"
 )
 public class CucumberTest {
 }

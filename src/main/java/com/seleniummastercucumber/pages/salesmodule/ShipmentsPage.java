@@ -52,7 +52,7 @@ public class ShipmentsPage {
     WebElement trackingNumberField;
     @FindBy(xpath = "//span[text()=\"Add\"]")
     WebElement addButton;
-    @FindBy(xpath = "//span[contains(text(),'Send Tracking Information')]")
+    @FindBy(xpath = "//button[@title='Send Tracking Information']")
     WebElement sendTrackingInfo;
     @FindBy(xpath = "//span[text()=\"The shipment has been sent.\"]")
     WebElement sentInformationMessage;
@@ -65,21 +65,32 @@ public class ShipmentsPage {
     }
     public void updateShipmentsMethod(String commentText,String trackingNumber){
         actions.scrollToElement(commentTextField).build().perform();
-        actions.click(commentTextField).sendKeys(commentText).build().perform();
+        functionLibrary.waitForElementVisible(commentTextField);
+        commentTextField.sendKeys(commentText);
         functionLibrary.waitForElementVisible(notifyCustomerCheckBox);
-        actions.click(notifyCustomerCheckBox).build().perform();
+        notifyCustomerCheckBox.click();
         functionLibrary.waitForElementVisible(visibleOnFrontend);
-        actions.click(visibleOnFrontend).build().perform();
+        visibleOnFrontend.click();
         functionLibrary.waitForElementVisible(submitButton);
-        actions.click(submitButton).build().perform();
+        submitButton.click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         Select select=new Select(customerValue);
         select.selectByValue("ups");
         functionLibrary.waitForElementVisible(trackingNumberField);
         trackingNumberField.sendKeys(trackingNumber);
         functionLibrary.waitForElementVisible(addButton);
-        functionLibrary.javaScriptClick(addButton);
+        addButton.click();
+        try {
+            Thread.sleep(8000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         functionLibrary.waitForElementVisible(sendTrackingInfo);
-        functionLibrary.javaScriptClick(sendTrackingInfo);
+        sendTrackingInfo.click();
         driver.switchTo().alert().accept();
     }
     public boolean verifySentTrackingInfoMessage(){
