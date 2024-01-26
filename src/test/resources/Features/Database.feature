@@ -11,7 +11,7 @@ Feature: eCommerce Magento Database features
 
   @NewlyAddedStoreView
   Scenario: user get newly added store view info from database
-    When run SQL query to get newly added store view info with store view name "hilpert.org"
+    When run SQL query to get newly added store view info with store view name "English"
     Then database returns store view information details
 
   @verifyNewlyRegisteredUser
@@ -39,7 +39,7 @@ Feature: eCommerce Magento Database features
   @AddedRootCategory
   Scenario: newly added product root category should be in the database
     Given ready to test
-    When Execute SQL query to get root category information with categoryName "Team1-Istanbul-DO Not Delete"
+    When Execute SQL query to get root category information with categoryName "Team1Category"
     Then The database returns root category information with details
 
     @VerifyNewlyAddedStock

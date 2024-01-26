@@ -261,7 +261,7 @@ public class ReportingModuleStepDefinitions extends BasePage {
 
     @When("Reporting Manager Navigate to The Shopping Cart And Choose Abandoned carts")
     public void reportingManagerNavigateToTheShoppingCartAndChooseAbandonedCarts() {
-        reportViewPage.clickReportMethod("lakesha.schinner@hotmail.com");
+        reportViewPage.clickReportMethod("salmanuyghur3@gmail.com");
     }
 
 

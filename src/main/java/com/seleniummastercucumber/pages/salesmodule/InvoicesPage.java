@@ -52,18 +52,20 @@ public class InvoicesPage {
     WebElement verifyCommentTextSuccessful;
 
     public void viewInvoicesAndAddComments(String commentText){
-        actions.moveToElement(salesTap).build().perform();
+        functionLibrary.waitForElementVisible(salesTap);
+        salesTap.click();
        functionLibrary.waitForElementVisible(invoices);
-        actions.moveToElement(invoices).click().build().perform();
+        invoices.click();
         allInvoices.get(new Random().nextInt(allInvoices.size())).click();
         actions.scrollToElement(commentTextField).build().perform();
-        actions.click(commentTextField).sendKeys(commentText).build().perform();
+        functionLibrary.waitForElementVisible(commentTextField);
+        commentTextField.sendKeys(commentText);
         functionLibrary.waitForElementVisible(notifyCustomerCheckBox);
-        actions.click(notifyCustomerCheckBox).build().perform();
+        notifyCustomerCheckBox.click();
         functionLibrary.waitForElementVisible(visibleOnFrontend);
-        actions.click(visibleOnFrontend).build().perform();
+        visibleOnFrontend.click();
         functionLibrary.waitForElementVisible(submitButton);
-        actions.click(submitButton).build().perform();
+        submitButton.click();
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {

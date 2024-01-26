@@ -144,6 +144,11 @@ public class ManageCustomersPage {
     }
 
     public void updateShoppingCart(int quantityCount) {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         functionLibrary.waitForElementVisible(configureIcon);
         configureIcon.click();
 
